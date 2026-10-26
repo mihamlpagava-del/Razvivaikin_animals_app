@@ -27,7 +27,7 @@ const server = http.createServer((req, res) => {
 
   // Главная страница
   if (reqPath === '/' || reqPath === '') {
-    reqPath = '/public/index.html';
+    reqPath = fs.existsSync(path.join(ROOT, 'index.html')) ? '/index.html' : '/public/index.html';
   }
 
   // Если запрос на /assets/..., проверяем также и public/assets/...

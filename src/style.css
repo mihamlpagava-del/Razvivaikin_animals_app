@@ -968,28 +968,37 @@ body {
 
 
 /* ========================================================
-   СТАРТОВОЕ МЕНЮ: КРАСИВЫЙ ВЫБОР МИРОВ И КАТЕГОРИЙ ДЛЯ ДЕТЕЙ
+   СТАРТОВОЕ МЕНЮ (ХАБ-ЭКРАН С 3D ПЛАСТИЛИНОВЫМ ДИЗАЙНОМ)
    ======================================================== */
+#menu-screen,
 .start-screen {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  min-height: 100%;
   width: 100%;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 4px 2px 14px;
-  gap: 12px;
+  padding: 10px 8px 24px;
+  gap: 14px;
+  background: 
+    linear-gradient(rgba(255, 252, 247, 0.32), rgba(255, 245, 236, 0.42)),
+    url('assets/images/menu/background.png') no-repeat center center;
+  background-size: cover;
+  background-attachment: local;
+  border-radius: var(--radius-card);
   animation: screenFadeIn 0.35s ease-out forwards;
+  box-sizing: border-box;
 }
 
 .start-screen::-webkit-scrollbar {
-  width: 4px;
+  width: 5px;
 }
 .start-screen::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.15);
+  background: rgba(0, 0, 0, 0.16);
   border-radius: 999px;
 }
 
+#game-screen,
 .game-screen {
   display: flex;
   flex-direction: column;
@@ -1012,160 +1021,182 @@ body {
 /* Заголовок стартового экрана */
 .start-header {
   text-align: center;
-  padding: 4px 6px 0;
+  padding: 2px 6px 0;
 }
 
 .start-badge {
   display: inline-block;
-  background: #FFF3D6;
-  color: #B45309;
-  border: 1.5px solid #FCD34D;
-  font-size: 0.76rem;
+  background: rgba(255, 255, 255, 0.92);
+  color: #8C4309;
+  border: 2px solid #FCD34D;
+  font-size: 0.78rem;
   font-weight: 800;
-  padding: 3px 12px;
+  padding: 4px 14px;
   border-radius: var(--radius-pill);
-  box-shadow: 0 2px 6px rgba(180, 83, 9, 0.1);
+  box-shadow: 0 4px 10px rgba(180, 83, 9, 0.12), inset 0 2px 2px #FFFFFF;
   margin-bottom: 6px;
 }
 
 .start-title {
-  font-size: 1.65rem;
+  font-family: 'Comfortaa', 'Nunito', 'Segoe UI', system-ui, sans-serif;
+  font-size: 1.85rem;
   font-weight: 900;
-  color: #2E2823;
+  color: #382517;
   margin-bottom: 2px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.9);
 }
 
 .start-subtitle {
-  font-size: 0.86rem;
-  font-weight: 700;
-  color: #7E746C;
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #6A5141;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.85);
 }
 
-/* Сетка миров */
+/* Сетка миров (7 крупных интерактивных карточек) */
 .worlds-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  gap: 12px;
   width: 100%;
 }
 
-/* Карточка мира (пластилиновая 3D плитка) */
+@media (min-width: 540px) {
+  .worlds-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+}
+
+@media (min-width: 780px) {
+  .worlds-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+}
+
+/* Крупная пластилиновая карточка-кнопка мира */
 .world-card {
   position: relative;
-  border: 2.5px solid rgba(255, 255, 255, 0.9);
-  border-radius: 20px;
-  padding: 12px 10px;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 3.5px solid #FFFFFF;
+  border-radius: 26px;
+  padding: 10px 8px 12px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: space-between;
-  min-height: 106px;
+  min-height: 145px;
   cursor: pointer;
   box-shadow: 
-    0 10px 20px rgba(84, 60, 44, 0.10),
-    inset 0 2px 4px rgba(255, 255, 255, 0.7),
-    inset 0 -3px 6px rgba(0, 0, 0, 0.08);
-  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.18s ease;
+    0 8px 16px rgba(0, 0, 0, 0.1),
+    inset 0 2px 4px rgba(255, 255, 255, 0.95),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
   overflow: hidden;
-  text-align: left;
+  text-align: center;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .world-card:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 14px 26px rgba(84, 60, 44, 0.16);
+  transform: scale(1.05);
+  box-shadow: 0 12px 24px rgba(84, 60, 44, 0.16), inset 0 2px 4px rgba(255, 255, 255, 0.95);
 }
 
 .world-card:active {
-  transform: scale(0.95);
+  transform: scale(0.98) translateY(3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12), inset 0 3px 6px rgba(0, 0, 0, 0.12);
 }
 
-/* Иконки-эмодзи в карточке мира */
-.world-icons-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 6px;
+/* Картинка занимает 75-80% высоты карточки */
+.world-card img {
+  width: 100%;
+  height: 98px;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 10px rgba(84, 60, 44, 0.16));
+  transition: transform 0.25s ease;
+  pointer-events: none;
 }
 
-.world-main-emoji {
-  font-size: 1.8rem;
-  line-height: 1;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+.world-card:hover img {
+  transform: scale(1.06) rotate(1deg);
 }
 
-.world-icons-preview {
-  display: flex;
-  gap: 2px;
-  font-size: 1.05rem;
-  background: rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(4px);
-  padding: 2px 6px;
-  border-radius: var(--radius-pill);
-}
-
-.world-card-info {
-  display: flex;
-  flex-direction: column;
-}
-
-.world-card-title {
+/* Крупный закруглённый шрифт внизу карточки */
+.world-card span {
+  font-family: 'Comfortaa', 'Nunito', 'Segoe UI', system-ui, sans-serif;
   font-size: 1.05rem;
   font-weight: 900;
-  color: #1F2937;
-  line-height: 1.2;
-}
-
-.world-card-desc {
-  font-size: 0.74rem;
-  font-weight: 700;
-  color: #4B5563;
-  margin-top: 2px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.world-card-count {
-  display: inline-block;
-  align-self: flex-start;
+  color: #3E2B1E;
   margin-top: 6px;
-  font-size: 0.7rem;
-  font-weight: 800;
-  background: rgba(255, 255, 255, 0.75);
-  color: #1F2937;
-  padding: 2px 7px;
-  border-radius: var(--radius-pill);
+  letter-spacing: -0.2px;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.95);
+  pointer-events: none;
+}
+
+/* Индивидуальные нежные пластилиновые оттенки карточек */
+.world-card[data-category="pets"] {
+  background: linear-gradient(155deg, rgba(255, 246, 240, 0.95) 0%, rgba(255, 226, 212, 0.92) 100%);
+  border-color: #FFD2C0;
+}
+.world-card[data-category="farm"] {
+  background: linear-gradient(155deg, rgba(255, 253, 236, 0.95) 0%, rgba(255, 241, 186, 0.92) 100%);
+  border-color: #FFE58E;
+}
+.world-card[data-category="forest"] {
+  background: linear-gradient(155deg, rgba(240, 254, 245, 0.95) 0%, rgba(212, 247, 220, 0.92) 100%);
+  border-color: #A8E6CF;
+}
+.world-card[data-category="savanna"] {
+  background: linear-gradient(155deg, rgba(255, 251, 235, 0.95) 0%, rgba(254, 238, 186, 0.92) 100%);
+  border-color: #F8D87E;
+}
+.world-card[data-category="dinos"] {
+  background: linear-gradient(155deg, rgba(249, 244, 255, 0.95) 0%, rgba(230, 219, 252, 0.92) 100%);
+  border-color: #D3C4F3;
+}
+.world-card[data-category="ocean"] {
+  background: linear-gradient(155deg, rgba(238, 249, 255, 0.95) 0%, rgba(206, 239, 254, 0.92) 100%);
+  border-color: #A6DFFB;
+}
+.world-card[data-category="birds"] {
+  background: linear-gradient(155deg, rgba(244, 248, 255, 0.95) 0%, rgba(218, 232, 255, 0.92) 100%);
+  border-color: #BDD4FA;
 }
 
 /* Большая радужная кнопка "Смотреть всех" */
 .all-animals-hero-btn {
   width: 100%;
-  border: 2.5px solid #FFFFFF;
-  border-radius: 20px;
-  background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 40%, #FFAA00 100%);
+  border: 3.5px solid #FFFFFF;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 45%, #FFAA00 100%);
   color: #FFFFFF;
-  padding: 12px 14px;
+  padding: 12px 16px;
   display: flex;
   align-items: center;
   gap: 12px;
   cursor: pointer;
   box-shadow: 
-    0 12px 24px rgba(255, 107, 107, 0.35),
-    inset 0 3px 5px rgba(255, 255, 255, 0.6);
-  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+    0 10px 22px rgba(255, 107, 107, 0.32),
+    inset 0 3px 5px rgba(255, 255, 255, 0.65);
+  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.18s ease;
   text-align: left;
 }
 
 .all-animals-hero-btn:hover {
   transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 14px 28px rgba(255, 107, 107, 0.42);
 }
 
 .all-animals-hero-btn:active {
-  transform: scale(0.96);
+  transform: scale(0.97) translateY(2px);
 }
 
 .hero-btn-icon {
-  font-size: 2rem;
+  font-size: 2.1rem;
   line-height: 1;
 }
 
@@ -1176,16 +1207,17 @@ body {
 }
 
 .hero-btn-title {
-  font-size: 1.05rem;
+  font-family: 'Comfortaa', 'Nunito', 'Segoe UI', system-ui, sans-serif;
+  font-size: 1.12rem;
   font-weight: 900;
   color: #FFFFFF;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
 }
 
 .hero-btn-sub {
-  font-size: 0.76rem;
+  font-size: 0.8rem;
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.95);
 }
 
 .hero-btn-arrow {
@@ -1193,34 +1225,167 @@ body {
   animation: rocketWiggle 1.5s infinite ease-in-out;
 }
 
-@keyframes rocketWiggle {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-3px) rotate(8deg); }
-}
-
-/* Нижняя кнопка доната на стартовом экране */
+/* Нижний ряд с кнопкой благодарности */
 .start-footer-row {
   display: flex;
   justify-content: center;
   margin-top: 2px;
+  width: 100%;
 }
 
-.start-donate-btn {
-  background: rgba(255, 255, 255, 0.85);
-  border: 1.5px solid #FCD34D;
-  color: #B45309;
-  font-family: inherit;
-  font-size: 0.82rem;
-  font-weight: 800;
-  padding: 6px 16px;
-  border-radius: var(--radius-pill);
+/* Большая пластилиновая кнопка «Сказать спасибо зверятам» */
+.thanks-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 18px;
+  background: linear-gradient(135deg, #FFE4E4 0%, #FFC1C1 100%);
+  border: 3.5px solid #FF8E8E;
+  border-radius: 28px;
+  box-shadow: 
+    0 8px 18px rgba(230, 80, 80, 0.24),
+    inset 0 2px 4px rgba(255, 255, 255, 0.95),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.06);
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  transition: transform 0.15s ease;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.start-donate-btn:hover {
-  transform: scale(1.03);
+.thanks-button:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 24px rgba(230, 80, 80, 0.32);
+}
+
+.thanks-button:active {
+  transform: scale(0.97) translateY(3px);
+  box-shadow: 0 4px 8px rgba(230, 80, 80, 0.18);
+}
+
+.thanks-button img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(210, 50, 50, 0.25));
+  animation: heartWobble 2.6s ease-in-out infinite;
+}
+
+.thanks-button span {
+  font-family: 'Comfortaa', 'Nunito', 'Segoe UI', system-ui, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: #8C2222;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.85);
+}
+
+@keyframes heartWobble {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  20% { transform: scale(1.1) rotate(-6deg); }
+  40% { transform: scale(1.05) rotate(5deg); }
+  60% { transform: scale(1.12) rotate(-3deg); }
+  80% { transform: scale(1.02) rotate(2deg); }
+}
+
+/* Модальное окно благодарности */
+.thanks-modal-card {
+  position: relative;
+  background: #FFFDF9;
+  border-radius: 32px;
+  border: 4.5px solid #FFCCD2;
+  box-shadow: 
+    0 24px 48px rgba(78, 42, 28, 0.28),
+    inset 0 2px 4px rgba(255, 255, 255, 0.95);
+  max-width: 440px;
+  width: 90%;
+  padding: 28px 22px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.thanks-modal-img {
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 14px rgba(220, 60, 60, 0.25));
+  animation: heartWobble 2.4s ease-in-out infinite;
+}
+
+.thanks-modal-badge {
+  display: inline-block;
+  background: #FFE8E8;
+  color: #C02626;
+  font-weight: 800;
+  font-size: 0.85rem;
+  padding: 4px 14px;
+  border-radius: 14px;
+  border: 1.5px solid #FFA8A8;
+}
+
+.thanks-modal-title {
+  margin: 0;
+  font-family: 'Comfortaa', 'Nunito', 'Segoe UI', system-ui, sans-serif;
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: #4A3020;
+}
+
+.thanks-modal-text {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #6C5242;
+}
+
+.thanks-modal-parent-hint {
+  background: #F8F4ED;
+  border: 2px dashed #D6C7B8;
+  border-radius: 16px;
+  padding: 10px 14px;
+  font-size: 0.82rem;
+  color: #7A6252;
+  text-align: left;
+}
+
+.thanks-modal-parent-hint span {
+  font-weight: 800;
+  display: block;
+  margin-bottom: 2px;
+  color: #554032;
+}
+
+.thanks-modal-parent-hint p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.thanks-action-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 20px;
+  font-family: 'Comfortaa', 'Nunito', 'Segoe UI', system-ui, sans-serif;
+  font-size: 1.15rem;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(255, 107, 107, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.thanks-action-btn:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 22px rgba(255, 107, 107, 0.45);
+}
+
+.thanks-action-btn:active {
+  transform: scale(0.97);
 }
 
 /* Кнопка "Миры" (🏠) в заголовке карточки */

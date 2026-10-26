@@ -106,6 +106,89 @@ function getTaxonomyText(animal) {
 /**
  * Мгновенная остановка любого текущего звука
  */
+
+// ========================================================
+// НЕГРОМКИЕ ПРИЯТНЫЕ ЗВУКОВЫЕ ЭФФЕКТЫ (SFX) ПРИ НАЖАТИИ
+// ========================================================
+let audioCtx = null;
+function getAudioContext() {
+  if (!audioCtx) {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (AudioContextClass) {
+      audioCtx = new AudioContextClass();
+    }
+  }
+  if (audioCtx && audioCtx.state === 'suspended') {
+    audioCtx.resume().catch(() => {});
+  }
+  return audioCtx;
+}
+
+// Мягкий негромкий пластилиновый звук нажатия (Soft Pop SFX)
+function playSoftPopSFX(freq = 520) {
+  try {
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.type = 'sine';
+    const now = ctx.currentTime;
+    osc.frequency.setValueAtTime(freq, now);
+    osc.frequency.exponentialRampToValueAtTime(freq * 0.45, now + 0.08);
+
+    gain.gain.setValueAtTime(0.07, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start(now);
+    osc.stop(now + 0.1);
+  } catch (e) {}
+}
+
+// Добрый звуковой эффект радости / аккорд колокольчиков для кнопки «Сказать спасибо»
+function playJoyfulThanksSFX() {
+  try {
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+    const notes = [523.25, 659.25, 783.99, 1046.50]; // До, Ми, Соль, До
+    notes.forEach((freq, idx) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(freq, now + idx * 0.07);
+
+      gain.gain.setValueAtTime(0.001, now + idx * 0.07);
+      gain.gain.linearRampToValueAtTime(0.08, now + idx * 0.07 + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.07 + 0.32);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(now + idx * 0.07);
+      osc.stop(now + idx * 0.07 + 0.35);
+    });
+  } catch (e) {}
+}
+
+function getCategoryEmoji(catId) {
+  const emojis = {
+    pets: '🐶',
+    farm: '🐮',
+    forest: '🌲',
+    savanna: '🦁',
+    ocean: '🌊',
+    birds: '🦚',
+    dinos: '🦖',
+    all: '⭐'
+  };
+  return emojis[catId] || '🐾';
+}
+
 function stopAllAudio() {
   if (activeTimeoutId) {
     clearTimeout(activeTimeoutId);
@@ -202,6 +285,7 @@ function playTrack(src, fallbackText, pitch, signal) {
     }
 
     const audio = new Audio(src);
+    try { audio.playbackRate = 0.94 + Math.random() * 0.14; } catch (e) {}
     activeAudio = audio;
 
     let resolved = false;
@@ -376,7 +460,20 @@ function renderCard(direction = 'none') {
   }
 
   // Обновление контента
-  cardTaxonomy.textContent = getTaxonomyText(animal);
+    const worldTitles = {
+    pets: 'Мир: Домашние 🐶',
+    farm: 'Мир: Ферма 🐮',
+    forest: 'Мир: Лесные 🌲',
+    savanna: 'Мир: Саванна 🦁',
+    ocean: 'Мир: Океан 🌊',
+    birds: 'Мир: Птицы 🦚',
+    dinos: 'Мир: Дино Мир 🦖',
+    all: 'Мир: Все животные ⭐'
+  };
+  const worldName = worldTitles[state.selectedCategory] || `Мир: ${state.selectedCategory}`;
+  const subObj = subCategories.find(s => s.id === animal.subCategory);
+  const subText = subObj && subObj.id !== 'all' ? ` • ${subObj.name} ${subObj.icon}` : '';
+  cardTaxonomy.textContent = `${worldName}${subText}`;
 
   cardImage.onerror = () => {
     // Векторный фоллбек, если PNG еще не сгенерирован
@@ -401,6 +498,7 @@ function renderCard(direction = 'none') {
  * Перелистывание вперед (зациклено)
  */
 function nextAnimal() {
+  playSoftPopSFX(580);
   const list = getFilteredAnimals();
   if (list.length <= 1) return;
   stopAllAudio();
@@ -412,6 +510,7 @@ function nextAnimal() {
  * Перелистывание назад (зациклено)
  */
 function prevAnimal() {
+  playSoftPopSFX(500);
   const list = getFilteredAnimals();
   if (list.length <= 1) return;
   stopAllAudio();
@@ -423,12 +522,16 @@ function prevAnimal() {
  * Построение кнопок главных категорий
  */
 
-// Ссылки на экраны
-const startScreen = document.getElementById('startScreen');
-const gameScreen = document.getElementById('gameScreen');
+// Ссылки на экраны и элементы навигации
+const menuScreen = document.getElementById('menu-screen') || document.getElementById('startScreen');
+const gameScreen = document.getElementById('game-screen') || document.getElementById('gameScreen');
 const worldsGrid = document.getElementById('worldsGrid');
 const allAnimalsHeroBtn = document.getElementById('allAnimalsHeroBtn');
 const backToMenuBtn = document.getElementById('backToMenuBtn');
+const btnThanks = document.getElementById('btn-thanks');
+const thanksModal = document.getElementById('thanks-modal');
+const closeThanksModalBtn = document.getElementById('closeThanksModalBtn');
+const thanksActionBtn = document.getElementById('thanksActionBtn');
 const startDonateBtn = document.getElementById('startDonateBtn');
 
 /**
@@ -436,33 +539,45 @@ const startDonateBtn = document.getElementById('startDonateBtn');
  */
 function buildWorldsGrid() {
   if (!worldsGrid) return;
+
+  // Если карточки уже встроены в HTML (с кнопками .world-card), подключаем обработчики
+  const existingCards = worldsGrid.querySelectorAll('.world-card');
+  if (existingCards.length > 0) {
+    existingCards.forEach(card => {
+      const newCard = card.cloneNode(true);
+      card.parentNode.replaceChild(newCard, card);
+      
+      newCard.addEventListener('click', (e) => {
+        playSoftPopSFX(540);
+        tapticFeedback('medium');
+        const catId = newCard.dataset.category;
+        const rect = newCard.getBoundingClientRect();
+        spawnEmojiBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, getCategoryEmoji(catId));
+        openCategory(catId);
+      });
+    });
+    return;
+  }
+
+  // Динамическая генерация, если в HTML сетка пуста
   worldsGrid.innerHTML = '';
-
-  // Отображаем все категории кроме 'all' (для 'all' есть большая hero-кнопка)
   mainCategories.filter(c => c.id !== 'all').forEach(cat => {
-    const card = document.createElement('div');
+    const card = document.createElement('button');
     card.className = 'world-card';
-    card.style.background = cat.gradient || 'linear-gradient(135deg, #FF9A9E 0%, #FECFEF 100%)';
-    card.setAttribute('role', 'button');
-    card.setAttribute('tabindex', '0');
+    card.type = 'button';
+    card.dataset.category = cat.id;
 
-    const iconsPreview = Array.isArray(cat.icons) ? cat.icons.join(' ') : cat.icon;
-
+    const imgPath = cat.image || `assets/images/menu/world_${cat.id}.png`;
     card.innerHTML = `
-      <div class="world-icons-row">
-        <span class="world-main-emoji">${cat.icon}</span>
-        <span class="world-icons-preview">${iconsPreview}</span>
-      </div>
-      <div class="world-card-info">
-        <div class="world-card-title">${cat.name}</div>
-        <div class="world-card-desc">${cat.desc || ''}</div>
-        <span class="world-card-count">${cat.count} животных 🐾</span>
-      </div>
+      <img src="${imgPath}" alt="${cat.name}">
+      <span>${cat.name}</span>
     `;
 
     card.addEventListener('click', (e) => {
+      playSoftPopSFX(540);
       tapticFeedback('medium');
-      spawnEmojiBurst(e.clientX, e.clientY, cat.icon);
+      const rect = card.getBoundingClientRect();
+      spawnEmojiBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, cat.icon || '🐾');
       openCategory(cat.id);
     });
 
@@ -477,12 +592,12 @@ function openCategory(categoryId) {
   state.selectedCategory = categoryId;
   state.selectedSubCategory = 'all';
   state.searchQuery = '';
-  state.currentIndex = 0;
+  state.currentIndex = 0; // Начинаем строго с 1-го животного выбранного мира
 
   if (searchInput) searchInput.value = '';
   if (clearSearchBtn) clearSearchBtn.classList.add('hidden');
 
-  // Обновляем чипы категорий в шапке
+  // Обновляем чипы категорий в шапке игры
   document.querySelectorAll('.cat-chip').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.category === categoryId);
   });
@@ -491,8 +606,10 @@ function openCategory(categoryId) {
   });
 
   // Переключаем экраны
-  if (startScreen) startScreen.classList.add('hidden');
-  if (gameScreen) gameScreen.classList.remove('hidden');
+  const menuEl = document.getElementById('menu-screen') || document.getElementById('startScreen');
+  const gameEl = document.getElementById('game-screen') || document.getElementById('gameScreen');
+  if (menuEl) menuEl.classList.add('hidden');
+  if (gameEl) gameEl.classList.remove('hidden');
 
   renderCard('none');
 }
@@ -502,13 +619,15 @@ function openCategory(categoryId) {
  */
 function openStartMenu() {
   stopAllAudio();
+  playSoftPopSFX(440);
   tapticFeedback('light');
 
-  if (gameScreen) gameScreen.classList.add('hidden');
-  if (startScreen) {
-    startScreen.classList.remove('hidden');
-    // Плавный скролл меню наверх
-    startScreen.scrollTop = 0;
+  const menuEl = document.getElementById('menu-screen') || document.getElementById('startScreen');
+  const gameEl = document.getElementById('game-screen') || document.getElementById('gameScreen');
+  if (gameEl) gameEl.classList.add('hidden');
+  if (menuEl) {
+    menuEl.classList.remove('hidden');
+    menuEl.scrollTop = 0;
   }
 }
 
@@ -851,6 +970,8 @@ function initEvents() {
       nextAnimal();
     } else if (e.key === ' ' || e.key === 'Enter') {
       e.preventDefault();
+      const animal = getCurrentAnimal();
+      spawnEmojiBurst(0, 0, animal ? animal.emoji : '🐾');
       playAnimalAudio();
     }
   });
@@ -861,6 +982,7 @@ function initEvents() {
 
   if (allAnimalsHeroBtn) {
     allAnimalsHeroBtn.addEventListener('click', (e) => {
+      playSoftPopSFX(600);
       tapticFeedback('medium');
       spawnEmojiBurst(e.clientX, e.clientY, '⭐');
       openCategory('all');
@@ -875,7 +997,45 @@ function initEvents() {
 
   if (startDonateBtn) {
     startDonateBtn.addEventListener('click', () => {
+      playSoftPopSFX(480);
       openDonateModal();
+    });
+  }
+
+  // Кнопка «Сказать спасибо зверятам»
+  if (btnThanks) {
+    btnThanks.addEventListener('click', (e) => {
+      tapticFeedback('medium');
+      playJoyfulThanksSFX();
+      const rect = btnThanks.getBoundingClientRect();
+      spawnEmojiBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, '💖');
+      if (thanksModal) {
+        thanksModal.classList.remove('hidden');
+      }
+    });
+  }
+
+  // Закрытие модального окна благодарности
+  if (closeThanksModalBtn) {
+    closeThanksModalBtn.addEventListener('click', () => {
+      playSoftPopSFX(420);
+      if (thanksModal) thanksModal.classList.add('hidden');
+    });
+  }
+
+  if (thanksActionBtn) {
+    thanksActionBtn.addEventListener('click', () => {
+      playSoftPopSFX(520);
+      if (thanksModal) thanksModal.classList.add('hidden');
+    });
+  }
+
+  if (thanksModal) {
+    thanksModal.addEventListener('click', (e) => {
+      if (e.target === thanksModal) {
+        playSoftPopSFX(420);
+        thanksModal.classList.add('hidden');
+      }
     });
   }
 }

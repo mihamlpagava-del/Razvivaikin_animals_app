@@ -19,21 +19,54 @@
 <body>
   <div class="app-container">
     <!-- ========================================================
-         СТАРТОВОЕ МЕНЮ (ВЫБОР МИРА И КАТЕГОРИЙ ДЛЯ ДЕТЕЙ)
+         СТАРТОВОЕ МЕНЮ (ХАБ-ЭКРАН / ВЫБОР МИРА И КАТЕГОРИЙ)
          ======================================================== -->
-    <section id="startScreen" class="start-screen" aria-label="Выбор мира">
+    <section id="menu-screen" class="start-screen menu-screen" aria-label="Выбор мира">
       <div class="start-header">
         <div class="start-badge">✨ Игра для малышей • 3D Пластилин ✨</div>
         <h1 class="start-title">Мир Животных 🐾</h1>
         <p class="start-subtitle">Куда отправимся в путешествие? Выбери мир:</p>
       </div>
 
-      <!-- Сетка красочных миров животных -->
+      <!-- Сетка красочных миров животных (7 интерактивных карточек) -->
       <div id="worldsGrid" class="worlds-grid">
-        <!-- Генерируется динамически из mainCategories -->
+        <button class="world-card" data-category="pets" type="button" aria-label="Домашние">
+          <img src="assets/images/menu/world_pets.png" alt="Домашние">
+          <span>Домашние</span>
+        </button>
+
+        <button class="world-card" data-category="farm" type="button" aria-label="Ферма">
+          <img src="assets/images/menu/world_farm.png" alt="Ферма">
+          <span>Ферма</span>
+        </button>
+
+        <button class="world-card" data-category="forest" type="button" aria-label="Лесные">
+          <img src="assets/images/menu/world_forest.png" alt="Лесные">
+          <span>Лесные</span>
+        </button>
+
+        <button class="world-card" data-category="savanna" type="button" aria-label="Саванна">
+          <img src="assets/images/menu/world_savanna.png" alt="Саванна">
+          <span>Саванна</span>
+        </button>
+
+        <button class="world-card" data-category="dinos" type="button" aria-label="Дино Мир">
+          <img src="assets/images/menu/world_dinos.png" alt="Дино Мир">
+          <span>Дино Мир</span>
+        </button>
+
+        <button class="world-card" data-category="ocean" type="button" aria-label="Океан">
+          <img src="assets/images/menu/world_ocean.png" alt="Океан">
+          <span>Океан</span>
+        </button>
+
+        <button class="world-card" data-category="birds" type="button" aria-label="Птицы">
+          <img src="assets/images/menu/world_birds.png" alt="Птицы">
+          <span>Птицы</span>
+        </button>
       </div>
 
-      <!-- Большая яркая кнопка "Смотреть всех" -->
+      <!-- Большая яркая кнопка "Смотреть всех животных" -->
       <button id="allAnimalsHeroBtn" class="all-animals-hero-btn" type="button">
         <span class="hero-btn-icon">⭐</span>
         <div class="hero-btn-content">
@@ -43,9 +76,11 @@
         <span class="hero-btn-arrow">🚀</span>
       </button>
 
+      <!-- Интерактивная кнопка "Сказать спасибо зверятам" -->
       <div class="start-footer-row">
-        <button id="startDonateBtn" class="start-donate-btn" type="button">
-          <span>💖 Сказать спасибо зверям</span>
+        <button id="btn-thanks" class="thanks-button" type="button" aria-label="Сказать спасибо зверятам">
+          <img src="assets/images/menu/btn_thanks.png" alt="Спасибо">
+          <span>Сказать спасибо зверятам ❤️</span>
         </button>
       </div>
     </section>
@@ -53,7 +88,7 @@
     <!-- ========================================================
          ЭКРАН ИГРЫ (КАРТОЧКА + СЛАЙДЕР + ПОИСК)
          ======================================================== -->
-    <div id="gameScreen" class="game-screen hidden">
+    <div id="game-screen" class="game-screen hidden">
       <header class="app-header">
       
       <!-- Верхний ряд: Поиск и кнопка "Сказать спасибо" (Голоса VK) -->
@@ -213,6 +248,26 @@
         </button>
 
         <p class="donate-note">Оплата происходит официально через голоса ВКонтакте</p>
+      </div>
+    </div>
+
+    <!-- Модальное окно благодарности зверятам -->
+    <div id="thanks-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="thanksModalTitle">
+      <div class="thanks-modal-card">
+        <button id="closeThanksModalBtn" class="modal-close-btn" aria-label="Закрыть">✕</button>
+        <div class="thanks-modal-badge">💖 Спасибо, маленький друг! 🐾</div>
+        <img src="assets/images/menu/btn_thanks.png" alt="Пластилиновое сердечко" class="thanks-modal-img">
+        <h2 id="thanksModalTitle" class="thanks-modal-title">Зверята передают тебе привет!</h2>
+        <p class="thanks-modal-text">
+          Ты делаешь наш пластилиновый мир теплее и радостнее! Каждое животное слеплено с заботой и любовью. Изучай повадки зверей, слушай их настоящие голоса и расти любознательным!
+        </p>
+        <div class="thanks-modal-parent-hint">
+          <span>👨‍👩‍👧 Информация для родителей:</span>
+          <p>Приложение создано для раннего развития малышей. Поддержать проект добрым словом или голосами VK можно в игре.</p>
+        </div>
+        <button id="thanksActionBtn" class="thanks-action-btn" type="button">
+          <span>🚀 К зверятам!</span>
+        </button>
       </div>
     </div>
 

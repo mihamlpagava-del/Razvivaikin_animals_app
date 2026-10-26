@@ -10,14 +10,14 @@ export const subCategories = [
 ];
 
 export const mainCategories = [
-  { id: 'all', name: 'Все животные', icon: '⭐', count: 73, gradient: 'linear-gradient(135deg, #FF6B6B 0%, #FFE66D 100%)', icons: ['🐶', '🦁', '🐬', '🦖'], desc: 'Смотреть всех подряд' },
-  { id: 'pets', name: 'Домашние', icon: '🐶', count: 12, gradient: 'linear-gradient(135deg, #FF9A9E 0%, #FECFEF 100%)', icons: ['🐶', '🐱', '🐰', '🐍'], desc: 'Кошка, собака, змейка' },
-  { id: 'farm', name: 'Ферма', icon: '🐮', count: 11, gradient: 'linear-gradient(135deg, #A8E063 0%, #56AB2F 100%)', icons: ['🐮', '🐴', '🐷', '🐝'], desc: 'Корова, лошадка, пчела' },
-  { id: 'forest', name: 'Лес', icon: '🌲', count: 13, gradient: 'linear-gradient(135deg, #48C6EF 0%, #6F86D6 100%)', icons: ['🫎', '🦫', '🐻', '🦊'], desc: 'Лось, Бобёр, медведь' },
-  { id: 'savannah', name: 'Саванна', icon: '🦁', count: 14, gradient: 'linear-gradient(135deg, #F6D365 0%, #FDA085 100%)', icons: ['🦁', '🐘', '🦒', '🦓'], desc: 'Лев, слон, жираф' },
-  { id: 'ocean', name: 'Океан', icon: '🌊', count: 12, gradient: 'linear-gradient(135deg, #2AF598 0%, #009EFD 100%)', icons: ['🐋', '🐬', '🦭', '🦀'], desc: 'Кит, Тюлень, Морж' },
-  { id: 'birds', name: 'Птицы', icon: '🦚', count: 6, gradient: 'linear-gradient(135deg, #E0C3FC 0%, #8EC5FC 100%)', icons: ['🦚', '🦜', '🦅', '🦩'], desc: 'Павлин, тукан, фламинго' },
-  { id: 'dinos', name: 'Динозавры', icon: '🦖', count: 5, gradient: 'linear-gradient(135deg, #FF758C 0%, #FF7EB3 100%)', icons: ['🦖', '🦕', '🌋', '🦣'], desc: 'Ти-Рекс, мамонт' }
+  { id: 'all', name: 'Все животные', icon: '⭐', count: 73, gradient: 'linear-gradient(135deg, #FF6B6B 0%, #FFE66D 100%)', icons: ['🐶', '🐮', '🌲', '🦁', '🦖'], desc: 'Смотреть всех подряд' },
+  { id: 'pets', name: 'Домашние', icon: '🐶', count: 12, image: 'assets/images/menu/world_pets.png', gradient: 'linear-gradient(145deg, #FFE8DC 0%, #FFCCB8 100%)', icons: ['🐶', '🐱', '🐰', '🐹'], desc: 'Кошка, собака, хомячок' },
+  { id: 'farm', name: 'Ферма', icon: '🐮', count: 11, image: 'assets/images/menu/world_farm.png', gradient: 'linear-gradient(145deg, #FFF6BD 0%, #FFE57F 100%)', icons: ['🐮', '🐴', '🐷', '🐑'], desc: 'Корова, лошадка, свинка' },
+  { id: 'forest', name: 'Лесные', icon: '🌲', count: 13, image: 'assets/images/menu/world_forest.png', gradient: 'linear-gradient(145deg, #D4F7DC 0%, #A8E6CF 100%)', icons: ['🐻', '🦊', '🫎', '🦉'], desc: 'Медведь, лисичка, лось' },
+  { id: 'savanna', name: 'Саванна', icon: '🦁', count: 14, image: 'assets/images/menu/world_savanna.png', gradient: 'linear-gradient(145deg, #FDE8A5 0%, #F5CE62 100%)', icons: ['🦁', '🐘', '🦒', '🦓'], desc: 'Лев, слоник, жираф' },
+  { id: 'ocean', name: 'Океан', icon: '🌊', count: 12, image: 'assets/images/menu/world_ocean.png', gradient: 'linear-gradient(145deg, #C2EEFE 0%, #90DBF9 100%)', icons: ['🐋', '🐬', '🦈', '🦀'], desc: 'Кит, дельфин, акула' },
+  { id: 'birds', name: 'Птицы', icon: '🦚', count: 6, image: 'assets/images/menu/world_birds.png', gradient: 'linear-gradient(145deg, #D4E4FC 0%, #B8D4FA 100%)', icons: ['🦚', '🦜', '🦅', '🦩'], desc: 'Орёл, тукан, фламинго' },
+  { id: 'dinos', name: 'Дино Мир', icon: '🦖', count: 5, image: 'assets/images/menu/world_dinos.png', gradient: 'linear-gradient(145deg, #EBE3FC 0%, #D1C4E9 100%)', icons: ['🦖', '🦕', '🌋', '🦣'], desc: 'Ти-Рекс, трицератопс' }
 ];
 
 export const animals = [
@@ -576,7 +576,7 @@ export const animals = [
   {
     id: 'lion',
     name: 'Лев',
-    category: 'savannah',
+    category: 'savanna',
     subCategory: 'mammal',
     image: 'assets/images/savannah/lion.png',
     sound: 'assets/audio/sounds/lion_1.wav',
@@ -591,7 +591,7 @@ export const animals = [
   {
     id: 'tiger',
     name: 'Тигр',
-    category: 'savannah',
+    category: 'savanna',
     subCategory: 'mammal',
     image: 'assets/images/savannah/tiger.png',
     sound: 'assets/audio/sounds/tiger_1.wav',
@@ -606,7 +606,7 @@ export const animals = [
   {
     id: 'elephant',
     name: 'Слон',
-    category: 'savannah',
+    category: 'savanna',
     subCategory: 'mammal',
     image: 'assets/images/savannah/elephant.png',
     sound: 'assets/audio/sounds/elephant.mp3',
@@ -620,7 +620,7 @@ export const animals = [
   {
     id: 'giraffe',
     name: 'Жираф',
-    category: 'savannah',
+    category: 'savanna',
     subCategory: 'mammal',
     image: 'assets/images/savannah/giraffe.png',
     sound: 'assets/audio/sounds/giraffe.mp3',
@@ -634,7 +634,7 @@ export const animals = [
   {
     id: 'zebra',
     name: 'Зебра',
-    category: 'savannah',
+    category: 'savanna',
     subCategory: 'mammal',
     image: 'assets/images/savannah/zebra.png',
     sound: 'assets/audio/sounds/zebra_1.wav',
@@ -649,7 +649,7 @@ export const animals = [
   {
     id: 'monkey',
     name: 'Обезьяна',
-    category: 'savannah',
+    category: 'savanna',
     subCategory: 'mammal',
     image: 'assets/images/savannah/monkey.png',
     sound: 'assets/audio/sounds/monkey_1.wav',
@@ -664,7 +664,7 @@ export const animals = [
   {
     id: 'hippo',
     name: 'Бегемот',
-    category: 'savannah',
+    category: 'savanna',
     subCategory: 'mammal',
     image: 'assets/images/savannah/hippo.png',
     sound: 'assets/audio/sounds/hippo.mp3',
@@ -678,7 +678,7 @@ export const animals = [
   {
     id: 'rhino',
     name: 'Носорог',
-    category: 'savannah',
+    category: 'savanna',
     subCategory: 'mammal',
     image: 'assets/images/savannah/rhino.png',
     sound: 'assets/audio/sounds/rhino.mp3',
@@ -692,7 +692,7 @@ export const animals = [
   {
     id: 'cheetah',
     name: 'Гепард',
-    category: 'savannah',
+    category: 'savanna',
     subCategory: 'mammal',
     image: 'assets/images/savannah/cheetah.png',
     sound: 'assets/audio/sounds/cheetah_1.wav',
@@ -707,7 +707,7 @@ export const animals = [
   {
     id: 'kangaroo',
     name: 'Кенгуру',
-    category: 'savannah',
+    category: 'savanna',
     subCategory: 'mammal',
     image: 'assets/images/savannah/kangaroo.png',
     sound: 'assets/audio/sounds/kangaroo.mp3',
@@ -721,7 +721,7 @@ export const animals = [
   {
     id: 'koala',
     name: 'Коала',
-    category: 'savannah',
+    category: 'savanna',
     subCategory: 'mammal',
     image: 'assets/images/savannah/koala.png',
     sound: 'assets/audio/sounds/koala.mp3',
@@ -735,7 +735,7 @@ export const animals = [
   {
     id: 'panda',
     name: 'Большая панда',
-    category: 'savannah',
+    category: 'savanna',
     subCategory: 'mammal',
     image: 'assets/images/savannah/panda.png',
     sound: 'assets/audio/sounds/panda.mp3',
@@ -749,7 +749,7 @@ export const animals = [
   {
     id: 'crocodile',
     name: 'Крокодил',
-    category: 'savannah',
+    category: 'savanna',
     subCategory: 'reptile',
     image: 'assets/images/savannah/crocodile.png',
     sound: 'assets/audio/sounds/crocodile.mp3',
@@ -763,7 +763,7 @@ export const animals = [
   {
     id: 'chameleon',
     name: 'Хамелеон',
-    category: 'savannah',
+    category: 'savanna',
     subCategory: 'reptile',
     image: 'assets/images/savannah/chameleon.png',
     sound: 'assets/audio/sounds/chameleon_1.wav',

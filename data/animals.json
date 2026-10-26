@@ -205,22 +205,25 @@
     "color": "#A0C4FF"
   },
   {
-    "id": "axolotl",
-    "name": "Аксолотль",
+    "id": "snake",
+    "name": "Змея",
     "category": "pets",
-    "subCategory": "amphibian",
-    "image": "assets/images/pets/axolotl.png",
-    "sound": "assets/audio/sounds/axolotl.mp3",
-    "voice": "assets/audio/voices/axolotl.mp3",
-    "emoji": "🦎",
-    "soundText": "Бульк-плюх!",
-    "sounds": [
-      "Бульк-плюх!",
-      "Хлюп-хлюп!",
-      "Буль-буль!"
+    "subCategory": "reptile",
+    "image": "assets/images/pets/snake.png",
+    "sound": "assets/audio/sounds/snake_1.wav",
+    "soundFiles": [
+      "assets/audio/sounds/snake_1.wav"
     ],
-    "funFact": "Аксолотль похож на улыбающегося водяного дракончика с пушистыми жабрами!",
-    "color": "#F472B6"
+    "voice": "assets/audio/voices/snake.mp3",
+    "emoji": "🐍",
+    "soundText": "Ш-ш-ш-ш!",
+    "sounds": [
+      "Ш-ш-ш-ш!",
+      "Ф-с-с-с!",
+      "Ш-ш-ш-клац!"
+    ],
+    "funFact": "Змеи пробуют воздух раздвоенным язычком и умеют ползать совершенно бесшумно!",
+    "color": "#86EFAC"
   },
   {
     "id": "ferret",
@@ -1217,7 +1220,7 @@
     "name": "Орёл",
     "category": "birds",
     "subCategory": "bird",
-    "image": "assets/images/birds/eagle.svg",
+    "image": "assets/images/birds/eagle.png",
     "sound": "assets/audio/sounds/eagle_1.wav",
     "soundFiles": [
       "assets/audio/sounds/eagle_1.wav"
@@ -1238,7 +1241,7 @@
     "name": "Фламинго",
     "category": "birds",
     "subCategory": "bird",
-    "image": "assets/images/birds/flamingo.svg",
+    "image": "assets/images/birds/flamingo.png",
     "sound": "assets/audio/sounds/flamingo_1.wav",
     "soundFiles": [
       "assets/audio/sounds/flamingo_1.wav"
@@ -1259,7 +1262,7 @@
     "name": "Тукан",
     "category": "birds",
     "subCategory": "bird",
-    "image": "assets/images/birds/toucan.svg",
+    "image": "assets/images/birds/toucan.png",
     "sound": "assets/audio/sounds/toucan_1.wav",
     "soundFiles": [
       "assets/audio/sounds/toucan_1.wav"
@@ -1280,7 +1283,7 @@
     "name": "Лебедь",
     "category": "birds",
     "subCategory": "bird",
-    "image": "assets/images/birds/swan.svg",
+    "image": "assets/images/birds/swan.png",
     "sound": "assets/audio/sounds/swan_1.wav",
     "soundFiles": [
       "assets/audio/sounds/swan_1.wav"
@@ -1301,7 +1304,7 @@
     "name": "Павлин",
     "category": "birds",
     "subCategory": "bird",
-    "image": "assets/images/birds/peacock.svg",
+    "image": "assets/images/birds/peacock.png",
     "sound": "assets/audio/sounds/peacock_1.wav",
     "soundFiles": [
       "assets/audio/sounds/peacock_1.wav"
@@ -1322,7 +1325,7 @@
     "name": "Колибри",
     "category": "birds",
     "subCategory": "bird",
-    "image": "assets/images/birds/hummingbird.svg",
+    "image": "assets/images/birds/hummingbird.png",
     "sound": "assets/audio/sounds/hummingbird_1.wav",
     "soundFiles": [
       "assets/audio/sounds/hummingbird_1.wav"
@@ -1343,7 +1346,7 @@
     "name": "Тираннозавр Рекс",
     "category": "dinos",
     "subCategory": "dino",
-    "image": "assets/images/dinos/trex.svg",
+    "image": "assets/images/dinos/trex.png",
     "sound": "assets/audio/sounds/trex.mp3",
     "voice": "assets/audio/voices/trex.mp3",
     "emoji": "🦖",
@@ -1361,7 +1364,7 @@
     "name": "Трицератопс",
     "category": "dinos",
     "subCategory": "dino",
-    "image": "assets/images/dinos/triceratops.svg",
+    "image": "assets/images/dinos/triceratops.png",
     "sound": "assets/audio/sounds/triceratops.mp3",
     "voice": "assets/audio/voices/triceratops.mp3",
     "emoji": "🦕",
@@ -1379,7 +1382,7 @@
     "name": "Птеродактиль",
     "category": "dinos",
     "subCategory": "dino",
-    "image": "assets/images/dinos/pterodactyl.svg",
+    "image": "assets/images/dinos/pterodactyl.png",
     "sound": "assets/audio/sounds/pterodactyl_1.wav",
     "soundFiles": [
       "assets/audio/sounds/pterodactyl_1.wav"
@@ -1400,7 +1403,7 @@
     "name": "Стегозавр",
     "category": "dinos",
     "subCategory": "dino",
-    "image": "assets/images/dinos/stegosaurus.svg",
+    "image": "assets/images/dinos/stegosaurus.png",
     "sound": "assets/audio/sounds/stegosaurus.mp3",
     "voice": "assets/audio/voices/stegosaurus.mp3",
     "emoji": "🦎",
@@ -1418,7 +1421,7 @@
     "name": "Мамонт",
     "category": "dinos",
     "subCategory": "mammal",
-    "image": "assets/images/dinos/mammoth.svg",
+    "image": "assets/images/dinos/mammoth.png",
     "sound": "assets/audio/sounds/mammoth.mp3",
     "voice": "assets/audio/voices/mammoth.mp3",
     "emoji": "🦣",

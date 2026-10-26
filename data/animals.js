@@ -1,7 +1,7 @@
 export const subCategories = [
   { id: 'all', name: 'Все виды', icon: '✨' },
   { id: 'mammal', name: 'Млекопитающие', icon: '🐾' },
-  { id: 'bird', name: 'Птицы', icon: '🪶' },
+  { id: 'bird', name: 'Птицы', icon: '🦚' },
   { id: 'fish', name: 'Рыбы', icon: '🐟' },
   { id: 'reptile', name: 'Рептилии', icon: '🦎' },
   { id: 'amphibian', name: 'Амфибии', icon: '🐸' },
@@ -10,14 +10,14 @@ export const subCategories = [
 ];
 
 export const mainCategories = [
-  { id: 'all', name: 'Все', icon: '⭐' },
-  { id: 'pets', name: 'Домашние', icon: '🐶' },
-  { id: 'farm', name: 'Ферма', icon: '🐮' },
-  { id: 'forest', name: 'Лес', icon: '🌲' },
-  { id: 'savannah', name: 'Саванна', icon: '🦁' },
-  { id: 'ocean', name: 'Океан', icon: '🌊' },
-  { id: 'birds', name: 'Птицы', icon: '🦜' },
-  { id: 'dinos', name: 'Динозавры', icon: '🦖' }
+  { id: 'all', name: 'Все животные', icon: '⭐', count: 73, gradient: 'linear-gradient(135deg, #FF6B6B 0%, #FFE66D 100%)', icons: ['🐶', '🦁', '🐬', '🦖'], desc: 'Смотреть всех подряд' },
+  { id: 'pets', name: 'Домашние', icon: '🐶', count: 12, gradient: 'linear-gradient(135deg, #FF9A9E 0%, #FECFEF 100%)', icons: ['🐶', '🐱', '🐰', '🐍'], desc: 'Кошка, собака, змейка' },
+  { id: 'farm', name: 'Ферма', icon: '🐮', count: 11, gradient: 'linear-gradient(135deg, #A8E063 0%, #56AB2F 100%)', icons: ['🐮', '🐴', '🐷', '🐝'], desc: 'Корова, лошадка, пчела' },
+  { id: 'forest', name: 'Лес', icon: '🌲', count: 13, gradient: 'linear-gradient(135deg, #48C6EF 0%, #6F86D6 100%)', icons: ['🫎', '🦫', '🐻', '🦊'], desc: 'Лось, Бобёр, медведь' },
+  { id: 'savannah', name: 'Саванна', icon: '🦁', count: 14, gradient: 'linear-gradient(135deg, #F6D365 0%, #FDA085 100%)', icons: ['🦁', '🐘', '🦒', '🦓'], desc: 'Лев, слон, жираф' },
+  { id: 'ocean', name: 'Океан', icon: '🌊', count: 12, gradient: 'linear-gradient(135deg, #2AF598 0%, #009EFD 100%)', icons: ['🐋', '🐬', '🦭', '🦀'], desc: 'Кит, Тюлень, Морж' },
+  { id: 'birds', name: 'Птицы', icon: '🦚', count: 6, gradient: 'linear-gradient(135deg, #E0C3FC 0%, #8EC5FC 100%)', icons: ['🦚', '🦜', '🦅', '🦩'], desc: 'Павлин, тукан, фламинго' },
+  { id: 'dinos', name: 'Динозавры', icon: '🦖', count: 5, gradient: 'linear-gradient(135deg, #FF758C 0%, #FF7EB3 100%)', icons: ['🦖', '🦕', '🌋', '🦣'], desc: 'Ти-Рекс, мамонт' }
 ];
 
 export const animals = [
@@ -30,7 +30,8 @@ export const animals = [
     category: 'pets',
     subCategory: 'mammal',
     image: 'assets/images/pets/cat.png',
-    sound: 'assets/audio/sounds/cat_1.wav',
+    sound: 'assets/audio/sounds/fish_1.wav',
+    soundFiles: ['assets/audio/sounds/fish_1.wav'],
     soundFiles: ['assets/audio/sounds/cat_1.wav','assets/audio/sounds/cat_2.wav'],
     voice: 'assets/audio/voices/cat.mp3',
     emoji: '🐱',
@@ -778,7 +779,8 @@ export const animals = [
     category: 'ocean',
     subCategory: 'mammal',
     image: 'assets/images/ocean/whale.png',
-    sound: 'assets/audio/sounds/whale.mp3',
+    sound: 'assets/audio/sounds/whale_1.wav',
+    soundFiles: ['assets/audio/sounds/whale_1.wav'],
     voice: 'assets/audio/voices/whale.mp3',
     emoji: '🐋',
     soundText: 'У-у-у-у-у-ум...',
@@ -792,7 +794,8 @@ export const animals = [
     category: 'ocean',
     subCategory: 'mammal',
     image: 'assets/images/ocean/dolphin.png',
-    sound: 'assets/audio/sounds/dolphin.mp3',
+    sound: 'assets/audio/sounds/dolphin_1.wav',
+    soundFiles: ['assets/audio/sounds/dolphin_1.wav'],
     voice: 'assets/audio/voices/dolphin.mp3',
     emoji: '🐬',
     soundText: 'Клик-клик-клик!',
@@ -820,7 +823,8 @@ export const animals = [
     category: 'ocean',
     subCategory: 'fish',
     image: 'assets/images/ocean/clownfish.png',
-    sound: 'assets/audio/sounds/clownfish.mp3',
+    sound: 'assets/audio/sounds/clownfish_1.wav',
+    soundFiles: ['assets/audio/sounds/clownfish_1.wav'],
     voice: 'assets/audio/voices/clownfish.mp3',
     emoji: '🐠',
     soundText: 'Бульк-бульк!',

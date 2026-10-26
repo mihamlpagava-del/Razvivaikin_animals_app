@@ -389,7 +389,7 @@ function renderCard(direction = 'none') {
   cardImage.src = animal.image;
   cardImage.alt = animal.name;
 
-  cardTitle.textContent = animal.name;
+  cardTitle.innerHTML = `<span class="card-title-emoji">${animal.emoji}</span> <span class="card-title-text">${animal.name}</span>`;
   cardSoundHint.textContent = `«${animal.soundText}» • Нажми, чтобы услышать 🐾`;
   factText.textContent = animal.funFact || 'Удивительное создание нашей планеты!';
 
@@ -423,6 +423,96 @@ function prevAnimal() {
 /**
  * Построение кнопок главных категорий
  */
+
+// Ссылки на экраны
+const startScreen = document.getElementById('startScreen');
+const gameScreen = document.getElementById('gameScreen');
+const worldsGrid = document.getElementById('worldsGrid');
+const allAnimalsHeroBtn = document.getElementById('allAnimalsHeroBtn');
+const backToMenuBtn = document.getElementById('backToMenuBtn');
+const startDonateBtn = document.getElementById('startDonateBtn');
+
+/**
+ * Построение стартового меню выбора миров
+ */
+function buildWorldsGrid() {
+  if (!worldsGrid) return;
+  worldsGrid.innerHTML = '';
+
+  // Отображаем все категории кроме 'all' (для 'all' есть большая hero-кнопка)
+  mainCategories.filter(c => c.id !== 'all').forEach(cat => {
+    const card = document.createElement('div');
+    card.className = 'world-card';
+    card.style.background = cat.gradient || 'linear-gradient(135deg, #FF9A9E 0%, #FECFEF 100%)';
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+
+    const iconsPreview = Array.isArray(cat.icons) ? cat.icons.join(' ') : cat.icon;
+
+    card.innerHTML = `
+      <div class="world-icons-row">
+        <span class="world-main-emoji">${cat.icon}</span>
+        <span class="world-icons-preview">${iconsPreview}</span>
+      </div>
+      <div class="world-card-info">
+        <div class="world-card-title">${cat.name}</div>
+        <div class="world-card-desc">${cat.desc || ''}</div>
+        <span class="world-card-count">${cat.count} животных 🐾</span>
+      </div>
+    `;
+
+    card.addEventListener('click', (e) => {
+      tapticFeedback('medium');
+      spawnEmojiBurst(e.clientX, e.clientY, cat.icon);
+      openCategory(cat.id);
+    });
+
+    worldsGrid.appendChild(card);
+  });
+}
+
+/**
+ * Переход из меню в режим игры с выбранной категорией
+ */
+function openCategory(categoryId) {
+  state.selectedCategory = categoryId;
+  state.selectedSubCategory = 'all';
+  state.searchQuery = '';
+  state.currentIndex = 0;
+
+  if (searchInput) searchInput.value = '';
+  if (clearSearchBtn) clearSearchBtn.classList.add('hidden');
+
+  // Обновляем чипы категорий в шапке
+  document.querySelectorAll('.cat-chip').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.category === categoryId);
+  });
+  document.querySelectorAll('.subcat-chip').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.subcategory === 'all');
+  });
+
+  // Переключаем экраны
+  if (startScreen) startScreen.classList.add('hidden');
+  if (gameScreen) gameScreen.classList.remove('hidden');
+
+  renderCard('none');
+}
+
+/**
+ * Возврат в стартовое меню
+ */
+function openStartMenu() {
+  stopAllAudio();
+  tapticFeedback('light');
+
+  if (gameScreen) gameScreen.classList.add('hidden');
+  if (startScreen) {
+    startScreen.classList.remove('hidden');
+    // Плавный скролл меню наверх
+    startScreen.scrollTop = 0;
+  }
+}
+
 function buildMainCategories() {
   mainCategoriesBar.innerHTML = '';
   mainCategories.forEach(cat => {
@@ -771,11 +861,32 @@ function initEvents() {
   initTouchEvents();
   initSearch();
   initDonateModal();
+
+  if (allAnimalsHeroBtn) {
+    allAnimalsHeroBtn.addEventListener('click', (e) => {
+      tapticFeedback('medium');
+      spawnEmojiBurst(e.clientX, e.clientY, '⭐');
+      openCategory('all');
+    });
+  }
+
+  if (backToMenuBtn) {
+    backToMenuBtn.addEventListener('click', () => {
+      openStartMenu();
+    });
+  }
+
+  if (startDonateBtn) {
+    startDonateBtn.addEventListener('click', () => {
+      openDonateModal();
+    });
+  }
 }
 
 // Запуск при загрузке документа
 document.addEventListener('DOMContentLoaded', () => {
   initVKApp();
+  buildWorldsGrid();
   buildMainCategories();
   buildSubCategories();
   initEvents();

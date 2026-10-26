@@ -18,12 +18,50 @@
 </head>
 <body>
   <div class="app-container">
-    
-    <!-- Шапка приложения с поиском, кнопкой доната и фильтрами -->
-    <header class="app-header">
+    <!-- ========================================================
+         СТАРТОВОЕ МЕНЮ (ВЫБОР МИРА И КАТЕГОРИЙ ДЛЯ ДЕТЕЙ)
+         ======================================================== -->
+    <section id="startScreen" class="start-screen" aria-label="Выбор мира">
+      <div class="start-header">
+        <div class="start-badge">✨ Игра для малышей • 3D Пластилин ✨</div>
+        <h1 class="start-title">Мир Животных 🐾</h1>
+        <p class="start-subtitle">Куда отправимся в путешествие? Выбери мир:</p>
+      </div>
+
+      <!-- Сетка красочных миров животных -->
+      <div id="worldsGrid" class="worlds-grid">
+        <!-- Генерируется динамически из mainCategories -->
+      </div>
+
+      <!-- Большая яркая кнопка "Смотреть всех" -->
+      <button id="allAnimalsHeroBtn" class="all-animals-hero-btn" type="button">
+        <span class="hero-btn-icon">⭐</span>
+        <div class="hero-btn-content">
+          <span class="hero-btn-title">Смотреть всех животных</span>
+          <span class="hero-btn-sub">Все 73 пластилиновых зверят подряд 🐾</span>
+        </div>
+        <span class="hero-btn-arrow">🚀</span>
+      </button>
+
+      <div class="start-footer-row">
+        <button id="startDonateBtn" class="start-donate-btn" type="button">
+          <span>💖 Сказать спасибо зверям</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         ЭКРАН ИГРЫ (КАРТОЧКА + СЛАЙДЕР + ПОИСК)
+         ======================================================== -->
+    <div id="gameScreen" class="game-screen hidden">
+      <header class="app-header">
       
       <!-- Верхний ряд: Поиск и кнопка "Сказать спасибо" (Голоса VK) -->
       <div class="header-top-row">
+        <button id="backToMenuBtn" class="back-menu-btn" type="button" title="Вернуться к выбору миров">
+          <span class="back-icon">🏠</span>
+          <span class="back-text">Миры</span>
+        </button>
         <div class="search-container">
           <span class="search-icon">🔍</span>
           <input 
@@ -126,8 +164,9 @@
     <footer class="slider-footer">
       <span class="swipe-hint">👈 Листай свайпами или стрелками 👉</span>
     </footer>
+    </div><!-- /gameScreen -->
 
-    <!-- ========================================================
+<!-- ========================================================
          Модальное окно «Сказать спасибо голосами VK»
          ======================================================== -->
     <div id="donateModal" class="modal-overlay hidden" aria-hidden="true" role="dialog">

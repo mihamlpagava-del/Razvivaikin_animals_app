@@ -5,7 +5,7 @@
     "category": "pets",
     "subCategory": "mammal",
     "image": "assets/images/pets/cat.png",
-    "sound": "assets/audio/sounds/cat_1.wav",
+    "sound": "assets/audio/sounds/fish_1.wav",
     "soundFiles": [
       "assets/audio/sounds/cat_1.wav",
       "assets/audio/sounds/cat_2.wav"
@@ -1005,7 +1005,10 @@
     "category": "ocean",
     "subCategory": "mammal",
     "image": "assets/images/ocean/whale.png",
-    "sound": "assets/audio/sounds/whale.mp3",
+    "sound": "assets/audio/sounds/whale_1.wav",
+    "soundFiles": [
+      "assets/audio/sounds/whale_1.wav"
+    ],
     "voice": "assets/audio/voices/whale.mp3",
     "emoji": "🐋",
     "soundText": "У-у-у-у-у-ум...",
@@ -1023,7 +1026,10 @@
     "category": "ocean",
     "subCategory": "mammal",
     "image": "assets/images/ocean/dolphin.png",
-    "sound": "assets/audio/sounds/dolphin.mp3",
+    "sound": "assets/audio/sounds/dolphin_1.wav",
+    "soundFiles": [
+      "assets/audio/sounds/dolphin_1.wav"
+    ],
     "voice": "assets/audio/voices/dolphin.mp3",
     "emoji": "🐬",
     "soundText": "Клик-клик-клик!",
@@ -1059,7 +1065,10 @@
     "category": "ocean",
     "subCategory": "fish",
     "image": "assets/images/ocean/clownfish.png",
-    "sound": "assets/audio/sounds/clownfish.mp3",
+    "sound": "assets/audio/sounds/clownfish_1.wav",
+    "soundFiles": [
+      "assets/audio/sounds/clownfish_1.wav"
+    ],
     "voice": "assets/audio/voices/clownfish.mp3",
     "emoji": "🐠",
     "soundText": "Бульк-бульк!",

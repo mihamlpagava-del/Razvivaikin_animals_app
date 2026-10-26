@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Энциклопедия Животных • Детская Игра</title>
+  
+  <!-- VK Bridge для VK Mini Apps -->
+  <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
+  
+  <!-- Детские округлые шрифты -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700;800&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Стили приложения -->
+  <link rel="stylesheet" href="../src/style.css">
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- Шапка приложения с поиском, кнопкой доната и фильтрами -->
+    <header class="app-header">
+      
+      <!-- Верхний ряд: Поиск и кнопка "Сказать спасибо" (Голоса VK) -->
+      <div class="header-top-row">
+        <div class="search-container">
+          <span class="search-icon">🔍</span>
+          <input 
+            id="searchInput" 
+            type="text" 
+            class="search-input" 
+            placeholder="Найти животное..." 
+            autocomplete="off"
+            autocorrect="off"
+            spellcheck="false"
+          />
+          <button id="clearSearchBtn" class="clear-search-btn hidden" type="button" aria-label="Очистить поиск">✕</button>
+        </div>
+
+        <button id="openDonateBtn" class="donate-btn" type="button" title="Угостить зверят голосами ВКонтакте">
+          <span class="donate-icon">⭐</span>
+          <span class="donate-text">Спасибо</span>
+        </button>
+      </div>
+
+      <!-- Главные категории (Среда обитания / Миры) -->
+      <nav id="mainCategoriesBar" class="categories-bar scroll-x" aria-label="Категории обитания">
+        <!-- Генерируется из mainCategories -->
+      </nav>
+
+      <!-- Подкатегории (Биологические классы: Млекопитающие, Птицы, Рыбы...) -->
+      <nav id="subCategoriesBar" class="subcategories-bar scroll-x" aria-label="Классы животных">
+        <!-- Генерируется из subCategories -->
+      </nav>
+
+      <!-- Счетчик и пагинация -->
+      <div class="slider-meta">
+        <div id="counterBadge" class="counter-badge">1 из 73</div>
+        <div id="paginationDots" class="pagination-dots"></div>
+      </div>
+    </header>
+
+    <!-- Основная область: Большой пластилиновый слайдер -->
+    <main class="slider-section">
+      <!-- Кнопка Влево -->
+      <button id="prevBtn" class="nav-btn prev-btn" aria-label="Предыдущее животное" title="Предыдущее">
+        <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor">
+          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+        </svg>
+      </button>
+
+      <!-- Сцена для карточки со свайпами -->
+      <div id="cardStage" class="card-stage">
+        
+        <!-- Карточка животного -->
+        <article id="mainCard" class="fullscreen-card" role="button" tabindex="0" aria-label="Нажмите, чтобы прослушать">
+          
+          <!-- Верхний бейдж с категорией и классом -->
+          <div class="card-top-row">
+            <span id="cardTaxonomy" class="taxonomy-pill">Саванна • Млекопитающее 🐾</span>
+            <div class="card-badge" title="Нажми, чтобы послушать">
+              <span class="badge-icon">🔊</span>
+              <span class="sound-waves">
+                <span></span><span></span><span></span>
+              </span>
+            </div>
+          </div>
+
+          <!-- Большая иллюстрация животного -->
+          <div class="card-image-wrapper">
+            <img id="cardImage" src="" alt="Животное" class="card-image" draggable="false" />
+          </div>
+
+          <!-- Название, звук и познавательный факт -->
+          <div class="card-info">
+            <h2 id="cardTitle" class="card-title">Лев</h2>
+            <div id="cardSoundHint" class="card-sound-pill">«Р-р-р-мяу!» • Нажми, чтобы услышать 🐾</div>
+            <div id="cardFact" class="card-fact-box">
+              <span class="fact-icon">💡</span>
+              <span id="factText" class="fact-text">Льва по праву называют царём всех зверей!</span>
+            </div>
+          </div>
+
+        </article>
+
+        <!-- Экран при пустом поиске -->
+        <div id="emptyState" class="empty-state hidden">
+          <div class="empty-icon">🔍🐾</div>
+          <h3 class="empty-title">Животное не найдено</h3>
+          <p class="empty-desc">Попробуй изменить поисковый запрос или сбросить фильтры.</p>
+          <button id="resetFiltersBtn" class="reset-btn" type="button">Показать всех животных</button>
+        </div>
+
+      </div>
+
+      <!-- Кнопка Вправо -->
+      <button id="nextBtn" class="nav-btn next-btn" aria-label="Следующее животное" title="Следующее">
+        <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor">
+          <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+        </svg>
+      </button>
+    </main>
+
+    <!-- Нижняя подсказка -->
+    <footer class="slider-footer">
+      <span class="swipe-hint">👈 Листай свайпами или стрелками 👉</span>
+    </footer>
+
+    <!-- ========================================================
+         Модальное окно «Сказать спасибо голосами VK»
+         ======================================================== -->
+    <div id="donateModal" class="modal-overlay hidden" aria-hidden="true" role="dialog">
+      <div class="modal-card">
+        <button id="closeDonateBtn" class="modal-close-btn" type="button" aria-label="Закрыть">✕</button>
+        
+        <div class="modal-header">
+          <span class="modal-badge-icon">💖</span>
+          <h3 class="modal-title">Сказать спасибо!</h3>
+          <p class="modal-subtitle">Вам нравится игра? Вы можете угостить зверят голосами ВКонтакте:</p>
+        </div>
+
+        <div class="donate-options">
+          <button class="donate-tier-btn active" data-votes="3" data-item="treat_3">
+            <span class="tier-icon">🍬</span>
+            <div class="tier-info">
+              <div class="tier-title">Вкусная конфетка</div>
+              <div class="tier-desc">Маленький комплимент</div>
+            </div>
+            <span class="tier-price">3 💎</span>
+          </button>
+
+          <button class="donate-tier-btn" data-votes="5" data-item="treat_5">
+            <span class="tier-icon">🥕</span>
+            <div class="tier-info">
+              <div class="tier-title">Корзинка яблок и моркови</div>
+              <div class="tier-desc">Любимое угощение питомцев</div>
+            </div>
+            <span class="tier-price">5 💎</span>
+          </button>
+
+          <button class="donate-tier-btn" data-votes="10" data-item="treat_10">
+            <span class="tier-icon">🎂</span>
+            <div class="tier-info">
+              <div class="tier-title">Праздничный торт</div>
+              <div class="tier-desc">Большая радость всему зоопарку!</div>
+            </div>
+            <span class="tier-price">10 💎</span>
+          </button>
+        </div>
+
+        <button id="confirmDonateBtn" class="confirm-donate-btn" type="button">
+          Поблагодарить (3 голоса)
+        </button>
+
+        <p class="donate-note">Оплата происходит официально через голоса ВКонтакте</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Главный скрипт логики -->
+  <script type="module" src="../src/app.js"></script>
+</body>
+</html>

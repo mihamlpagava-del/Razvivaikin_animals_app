@@ -1,0 +1,21 @@
+{
+  "name": "animal-cards-vk-mini-app",
+  "version": "1.0.0",
+  "description": "Детская развивающая игра с карточками животных (VK Mini App)",
+  "main": "src/app.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.cjs",
+    "build": "node build_vk.cjs",
+    "deploy": "npx @vkontakte/vk-miniapps-deploy"
+  },
+  "keywords": [
+    "vk-mini-app",
+    "kids-game",
+    "animals",
+    "education"
+  ],
+  "author": "",
+  "license": "MIT"
+}
+

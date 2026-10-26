@@ -917,3 +917,51 @@ body {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.15); }
 }
+
+
+/* ============================================================
+   ЭФФЕКТ ВЫЛЕТАЮЩИХ ЭМОДЗИ И САЛЮТА ПРИ НАЖАТИИ НА КАРТОЧКУ
+   ============================================================ */
+.emoji-particle {
+  position: fixed;
+  pointer-events: none;
+  user-select: none;
+  z-index: 10000;
+  line-height: 1;
+  display: inline-block;
+  will-change: transform, opacity;
+  animation: emojiFlyOut var(--duration, 0.9s) cubic-bezier(0.18, 0.89, 0.32, 1.25) forwards;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.18));
+}
+
+@keyframes emojiFlyOut {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translate3d(0, 0, 0) scale(0.2) rotate(0deg);
+  }
+  18% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translate3d(calc(var(--dx) * 0.35), calc(var(--dy) * 0.35 - 15px), 0) scale(1.35) rotate(calc(var(--rot) * 0.35));
+  }
+  65% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translate3d(var(--dx), var(--dy), 0) scale(1.1) rotate(var(--rot));
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translate3d(calc(var(--dx) * 1.2), calc(var(--dy) + 55px), 0) scale(0.5) rotate(calc(var(--rot) * 1.4));
+  }
+}
+
+/* Пластилиновое подпрыгивание карточки при нажатии */
+.card.tap-pop {
+  animation: cardJellyPop 0.42s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes cardJellyPop {
+  0% { transform: scale(1); }
+  25% { transform: scale(0.96, 1.04); }
+  50% { transform: scale(1.03, 0.97); }
+  75% { transform: scale(0.99, 1.01); }
+  100% { transform: scale(1); }
+}

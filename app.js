@@ -678,6 +678,62 @@ function initDonateModal() {
 /**
  * Инициализация слушателей событий
  */
+
+/**
+ * Праздничный салют из эмодзи животного и звёздочек при нажатии
+ */
+function spawnEmojiBurst(x, y, animalEmoji) {
+  if (typeof x !== 'number' || typeof y !== 'number' || (x === 0 && y === 0)) {
+    const rect = mainCard.getBoundingClientRect();
+    x = rect.left + rect.width / 2;
+    y = rect.top + rect.height / 2;
+  }
+
+  // Эффект мягкого желейного подпрыгивания карточки
+  mainCard.classList.remove('tap-pop');
+  void mainCard.offsetWidth;
+  mainCard.classList.add('tap-pop');
+  setTimeout(() => mainCard.classList.remove('tap-pop'), 430);
+
+  // Набор эффектов: эмодзи животного + яркие детские смайлики
+  const sparkles = ['⭐', '✨', '🐾', '💖', '🌟', '🎈', '🎵', '🌈', '🍭', '🌸'];
+  const count = 10 + Math.floor(Math.random() * 5); // 10-14 смайликов
+
+  for (let i = 0; i < count; i++) {
+    const el = document.createElement('span');
+    el.className = 'emoji-particle';
+
+    // 45% вероятность эмодзи животного, 55% - звёздочки, сердечки и лапки
+    const isAnimalEmoji = Math.random() < 0.45 && animalEmoji;
+    el.textContent = isAnimalEmoji 
+      ? animalEmoji 
+      : sparkles[Math.floor(Math.random() * sparkles.length)];
+
+    // Разлёт по кругу с преобладанием движения вверх (весёлый фонтан)
+    const angle = (Math.random() * Math.PI * 2);
+    const distance = 65 + Math.random() * 115;
+    const dx = Math.cos(angle) * distance;
+    const dy = Math.sin(angle) * distance - (45 + Math.random() * 45);
+    const rotation = (Math.random() - 0.5) * 130;
+    const duration = 0.8 + Math.random() * 0.4;
+    const size = isAnimalEmoji ? (2.2 + Math.random() * 0.7) : (1.4 + Math.random() * 0.6);
+
+    el.style.left = `${x}px`;
+    el.style.top = `${y}px`;
+    el.style.setProperty('--dx', `${dx}px`);
+    el.style.setProperty('--dy', `${dy}px`);
+    el.style.setProperty('--rot', `${rotation}deg`);
+    el.style.setProperty('--duration', `${duration}s`);
+    el.style.fontSize = `${size}rem`;
+
+    document.body.appendChild(el);
+
+    setTimeout(() => {
+      if (el.parentNode) el.parentNode.removeChild(el);
+    }, duration * 1000 + 80);
+  }
+}
+
 function initEvents() {
   prevBtn.addEventListener('click', () => {
     tapticFeedback('light');
@@ -689,8 +745,10 @@ function initEvents() {
     nextAnimal();
   });
 
-  mainCard.addEventListener('click', () => {
+  mainCard.addEventListener('click', (e) => {
     tapticFeedback('medium');
+    const animal = getCurrentAnimal();
+    spawnEmojiBurst(e.clientX, e.clientY, animal ? animal.emoji : '🐾');
     playAnimalAudio();
   });
 

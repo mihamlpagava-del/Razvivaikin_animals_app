@@ -33,6 +33,8 @@ const state = {
 // Ссылки на воспроизведение
 let activeAudio = null;
 let activeTimeoutId = null;
+const lastPlayedSoundIndices = new Map();
+const lastPlayedFileIndices = new Map();
 
 // DOM элементы
 const mainCategoriesBar = document.getElementById('mainCategoriesBar');
@@ -72,7 +74,8 @@ function getFilteredAnimals() {
     // 3. Поиск по имени и звуку
     const matchQuery = !query || 
       animal.name.toLowerCase().includes(query) || 
-      (animal.soundText && animal.soundText.toLowerCase().includes(query));
+      (animal.soundText && animal.soundText.toLowerCase().includes(query)) ||
+      (Array.isArray(animal.sounds) && animal.sounds.some(s => s.toLowerCase().includes(query)));
 
     return matchCat && matchSubCat && matchQuery;
   });
@@ -151,7 +154,7 @@ function speakFallback(text, pitch = 1.0, signal) {
 
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'ru-RU';
-    utterance.pitch = pitch;
+    utterance.pitch = Math.max(0.75, Math.min(1.8, pitch * (0.94 + Math.random() * 0.14)));
     utterance.rate = 0.95;
 
     const voices = window.speechSynthesis.getVoices();
@@ -199,6 +202,7 @@ function playTrack(src, fallbackText, pitch, signal) {
     }
 
     const audio = new Audio(src);
+    try { audio.playbackRate = 0.94 + Math.random() * 0.14; } catch (e) {}
     activeAudio = audio;
 
     let resolved = false;
@@ -249,9 +253,46 @@ async function playAnimalAudio() {
   void mainCard.offsetWidth;
   mainCard.classList.add('bounce-active', 'is-playing');
 
+  // Выбор случайного звукового файла без повтора подряд
+  let soundSrc = animal.sound;
+  if (Array.isArray(animal.soundFiles) && animal.soundFiles.length > 0) {
+    if (animal.soundFiles.length === 1) {
+      soundSrc = animal.soundFiles[0];
+    } else {
+      const lastFileIdx = lastPlayedFileIndices.get(animal.id);
+      let newFileIdx;
+      do {
+        newFileIdx = Math.floor(Math.random() * animal.soundFiles.length);
+      } while (newFileIdx === lastFileIdx);
+      lastPlayedFileIndices.set(animal.id, newFileIdx);
+      soundSrc = animal.soundFiles[newFileIdx];
+    }
+  }
+
+  // Выбор случайного текста звука без повтора подряд
+  let currentSoundText = animal.soundText;
+  if (Array.isArray(animal.sounds) && animal.sounds.length > 0) {
+    if (animal.sounds.length === 1) {
+      currentSoundText = animal.sounds[0];
+    } else {
+      const lastTextIdx = lastPlayedSoundIndices.get(animal.id);
+      let newTextIdx;
+      do {
+        newTextIdx = Math.floor(Math.random() * animal.sounds.length);
+      } while (newTextIdx === lastTextIdx);
+      lastPlayedSoundIndices.set(animal.id, newTextIdx);
+      currentSoundText = animal.sounds[newTextIdx];
+    }
+  }
+
+  // Динамически обновляем подсказку со звуком на карточке
+  if (cardSoundHint) {
+    cardSoundHint.textContent = `«${currentSoundText}» • Нажми, чтобы услышать 🐾`;
+  }
+
   try {
-    // 1. Звук животного (например "Р-р-р!")
-    await playTrack(animal.sound, animal.soundText, 1.25, signal);
+    // 1. Звук животного (случайный аудиофайл или живой речевой фоллбек)
+    await playTrack(soundSrc, currentSoundText, 1.25, signal);
     if (signal.aborted) return;
 
     // Пауза 260мс

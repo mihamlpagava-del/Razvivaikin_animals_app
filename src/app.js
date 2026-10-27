@@ -449,6 +449,25 @@ function updatePagination(total, current) {
 /**
  * Отрисовка текущей карточки
  */
+/**
+ * Умная предзагрузка (Preload) картинок соседних карточек
+ * для мгновенного отображения без мерцания и задержек при свайпах
+ */
+const preloadedImageUrls = new Set();
+function preloadSurroundingAssets(list, current) {
+  if (!list || list.length <= 1) return;
+  const offsets = [1, 2, -1];
+  for (const offset of offsets) {
+    const idx = (current + offset + list.length) % list.length;
+    const target = list[idx];
+    if (target && target.image && !preloadedImageUrls.has(target.image)) {
+      preloadedImageUrls.add(target.image);
+      const img = new Image();
+      img.src = target.image;
+    }
+  }
+}
+
 function renderCard(direction = 'none') {
   const list = getFilteredAnimals();
 
@@ -517,6 +536,7 @@ function renderCard(direction = 'none') {
   };
   cardImage.src = animal.image;
   cardImage.alt = animal.name;
+  preloadSurroundingAssets(list, current);
 
   cardTitle.innerHTML = `<span class="card-title-emoji">${animal.emoji}</span> <span class="card-title-text">${animal.name}</span>`;
   if (state.mode === 'baby') {

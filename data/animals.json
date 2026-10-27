@@ -5,10 +5,10 @@
     "category": "pets",
     "subCategory": "mammal",
     "image": "assets/images/pets/cat.png",
-    "sound": "assets/audio/sounds/fish_1.wav",
+    "sound": "assets/audio/sounds/fish_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/cat_1.wav",
-      "assets/audio/sounds/cat_2.wav"
+      "assets/audio/sounds/cat_1.mp3",
+      "assets/audio/sounds/cat_2.mp3"
     ],
     "voice": "assets/audio/voices/cat.mp3",
     "emoji": "🐱",
@@ -27,10 +27,10 @@
     "category": "pets",
     "subCategory": "mammal",
     "image": "assets/images/pets/dog.png",
-    "sound": "assets/audio/sounds/dog_1.wav",
+    "sound": "assets/audio/sounds/dog_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/dog_1.wav",
-      "assets/audio/sounds/dog_2.wav"
+      "assets/audio/sounds/dog_1.mp3",
+      "assets/audio/sounds/dog_2.mp3"
     ],
     "voice": "assets/audio/voices/dog.mp3",
     "emoji": "🐶",
@@ -49,9 +49,9 @@
     "category": "pets",
     "subCategory": "mammal",
     "image": "assets/images/pets/hamster.png",
-    "sound": "assets/audio/sounds/hamster_1.wav",
+    "sound": "assets/audio/sounds/hamster_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/hamster_1.wav"
+      "assets/audio/sounds/hamster_1.mp3"
     ],
     "voice": "assets/audio/voices/hamster.mp3",
     "emoji": "🐹",
@@ -88,9 +88,9 @@
     "category": "pets",
     "subCategory": "mammal",
     "image": "assets/images/pets/guinea_pig.png",
-    "sound": "assets/audio/sounds/guinea_pig_1.wav",
+    "sound": "assets/audio/sounds/guinea_pig_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/guinea_pig_1.wav"
+      "assets/audio/sounds/guinea_pig_1.mp3"
     ],
     "voice": "assets/audio/voices/guinea_pig.mp3",
     "emoji": "🐹",
@@ -109,10 +109,10 @@
     "category": "pets",
     "subCategory": "bird",
     "image": "assets/images/pets/parrot.png",
-    "sound": "assets/audio/sounds/parrot_1.wav",
+    "sound": "assets/audio/sounds/parrot_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/parrot_1.wav",
-      "assets/audio/sounds/parrot_2.wav"
+      "assets/audio/sounds/parrot_1.mp3",
+      "assets/audio/sounds/parrot_2.mp3"
     ],
     "voice": "assets/audio/voices/parrot.mp3",
     "emoji": "🦜",
@@ -131,10 +131,10 @@
     "category": "pets",
     "subCategory": "bird",
     "image": "assets/images/pets/canary.png",
-    "sound": "assets/audio/sounds/canary_1.wav",
+    "sound": "assets/audio/sounds/canary_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/canary_1.wav",
-      "assets/audio/sounds/canary_2.wav"
+      "assets/audio/sounds/canary_1.mp3",
+      "assets/audio/sounds/canary_2.mp3"
     ],
     "voice": "assets/audio/voices/canary.mp3",
     "emoji": "🐤",
@@ -171,9 +171,9 @@
     "category": "pets",
     "subCategory": "reptile",
     "image": "assets/images/pets/gecko.png",
-    "sound": "assets/audio/sounds/gecko_1.wav",
+    "sound": "assets/audio/sounds/gecko_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/gecko_1.wav"
+      "assets/audio/sounds/gecko_1.mp3"
     ],
     "voice": "assets/audio/voices/gecko.mp3",
     "emoji": "🦎",
@@ -210,9 +210,9 @@
     "category": "pets",
     "subCategory": "reptile",
     "image": "assets/images/pets/snake.png",
-    "sound": "assets/audio/sounds/snake_1.wav",
+    "sound": "assets/audio/sounds/snake_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/snake_1.wav"
+      "assets/audio/sounds/snake_1.mp3"
     ],
     "voice": "assets/audio/voices/snake.mp3",
     "emoji": "🐍",
@@ -231,9 +231,9 @@
     "category": "pets",
     "subCategory": "mammal",
     "image": "assets/images/pets/ferret.png",
-    "sound": "assets/audio/sounds/ferret_1.wav",
+    "sound": "assets/audio/sounds/ferret_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/ferret_1.wav"
+      "assets/audio/sounds/ferret_1.mp3"
     ],
     "voice": "assets/audio/voices/ferret.mp3",
     "emoji": "🦡",
@@ -252,10 +252,10 @@
     "category": "farm",
     "subCategory": "mammal",
     "image": "assets/images/farm/cow.png",
-    "sound": "assets/audio/sounds/cow_1.wav",
+    "sound": "assets/audio/sounds/cow_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/cow_1.wav",
-      "assets/audio/sounds/cow_2.wav"
+      "assets/audio/sounds/cow_1.mp3",
+      "assets/audio/sounds/cow_2.mp3"
     ],
     "voice": "assets/audio/voices/cow.mp3",
     "emoji": "🐮",
@@ -274,10 +274,10 @@
     "category": "farm",
     "subCategory": "mammal",
     "image": "assets/images/farm/horse.png",
-    "sound": "assets/audio/sounds/horse_1.wav",
+    "sound": "assets/audio/sounds/horse_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/horse_1.wav",
-      "assets/audio/sounds/horse_2.wav"
+      "assets/audio/sounds/horse_1.mp3",
+      "assets/audio/sounds/horse_2.mp3"
     ],
     "voice": "assets/audio/voices/horse.mp3",
     "emoji": "🐴",
@@ -296,9 +296,9 @@
     "category": "farm",
     "subCategory": "mammal",
     "image": "assets/images/farm/sheep.png",
-    "sound": "assets/audio/sounds/sheep_1.wav",
+    "sound": "assets/audio/sounds/sheep_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/sheep_1.wav"
+      "assets/audio/sounds/sheep_1.mp3"
     ],
     "voice": "assets/audio/voices/sheep.mp3",
     "emoji": "🐑",
@@ -317,9 +317,9 @@
     "category": "farm",
     "subCategory": "mammal",
     "image": "assets/images/farm/goat.png",
-    "sound": "assets/audio/sounds/goat_1.wav",
+    "sound": "assets/audio/sounds/goat_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/goat_1.wav"
+      "assets/audio/sounds/goat_1.mp3"
     ],
     "voice": "assets/audio/voices/goat.mp3",
     "emoji": "🐐",
@@ -338,10 +338,10 @@
     "category": "farm",
     "subCategory": "mammal",
     "image": "assets/images/farm/pig.svg",
-    "sound": "assets/audio/sounds/pig_1.wav",
+    "sound": "assets/audio/sounds/pig_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/pig_1.wav",
-      "assets/audio/sounds/pig_2.wav"
+      "assets/audio/sounds/pig_1.mp3",
+      "assets/audio/sounds/pig_2.mp3"
     ],
     "voice": "assets/audio/voices/pig.mp3",
     "emoji": "🐷",
@@ -360,9 +360,9 @@
     "category": "farm",
     "subCategory": "mammal",
     "image": "assets/images/farm/donkey.png",
-    "sound": "assets/audio/sounds/donkey_1.wav",
+    "sound": "assets/audio/sounds/donkey_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/donkey_1.wav"
+      "assets/audio/sounds/donkey_1.mp3"
     ],
     "voice": "assets/audio/voices/donkey.mp3",
     "emoji": "🫏",
@@ -381,9 +381,9 @@
     "category": "farm",
     "subCategory": "bird",
     "image": "assets/images/farm/rooster.png",
-    "sound": "assets/audio/sounds/rooster_1.wav",
+    "sound": "assets/audio/sounds/rooster_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/rooster_1.wav"
+      "assets/audio/sounds/rooster_1.mp3"
     ],
     "voice": "assets/audio/voices/rooster.mp3",
     "emoji": "🐓",
@@ -402,9 +402,9 @@
     "category": "farm",
     "subCategory": "bird",
     "image": "assets/images/farm/duck.png",
-    "sound": "assets/audio/sounds/duck_1.wav",
+    "sound": "assets/audio/sounds/duck_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/duck_1.wav"
+      "assets/audio/sounds/duck_1.mp3"
     ],
     "voice": "assets/audio/voices/duck.mp3",
     "emoji": "🦆",
@@ -423,9 +423,9 @@
     "category": "farm",
     "subCategory": "bird",
     "image": "assets/images/farm/goose.png",
-    "sound": "assets/audio/sounds/goose_1.wav",
+    "sound": "assets/audio/sounds/goose_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/goose_1.wav"
+      "assets/audio/sounds/goose_1.mp3"
     ],
     "voice": "assets/audio/voices/goose.mp3",
     "emoji": "🪿",
@@ -444,9 +444,9 @@
     "category": "farm",
     "subCategory": "bird",
     "image": "assets/images/farm/turkey.png",
-    "sound": "assets/audio/sounds/turkey_1.wav",
+    "sound": "assets/audio/sounds/turkey_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/turkey_1.wav"
+      "assets/audio/sounds/turkey_1.mp3"
     ],
     "voice": "assets/audio/voices/turkey.mp3",
     "emoji": "🦃",
@@ -465,9 +465,9 @@
     "category": "farm",
     "subCategory": "insect",
     "image": "assets/images/farm/bee.png",
-    "sound": "assets/audio/sounds/bee_1.wav",
+    "sound": "assets/audio/sounds/bee_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/bee_1.wav"
+      "assets/audio/sounds/bee_1.mp3"
     ],
     "voice": "assets/audio/voices/bee.mp3",
     "emoji": "🐝",
@@ -486,9 +486,9 @@
     "category": "forest",
     "subCategory": "mammal",
     "image": "assets/images/forest/bear.png",
-    "sound": "assets/audio/sounds/bear_1.wav",
+    "sound": "assets/audio/sounds/bear_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/bear_1.wav"
+      "assets/audio/sounds/bear_1.mp3"
     ],
     "voice": "assets/audio/voices/bear.mp3",
     "emoji": "🐻",
@@ -507,9 +507,9 @@
     "category": "forest",
     "subCategory": "mammal",
     "image": "assets/images/forest/wolf.png",
-    "sound": "assets/audio/sounds/wolf_1.wav",
+    "sound": "assets/audio/sounds/wolf_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/wolf_1.wav"
+      "assets/audio/sounds/wolf_1.mp3"
     ],
     "voice": "assets/audio/voices/wolf.mp3",
     "emoji": "🐺",
@@ -636,9 +636,9 @@
     "category": "forest",
     "subCategory": "mammal",
     "image": "assets/images/forest/lynx.png",
-    "sound": "assets/audio/sounds/lynx_1.wav",
+    "sound": "assets/audio/sounds/lynx_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/lynx_1.wav"
+      "assets/audio/sounds/lynx_1.mp3"
     ],
     "voice": "assets/audio/voices/lynx.mp3",
     "emoji": "🐱",
@@ -693,9 +693,9 @@
     "category": "forest",
     "subCategory": "bird",
     "image": "assets/images/forest/owl.png",
-    "sound": "assets/audio/sounds/owl_1.wav",
+    "sound": "assets/audio/sounds/owl_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/owl_1.wav"
+      "assets/audio/sounds/owl_1.mp3"
     ],
     "voice": "assets/audio/voices/owl.mp3",
     "emoji": "🦉",
@@ -714,9 +714,9 @@
     "category": "forest",
     "subCategory": "bird",
     "image": "assets/images/forest/woodpecker.svg",
-    "sound": "assets/audio/sounds/woodpecker_1.wav",
+    "sound": "assets/audio/sounds/woodpecker_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/woodpecker_1.wav"
+      "assets/audio/sounds/woodpecker_1.mp3"
     ],
     "voice": "assets/audio/voices/woodpecker.mp3",
     "emoji": "🐦",
@@ -735,9 +735,9 @@
     "category": "savannah",
     "subCategory": "mammal",
     "image": "assets/images/savannah/lion.png",
-    "sound": "assets/audio/sounds/lion_1.wav",
+    "sound": "assets/audio/sounds/lion_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/lion_1.wav"
+      "assets/audio/sounds/lion_1.mp3"
     ],
     "voice": "assets/audio/voices/lion.mp3",
     "emoji": "🦁",
@@ -756,9 +756,9 @@
     "category": "savannah",
     "subCategory": "mammal",
     "image": "assets/images/savannah/tiger.png",
-    "sound": "assets/audio/sounds/tiger_1.wav",
+    "sound": "assets/audio/sounds/tiger_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/tiger_1.wav"
+      "assets/audio/sounds/tiger_1.mp3"
     ],
     "voice": "assets/audio/voices/tiger.mp3",
     "emoji": "🐯",
@@ -813,9 +813,9 @@
     "category": "savannah",
     "subCategory": "mammal",
     "image": "assets/images/savannah/zebra.png",
-    "sound": "assets/audio/sounds/zebra_1.wav",
+    "sound": "assets/audio/sounds/zebra_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/zebra_1.wav"
+      "assets/audio/sounds/zebra_1.mp3"
     ],
     "voice": "assets/audio/voices/zebra.mp3",
     "emoji": "🦓",
@@ -834,9 +834,9 @@
     "category": "savannah",
     "subCategory": "mammal",
     "image": "assets/images/savannah/monkey.png",
-    "sound": "assets/audio/sounds/monkey_1.wav",
+    "sound": "assets/audio/sounds/monkey_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/monkey_1.wav"
+      "assets/audio/sounds/monkey_1.mp3"
     ],
     "voice": "assets/audio/voices/monkey.mp3",
     "emoji": "🐒",
@@ -891,9 +891,9 @@
     "category": "savannah",
     "subCategory": "mammal",
     "image": "assets/images/savannah/cheetah.png",
-    "sound": "assets/audio/sounds/cheetah_1.wav",
+    "sound": "assets/audio/sounds/cheetah_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/cheetah_1.wav"
+      "assets/audio/sounds/cheetah_1.mp3"
     ],
     "voice": "assets/audio/voices/cheetah.mp3",
     "emoji": "🐆",
@@ -984,9 +984,9 @@
     "category": "savannah",
     "subCategory": "reptile",
     "image": "assets/images/savannah/chameleon.png",
-    "sound": "assets/audio/sounds/chameleon_1.wav",
+    "sound": "assets/audio/sounds/chameleon_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/chameleon_1.wav"
+      "assets/audio/sounds/chameleon_1.mp3"
     ],
     "voice": "assets/audio/voices/chameleon.mp3",
     "emoji": "🦎",
@@ -1005,9 +1005,9 @@
     "category": "ocean",
     "subCategory": "mammal",
     "image": "assets/images/ocean/whale.png",
-    "sound": "assets/audio/sounds/whale_1.wav",
+    "sound": "assets/audio/sounds/whale_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/whale_1.wav"
+      "assets/audio/sounds/whale_1.mp3"
     ],
     "voice": "assets/audio/voices/whale.mp3",
     "emoji": "🐋",
@@ -1026,9 +1026,9 @@
     "category": "ocean",
     "subCategory": "mammal",
     "image": "assets/images/ocean/dolphin.png",
-    "sound": "assets/audio/sounds/dolphin_1.wav",
+    "sound": "assets/audio/sounds/dolphin_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/dolphin_1.wav"
+      "assets/audio/sounds/dolphin_1.mp3"
     ],
     "voice": "assets/audio/voices/dolphin.mp3",
     "emoji": "🐬",
@@ -1065,9 +1065,9 @@
     "category": "ocean",
     "subCategory": "fish",
     "image": "assets/images/ocean/clownfish.png",
-    "sound": "assets/audio/sounds/clownfish_1.wav",
+    "sound": "assets/audio/sounds/clownfish_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/clownfish_1.wav"
+      "assets/audio/sounds/clownfish_1.mp3"
     ],
     "voice": "assets/audio/voices/clownfish.mp3",
     "emoji": "🐠",
@@ -1230,9 +1230,9 @@
     "category": "birds",
     "subCategory": "bird",
     "image": "assets/images/birds/eagle.png",
-    "sound": "assets/audio/sounds/eagle_1.wav",
+    "sound": "assets/audio/sounds/eagle_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/eagle_1.wav"
+      "assets/audio/sounds/eagle_1.mp3"
     ],
     "voice": "assets/audio/voices/eagle.mp3",
     "emoji": "🦅",
@@ -1251,9 +1251,9 @@
     "category": "birds",
     "subCategory": "bird",
     "image": "assets/images/birds/flamingo.png",
-    "sound": "assets/audio/sounds/flamingo_1.wav",
+    "sound": "assets/audio/sounds/flamingo_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/flamingo_1.wav"
+      "assets/audio/sounds/flamingo_1.mp3"
     ],
     "voice": "assets/audio/voices/flamingo.mp3",
     "emoji": "🦩",
@@ -1272,9 +1272,9 @@
     "category": "birds",
     "subCategory": "bird",
     "image": "assets/images/birds/toucan.png",
-    "sound": "assets/audio/sounds/toucan_1.wav",
+    "sound": "assets/audio/sounds/toucan_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/toucan_1.wav"
+      "assets/audio/sounds/toucan_1.mp3"
     ],
     "voice": "assets/audio/voices/toucan.mp3",
     "emoji": "🦜",
@@ -1293,9 +1293,9 @@
     "category": "birds",
     "subCategory": "bird",
     "image": "assets/images/birds/swan.png",
-    "sound": "assets/audio/sounds/swan_1.wav",
+    "sound": "assets/audio/sounds/swan_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/swan_1.wav"
+      "assets/audio/sounds/swan_1.mp3"
     ],
     "voice": "assets/audio/voices/swan.mp3",
     "emoji": "🦢",
@@ -1314,9 +1314,9 @@
     "category": "birds",
     "subCategory": "bird",
     "image": "assets/images/birds/peacock.png",
-    "sound": "assets/audio/sounds/peacock_1.wav",
+    "sound": "assets/audio/sounds/peacock_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/peacock_1.wav"
+      "assets/audio/sounds/peacock_1.mp3"
     ],
     "voice": "assets/audio/voices/peacock.mp3",
     "emoji": "🦚",
@@ -1335,9 +1335,9 @@
     "category": "birds",
     "subCategory": "bird",
     "image": "assets/images/birds/hummingbird.png",
-    "sound": "assets/audio/sounds/hummingbird_1.wav",
+    "sound": "assets/audio/sounds/hummingbird_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/hummingbird_1.wav"
+      "assets/audio/sounds/hummingbird_1.mp3"
     ],
     "voice": "assets/audio/voices/hummingbird.mp3",
     "emoji": "🐦",
@@ -1392,9 +1392,9 @@
     "category": "dinos",
     "subCategory": "dino",
     "image": "assets/images/dinos/pterodactyl.png",
-    "sound": "assets/audio/sounds/pterodactyl_1.wav",
+    "sound": "assets/audio/sounds/pterodactyl_1.mp3",
     "soundFiles": [
-      "assets/audio/sounds/pterodactyl_1.wav"
+      "assets/audio/sounds/pterodactyl_1.mp3"
     ],
     "voice": "assets/audio/voices/pterodactyl.mp3",
     "emoji": "🦅",

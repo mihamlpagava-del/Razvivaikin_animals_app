@@ -1205,7 +1205,274 @@ function spawnEmojiBurst(x, y, animalEmoji) {
   }
 }
 
+
+/* ========================================================
+   РАЗДЕЛ СКАЗОК: ДОКТОР АЙБОЛИТ (СИНХРОНИЗИРОВАННЫЕ ИЛЛЮСТРАЦИИ)
+   ======================================================== */
+const AIBOLIT_SCENES = [
+  {
+    startTime: 0,
+    title: 'Добрый доктор Айболит',
+    subtitle: 'Он под деревом сидит, всех излечит, исцелит!',
+    image: 'assets/images/fairytales/aibolit/scene_1_tree.jpg',
+  },
+  {
+    startTime: 106, // 01:46 - "И встал Айболит, побежал Айболит..."
+    title: 'Сквозь метель на волках',
+    subtitle: '«Садись, Айболит, верхом! Мы живо тебя довезём!»',
+    image: 'assets/images/fairytales/aibolit/scene_2_wolves.jpg',
+  },
+  {
+    startTime: 163, // 02:43 - "Но тут выплывает кит..."
+    title: 'На спине синего кита',
+    subtitle: '«Садись на меня, Айболит! Тебя повезу я вперёд!»',
+    image: 'assets/images/fairytales/aibolit/scene_3_whale.jpg',
+  },
+  {
+    startTime: 195, // 03:15 - "С высокой скалы к Айболиту слетели орлы..."
+    title: 'Полёт над вершинами гор',
+    subtitle: 'И горы встают перед ним на пути, а орлы несут сквозь тучи!',
+    image: 'assets/images/fairytales/aibolit/scene_4_eagle.jpg',
+  },
+  {
+    startTime: 286, // 04:46 - "Но вот поглядите, какая-то птица... и всем по порядку даёт шоколадку..."
+    title: 'Айболит в Африке',
+    subtitle: 'И всем по порядку даёт шоколадку, и ставит, и ставит градусники!',
+    image: 'assets/images/fairytales/aibolit/scene_5_healing.jpg',
+  },
+  {
+    startTime: 344, // 05:44 - "Вот и вылечил он их, Лимпопо! И пошли они смеяться..."
+    title: 'Всеобщее ликование',
+    subtitle: '«Слава, слава Айболиту! Слава добрым докторам!»',
+    image: 'assets/images/fairytales/aibolit/scene_6_celebration.jpg',
+  }
+];
+
+let currentTaleSceneIndex = -1;
+
+function formatTaleTime(seconds) {
+  const m = Math.floor(seconds / 60);
+  const s = Math.floor(seconds % 60);
+  return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+}
+
+function updateFairytaleScene(index) {
+  if (index < 0 || index >= AIBOLIT_SCENES.length) return;
+  if (currentTaleSceneIndex === index) return;
+  currentTaleSceneIndex = index;
+
+  const scene = AIBOLIT_SCENES[index];
+  const imgEl = document.getElementById('fairytaleImage');
+  const titleEl = document.getElementById('fairytaleSceneTitle');
+  const textEl = document.getElementById('fairytaleSceneText');
+
+  if (imgEl) {
+    imgEl.classList.add('fade-out');
+    setTimeout(() => {
+      imgEl.src = scene.image;
+      imgEl.alt = scene.title;
+      imgEl.classList.remove('fade-out');
+    }, 200);
+  }
+
+  if (titleEl) titleEl.textContent = scene.title;
+  if (textEl) textEl.textContent = scene.subtitle;
+}
+
+function openFairytale() {
+  stopMenuBGM(true);
+  stopAllAudio();
+  playSoftPopSFX(550);
+  tapticFeedback('medium');
+
+  const menuEl = document.getElementById('menu-screen') || document.getElementById('startScreen');
+  const gameEl = document.getElementById('game-screen') || document.getElementById('gameScreen');
+  const taleEl = document.getElementById('fairytale-screen');
+
+  if (menuEl) menuEl.classList.add('hidden');
+  if (gameEl) gameEl.classList.add('hidden');
+  if (taleEl) taleEl.classList.remove('hidden');
+
+  const audio = document.getElementById('fairytaleAudio');
+  if (audio) {
+    audio.currentTime = 0;
+    currentTaleSceneIndex = -1;
+    updateFairytaleScene(0);
+    audio.play().then(() => {
+      updateTalePlayIcon(true);
+    }).catch(() => {
+      updateTalePlayIcon(false);
+    });
+  }
+}
+
+function closeFairytale() {
+  playSoftPopSFX(440);
+  tapticFeedback('light');
+
+  const audio = document.getElementById('fairytaleAudio');
+  if (audio) {
+    audio.pause();
+    updateTalePlayIcon(false);
+  }
+
+  const menuEl = document.getElementById('menu-screen') || document.getElementById('startScreen');
+  const taleEl = document.getElementById('fairytale-screen');
+
+  if (taleEl) taleEl.classList.add('hidden');
+  if (menuEl) {
+    menuEl.classList.remove('hidden');
+    playMenuBGM(true);
+  }
+}
+
+function updateTalePlayIcon(isPlaying) {
+  const icon = document.getElementById('talePlayIcon');
+  if (icon) {
+    icon.textContent = isPlaying ? '⏸' : '▶';
+  }
+}
+
+function toggleFairytalePlay() {
+  const audio = document.getElementById('fairytaleAudio');
+  if (!audio) return;
+  playSoftPopSFX(500);
+  tapticFeedback('light');
+
+  if (audio.paused) {
+    audio.play().then(() => updateTalePlayIcon(true)).catch(() => {});
+  } else {
+    audio.pause();
+    updateTalePlayIcon(false);
+  }
+}
+
+function seekFairytale(e) {
+  const track = document.getElementById('taleProgressTrack');
+  const audio = document.getElementById('fairytaleAudio');
+  if (!track || !audio || !audio.duration) return;
+
+  const rect = track.getBoundingClientRect();
+  const clickX = e.clientX - rect.left;
+  const ratio = Math.max(0, Math.min(1, clickX / rect.width));
+  audio.currentTime = ratio * audio.duration;
+  onFairytaleTimeUpdate();
+}
+
+function prevFairytaleScene() {
+  const audio = document.getElementById('fairytaleAudio');
+  if (!audio) return;
+  playSoftPopSFX(480);
+  tapticFeedback('light');
+
+  const curTime = audio.currentTime;
+  let targetIdx = 0;
+  for (let i = AIBOLIT_SCENES.length - 1; i >= 0; i--) {
+    if (curTime >= AIBOLIT_SCENES[i].startTime) {
+      if (curTime - AIBOLIT_SCENES[i].startTime > 3 || i === 0) {
+        targetIdx = i;
+      } else {
+        targetIdx = i - 1;
+      }
+      break;
+    }
+  }
+  targetIdx = Math.max(0, targetIdx);
+  audio.currentTime = AIBOLIT_SCENES[targetIdx].startTime;
+  updateFairytaleScene(targetIdx);
+  onFairytaleTimeUpdate();
+}
+
+function nextFairytaleScene() {
+  const audio = document.getElementById('fairytaleAudio');
+  if (!audio) return;
+  playSoftPopSFX(520);
+  tapticFeedback('light');
+
+  const curTime = audio.currentTime;
+  let targetIdx = AIBOLIT_SCENES.length - 1;
+  for (let i = 0; i < AIBOLIT_SCENES.length; i++) {
+    if (AIBOLIT_SCENES[i].startTime > curTime + 0.5) {
+      targetIdx = i;
+      break;
+    }
+  }
+  audio.currentTime = AIBOLIT_SCENES[targetIdx].startTime;
+  updateFairytaleScene(targetIdx);
+  onFairytaleTimeUpdate();
+}
+
+function onFairytaleTimeUpdate() {
+  const audio = document.getElementById('fairytaleAudio');
+  if (!audio) return;
+
+  const t = audio.currentTime;
+  const dur = audio.duration || 385.5;
+
+  const curTimeEl = document.getElementById('taleCurrentTime');
+  const totalTimeEl = document.getElementById('taleTotalTime');
+  const barEl = document.getElementById('taleProgressBar');
+  const thumbEl = document.getElementById('taleProgressThumb');
+
+  if (curTimeEl) curTimeEl.textContent = formatTaleTime(t);
+  if (totalTimeEl && audio.duration) totalTimeEl.textContent = formatTaleTime(audio.duration);
+
+  const pct = Math.max(0, Math.min(100, (t / dur) * 100));
+  if (barEl) barEl.style.width = `${pct}%`;
+  if (thumbEl) thumbEl.style.left = `${pct}%`;
+
+  let activeIdx = 0;
+  for (let i = AIBOLIT_SCENES.length - 1; i >= 0; i--) {
+    if (t >= AIBOLIT_SCENES[i].startTime) {
+      activeIdx = i;
+      break;
+    }
+  }
+  updateFairytaleScene(activeIdx);
+}
+
+function initFairytaleEvents() {
+  const btnFairytales = document.getElementById('btnFairytales');
+  if (btnFairytales) {
+    btnFairytales.addEventListener('click', openFairytale);
+  }
+
+  const backFromTaleBtn = document.getElementById('backFromTaleBtn');
+  if (backFromTaleBtn) {
+    backFromTaleBtn.addEventListener('click', closeFairytale);
+  }
+
+  const talePlayPauseBtn = document.getElementById('talePlayPauseBtn');
+  if (talePlayPauseBtn) {
+    talePlayPauseBtn.addEventListener('click', toggleFairytalePlay);
+  }
+
+  const talePrevSceneBtn = document.getElementById('talePrevSceneBtn');
+  if (talePrevSceneBtn) {
+    talePrevSceneBtn.addEventListener('click', prevFairytaleScene);
+  }
+
+  const taleNextSceneBtn = document.getElementById('taleNextSceneBtn');
+  if (taleNextSceneBtn) {
+    taleNextSceneBtn.addEventListener('click', nextFairytaleScene);
+  }
+
+  const taleProgressTrack = document.getElementById('taleProgressTrack');
+  if (taleProgressTrack) {
+    taleProgressTrack.addEventListener('click', seekFairytale);
+  }
+
+  const fairytaleAudio = document.getElementById('fairytaleAudio');
+  if (fairytaleAudio) {
+    fairytaleAudio.addEventListener('timeupdate', onFairytaleTimeUpdate);
+    fairytaleAudio.addEventListener('ended', () => {
+      updateTalePlayIcon(false);
+    });
+  }
+}
+
 function initEvents() {
+  initFairytaleEvents();
   prevBtn.addEventListener('click', () => {
     tapticFeedback('light');
     prevAnimal();

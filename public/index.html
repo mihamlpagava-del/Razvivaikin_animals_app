@@ -93,6 +93,10 @@
 
       <!-- Органичный блок баннеров действий: Учим звуки, Все животные, Спасибо -->
       <div class="menu-actions-stack">
+        <button id="btnFairytales" class="menu-action-banner fairytales-banner" type="button" aria-label="Сказки — Волшебные аудиоистории">
+          <img src="assets/images/menu/btn_fairytales.png" alt="Сказки — Волшебные аудиоистории" class="menu-banner-btn-img">
+        </button>
+
         <button id="btnBabyMode" class="menu-action-banner baby-banner" type="button" aria-label="Учим звуки — Детский режим">
           <img src="assets/images/menu/btn_baby_mode.png" alt="Учим звуки — Детский режим" class="menu-banner-btn-img">
         </button>
@@ -105,6 +109,70 @@
           <img src="assets/images/menu/btn_thanks_wide.png" alt="Сказать спасибо зверятам" class="menu-banner-btn-img thanks-banner-img">
         </button>
       </div>
+    </section>
+
+        <!-- ========================================================
+         ЭКРАН СКАЗОК (АУДИОИСТОРИИ С ИЛЛЮСТРАЦИЯМИ)
+         ======================================================== -->
+    <section id="fairytale-screen" class="fairytale-screen hidden" aria-label="Раздел сказок">
+      <!-- Верхняя строка управления -->
+      <header class="fairytale-header">
+        <button id="backFromTaleBtn" class="back-menu-btn" type="button" title="Вернуться в меню">
+          <span class="back-icon">🏠</span>
+          <span class="back-text">Меню</span>
+        </button>
+
+        <div class="fairytale-badge">📖 Волшебная сказка • 3D Иллюстрации</div>
+
+        <button id="taleFsBtn" class="top-ctrl-btn fs-btn fullscreen-btn header-fs-btn" type="button" title="Во весь экран">
+          <span class="fs-icon">⛶</span>
+        </button>
+      </header>
+
+      <!-- Основная карточка-сцена с иллюстрацией -->
+      <div class="fairytale-stage-container">
+        <div class="fairytale-card">
+          <div class="fairytale-img-wrapper">
+            <img id="fairytaleImage" src="assets/images/fairytales/aibolit/scene_1_tree.jpg" alt="Иллюстрация к сказке" class="fairytale-illustration">
+          </div>
+
+          <div class="fairytale-info">
+            <h2 id="fairytaleSceneTitle" class="fairytale-scene-title">Добрый доктор Айболит</h2>
+            <p id="fairytaleSceneText" class="fairytale-scene-text">Он под деревом сидит, всех излечит, исцелит!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Аудиоплеер сказки -->
+      <div class="fairytale-player-bar">
+        <!-- Временная шкала / прогресс -->
+        <div class="tale-progress-container">
+          <span id="taleCurrentTime" class="tale-time">00:00</span>
+          <div id="taleProgressTrack" class="tale-progress-track">
+            <div id="taleProgressBar" class="tale-progress-bar"></div>
+            <div id="taleProgressThumb" class="tale-progress-thumb"></div>
+          </div>
+          <span id="taleTotalTime" class="tale-time">06:25</span>
+        </div>
+
+        <!-- Кнопки управления воспроизведением -->
+        <div class="tale-controls-row">
+          <button id="talePrevSceneBtn" class="tale-ctrl-btn sec-btn" type="button" title="Предыдущая сцена" aria-label="Предыдущая сцена">
+            <span>⏮</span>
+          </button>
+          
+          <button id="talePlayPauseBtn" class="tale-ctrl-btn main-play-btn" type="button" title="Играть / Пауза" aria-label="Воспроизведение">
+            <span id="talePlayIcon">▶</span>
+          </button>
+
+          <button id="taleNextSceneBtn" class="tale-ctrl-btn sec-btn" type="button" title="Следующая сцена" aria-label="Следующая сцена">
+            <span>⏭</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Скрытый аудиоэлемент для сказки -->
+      <audio id="fairytaleAudio" preload="auto" src="assets/audio/fairytales/aibolit.mp3"></audio>
     </section>
 
     <!-- ========================================================

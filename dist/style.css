@@ -1068,128 +1068,97 @@ body {
   display: none;
 }
 
-/* Сетка миров (7 крупных интерактивных карточек) */
+/* Сетка миров (7 интерактивных пластилиновых карточек) */
 .worlds-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  gap: 14px 10px;
   width: 100%;
+  margin: 6px 0;
 }
 
-@media (min-width: 540px) {
+@media (min-width: 420px) {
   .worlds-grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
+    gap: 16px 12px;
   }
 }
 
-@media (min-width: 780px) {
+@media (min-width: 720px) {
   .worlds-grid {
     grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
+    gap: 18px 14px;
   }
 }
 
-/* Крупная пластилиновая карточка-кнопка мира */
+/* Карточка мира (чистая пластилиновая плитка БЕЗ лишних рамок) */
 .world-card {
   position: relative;
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 3.5px solid #FFFFFF;
-  border-radius: 26px;
-  padding: 10px 8px 12px;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 4px 2px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  min-height: 145px;
+  justify-content: flex-start;
   cursor: pointer;
-  box-shadow: 
-    0 8px 16px rgba(0, 0, 0, 0.1),
-    inset 0 2px 4px rgba(255, 255, 255, 0.95),
-    inset 0 -3px 6px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
-  overflow: hidden;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  overflow: visible;
   text-align: center;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
+  outline: none;
 }
 
 .world-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 12px 24px rgba(84, 60, 44, 0.16), inset 0 2px 4px rgba(255, 255, 255, 0.95);
+  transform: scale(1.08);
 }
 
 .world-card:active {
-  transform: scale(0.98) translateY(3px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12), inset 0 3px 6px rgba(0, 0, 0, 0.12);
+  transform: scale(0.95) translateY(3px);
 }
 
-/* Картинка занимает 75-80% высоты карточки */
+/* Пластилиновая плитка */
 .world-card img {
   width: 100%;
-  height: 98px;
+  max-width: 106px;
+  height: auto;
+  aspect-ratio: 1 / 1;
   object-fit: contain;
-  filter: drop-shadow(0 6px 10px rgba(84, 60, 44, 0.16));
-  transition: transform 0.25s ease;
+  filter: drop-shadow(0 8px 16px rgba(84, 60, 44, 0.22));
+  transition: transform 0.22s ease;
   pointer-events: none;
+  display: block;
 }
 
 .world-card:hover img {
-  transform: scale(1.06) rotate(1deg);
+  transform: scale(1.05) rotate(1deg);
 }
 
-/* Крупный закруглённый шрифт внизу карточки */
+/* Крупный чёткий закруглённый шрифт названия мира */
 .world-card span {
   font-family: 'Comfortaa', 'Nunito', 'Segoe UI', system-ui, sans-serif;
   font-size: 1.05rem;
   font-weight: 900;
-  color: #3E2B1E;
-  margin-top: 6px;
+  color: #382517;
+  margin-top: 8px;
   letter-spacing: -0.2px;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.95);
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.95);
   pointer-events: none;
-}
-
-/* Индивидуальные нежные пластилиновые оттенки карточек */
-.world-card[data-category="pets"] {
-  background: linear-gradient(155deg, rgba(255, 246, 240, 0.95) 0%, rgba(255, 226, 212, 0.92) 100%);
-  border-color: #FFD2C0;
-}
-.world-card[data-category="farm"] {
-  background: linear-gradient(155deg, rgba(255, 253, 236, 0.95) 0%, rgba(255, 241, 186, 0.92) 100%);
-  border-color: #FFE58E;
-}
-.world-card[data-category="forest"] {
-  background: linear-gradient(155deg, rgba(240, 254, 245, 0.95) 0%, rgba(212, 247, 220, 0.92) 100%);
-  border-color: #A8E6CF;
-}
-.world-card[data-category="savanna"] {
-  background: linear-gradient(155deg, rgba(255, 251, 235, 0.95) 0%, rgba(254, 238, 186, 0.92) 100%);
-  border-color: #F8D87E;
-}
-.world-card[data-category="dinos"] {
-  background: linear-gradient(155deg, rgba(249, 244, 255, 0.95) 0%, rgba(230, 219, 252, 0.92) 100%);
-  border-color: #D3C4F3;
-}
-.world-card[data-category="ocean"] {
-  background: linear-gradient(155deg, rgba(238, 249, 255, 0.95) 0%, rgba(206, 239, 254, 0.92) 100%);
-  border-color: #A6DFFB;
-}
-.world-card[data-category="birds"] {
-  background: linear-gradient(155deg, rgba(244, 248, 255, 0.95) 0%, rgba(218, 232, 255, 0.92) 100%);
-  border-color: #BDD4FA;
+  white-space: nowrap;
+  line-height: 1.2;
 }
 
 /* Большая пластилиновая кнопка "Смотреть всех" */
 .all-animals-hero-btn {
   width: 100%;
-  max-width: 380px;
-  margin: 0 auto;
-  background: transparent;
-  border: none;
-  padding: 0;
+  max-width: 330px;
+  margin: 6px auto 2px;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -1200,38 +1169,30 @@ body {
 }
 
 .all-animals-hero-btn:hover {
-  transform: scale(1.03);
+  transform: scale(1.04);
 }
 
 .all-animals-hero-btn:active {
   transform: scale(0.96) translateY(3px);
 }
 
-.menu-banner-btn-img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  filter: drop-shadow(0 8px 16px rgba(84, 60, 44, 0.18));
-  pointer-events: none;
-  display: block;
-}
-
 /* Нижний ряд с кнопкой благодарности */
 .start-footer-row {
   display: flex;
   justify-content: center;
-  margin-top: 2px;
+  margin: 4px auto 8px;
   width: 100%;
 }
 
 /* Большая пластилиновая кнопка «Сказать спасибо зверятам» */
 .thanks-button {
   width: 100%;
-  max-width: 380px;
+  max-width: 330px;
   margin: 0 auto;
-  background: transparent;
-  border: none;
-  padding: 0;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -1242,31 +1203,32 @@ body {
 }
 
 .thanks-button:hover {
-  transform: scale(1.03);
+  transform: scale(1.04);
 }
 
 .thanks-button:active {
   transform: scale(0.96) translateY(3px);
 }
 
-.thanks-banner-img {
-  filter: drop-shadow(0 8px 16px rgba(220, 70, 70, 0.22));
-}
-
-.thanks-button img {
-  width: 44px;
-  height: 44px;
+/* Изображения баннерных кнопок */
+.menu-banner-btn-img {
+  width: 100%;
+  max-width: 330px;
+  height: auto;
   object-fit: contain;
-  filter: drop-shadow(0 4px 8px rgba(210, 50, 50, 0.25));
-  animation: heartWobble 2.6s ease-in-out infinite;
+  filter: drop-shadow(0 8px 16px rgba(84, 60, 44, 0.18));
+  pointer-events: none;
+  display: block;
+  margin: 0 auto;
+  transition: filter 0.2s ease;
 }
 
-.thanks-button span {
-  font-family: 'Comfortaa', 'Nunito', 'Segoe UI', system-ui, sans-serif;
-  font-size: 1.1rem;
-  font-weight: 900;
-  color: #8C2222;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.85);
+.all-animals-hero-btn:hover .menu-banner-btn-img {
+  filter: drop-shadow(0 12px 22px rgba(84, 60, 44, 0.24));
+}
+
+.thanks-button:hover .menu-banner-btn-img {
+  filter: drop-shadow(0 12px 22px rgba(220, 70, 70, 0.28));
 }
 
 @keyframes heartWobble {

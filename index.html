@@ -1,275 +1,274 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Р­РЅС†РёРєР»РѕРїРµРґРёСЏ Р–РёРІРѕС‚РЅС‹С… вЂў Р”РµС‚СЃРєР°СЏ РРіСЂР°</title>
+  <title>Энциклопедия Животных • Детская Игра</title>
   
-  <!-- VK Bridge РґР»СЏ VK Mini Apps -->
+  <!-- VK Bridge для VK Mini Apps -->
   <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
   
-  <!-- Р”РµС‚СЃРєРёРµ РѕРєСЂСѓРіР»С‹Рµ С€СЂРёС„С‚С‹ -->
+  <!-- Детские округлые шрифты -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700;800&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
   
-  <!-- РЎС‚РёР»Рё РїСЂРёР»РѕР¶РµРЅРёСЏ -->
+  <!-- Стили приложения -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="app-container">
     <!-- ========================================================
-         РЎРўРђР РўРћР’РћР• РњР•РќР® (РҐРђР‘-Р­РљР РђРќ / Р’Р«Р‘РћР  РњРР Рђ Р РљРђРўР•Р“РћР РР™)
+         СТАРТОВОЕ МЕНЮ (ХАБ-ЭКРАН / ВЫБОР МИРА И КАТЕГОРИЙ)
          ======================================================== -->
-    <section id="menu-screen" class="start-screen menu-screen" aria-label="Р’С‹Р±РѕСЂ РјРёСЂР°">
+    <section id="menu-screen" class="start-screen menu-screen" aria-label="Выбор мира">
       <div class="start-header">
-        <div class="start-badge">вњЁ РРіСЂР° РґР»СЏ РјР°Р»С‹С€РµР№ вЂў 3D РџР»Р°СЃС‚РёР»РёРЅ вњЁ</div>
+        <div class="start-badge">✨ Игра для малышей • 3D Пластилин ✨</div>
         <div class="start-logo-container">
-          <img src="assets/images/menu/logo_title.png" alt="РњРёСЂ Р–РёРІРѕС‚РЅС‹С… вЂ” РљСѓРґР° РѕС‚РїСЂР°РІРёРјСЃСЏ РІ РїСѓС‚РµС€РµСЃС‚РІРёРµ? Р’С‹Р±РµСЂРё РјРёСЂ:" class="start-logo-img">
+          <img src="assets/images/menu/logo_title.png" alt="Мир Животных — Куда отправимся в путешествие? Выбери мир:" class="start-logo-img">
         </div>
       </div>
 
-      <!-- РЎРµС‚РєР° РєСЂР°СЃРѕС‡РЅС‹С… РјРёСЂРѕРІ Р¶РёРІРѕС‚РЅС‹С… (7 РёРЅС‚РµСЂР°РєС‚РёРІРЅС‹С… РєР°СЂС‚РѕС‡РµРє) -->
+      <!-- Сетка красочных миров животных (7 интерактивных карточек) -->
       <div id="worldsGrid" class="worlds-grid">
-        <button class="world-card" data-category="pets" type="button" aria-label="Р”РѕРјР°С€РЅРёРµ">
-          <img src="assets/images/menu/world_pets.png" alt="Р”РѕРјР°С€РЅРёРµ">
-          <span>Р”РѕРјР°С€РЅРёРµ</span>
+        <button class="world-card" data-category="pets" type="button" aria-label="Домашние">
+          <img src="assets/images/menu/world_pets.png" alt="Домашние">
+          <span>Домашние</span>
         </button>
 
-        <button class="world-card" data-category="farm" type="button" aria-label="Р¤РµСЂРјР°">
-          <img src="assets/images/menu/world_farm.png" alt="Р¤РµСЂРјР°">
-          <span>Р¤РµСЂРјР°</span>
+        <button class="world-card" data-category="farm" type="button" aria-label="Ферма">
+          <img src="assets/images/menu/world_farm.png" alt="Ферма">
+          <span>Ферма</span>
         </button>
 
-        <button class="world-card" data-category="forest" type="button" aria-label="Р›РµСЃРЅС‹Рµ">
-          <img src="assets/images/menu/world_forest.png" alt="Р›РµСЃРЅС‹Рµ">
-          <span>Р›РµСЃРЅС‹Рµ</span>
+        <button class="world-card" data-category="forest" type="button" aria-label="Лесные">
+          <img src="assets/images/menu/world_forest.png" alt="Лесные">
+          <span>Лесные</span>
         </button>
 
-        <button class="world-card" data-category="savanna" type="button" aria-label="РЎР°РІР°РЅРЅР°">
-          <img src="assets/images/menu/world_savanna.png" alt="РЎР°РІР°РЅРЅР°">
-          <span>РЎР°РІР°РЅРЅР°</span>
+        <button class="world-card" data-category="savanna" type="button" aria-label="Саванна">
+          <img src="assets/images/menu/world_savanna.png" alt="Саванна">
+          <span>Саванна</span>
         </button>
 
-        <button class="world-card" data-category="dinos" type="button" aria-label="Р”РёРЅРѕ РњРёСЂ">
-          <img src="assets/images/menu/world_dinos.png" alt="Р”РёРЅРѕ РњРёСЂ">
-          <span>Р”РёРЅРѕ РњРёСЂ</span>
+        <button class="world-card" data-category="dinos" type="button" aria-label="Дино Мир">
+          <img src="assets/images/menu/world_dinos.png" alt="Дино Мир">
+          <span>Дино Мир</span>
         </button>
 
-        <button class="world-card" data-category="ocean" type="button" aria-label="РћРєРµР°РЅ">
-          <img src="assets/images/menu/world_ocean.png" alt="РћРєРµР°РЅ">
-          <span>РћРєРµР°РЅ</span>
+        <button class="world-card" data-category="ocean" type="button" aria-label="Океан">
+          <img src="assets/images/menu/world_ocean.png" alt="Океан">
+          <span>Океан</span>
         </button>
 
-        <button class="world-card" data-category="birds" type="button" aria-label="РџС‚РёС†С‹">
-          <img src="assets/images/menu/world_birds.png" alt="РџС‚РёС†С‹">
-          <span>РџС‚РёС†С‹</span>
+        <button class="world-card" data-category="birds" type="button" aria-label="Птицы">
+          <img src="assets/images/menu/world_birds.png" alt="Птицы">
+          <span>Птицы</span>
         </button>
       </div>
 
-      <!-- Р‘РѕР»СЊС€Р°СЏ РїР»Р°СЃС‚РёР»РёРЅРѕРІР°СЏ РєРЅРѕРїРєР° "РЎРјРѕС‚СЂРµС‚СЊ РІСЃРµС… Р¶РёРІРѕС‚РЅС‹С…" -->
-      <button id="allAnimalsHeroBtn" class="all-animals-hero-btn" type="button" aria-label="РЎРјРѕС‚СЂРµС‚СЊ РІСЃРµС… Р¶РёРІРѕС‚РЅС‹С…">
-        <img src="assets/images/menu/btn_all_animals.png" alt="РЎРјРѕС‚СЂРµС‚СЊ РІСЃРµС… Р¶РёРІРѕС‚РЅС‹С… вЂ” Р’СЃРµ 73 РїР»Р°СЃС‚РёР»РёРЅРѕРІС‹С… Р·РІРµСЂСЏС‚ РїРѕРґСЂСЏРґ" class="menu-banner-btn-img">
+      <!-- Большая пластилиновая кнопка "Смотреть всех животных" -->
+      <button id="allAnimalsHeroBtn" class="all-animals-hero-btn" type="button" aria-label="Смотреть всех животных">
+        <img src="assets/images/menu/btn_all_animals.png" alt="Смотреть всех животных — Все 73 пластилиновых зверят подряд" class="menu-banner-btn-img">
       </button>
 
-      <!-- РРЅС‚РµСЂР°РєС‚РёРІРЅР°СЏ РїР»Р°СЃС‚РёР»РёРЅРѕРІР°СЏ РєРЅРѕРїРєР° "РЎРєР°Р·Р°С‚СЊ СЃРїР°СЃРёР±Рѕ Р·РІРµСЂСЏС‚Р°Рј" -->
+      <!-- Интерактивная пластилиновая кнопка "Сказать спасибо зверятам" -->
       <div class="start-footer-row">
-        <button id="btn-thanks" class="thanks-button" type="button" aria-label="РЎРєР°Р·Р°С‚СЊ СЃРїР°СЃРёР±Рѕ Р·РІРµСЂСЏС‚Р°Рј">
-          <img src="assets/images/menu/btn_thanks_wide.png" alt="РЎРєР°Р·Р°С‚СЊ СЃРїР°СЃРёР±Рѕ Р·РІРµСЂСЏС‚Р°Рј" class="menu-banner-btn-img thanks-banner-img">
+        <button id="btn-thanks" class="thanks-button" type="button" aria-label="Сказать спасибо зверятам">
+          <img src="assets/images/menu/btn_thanks_wide.png" alt="Сказать спасибо зверятам" class="menu-banner-btn-img thanks-banner-img">
         </button>
       </div>
     </section>
 
     <!-- ========================================================
-         Р­РљР РђРќ РР“Р Р« (РљРђР РўРћР§РљРђ + РЎР›РђР™Р”Р•Р  + РџРћРРЎРљ)
+         ЭКРАН ИГРЫ (КАРТОЧКА + СЛАЙДЕР + ПОИСК)
          ======================================================== -->
     <div id="game-screen" class="game-screen hidden">
       <header class="app-header">
       
-      <!-- Р’РµСЂС…РЅРёР№ СЂСЏРґ: РџРѕРёСЃРє Рё РєРЅРѕРїРєР° "РЎРєР°Р·Р°С‚СЊ СЃРїР°СЃРёР±Рѕ" (Р“РѕР»РѕСЃР° VK) -->
+      <!-- Верхний ряд: Поиск и кнопка "Сказать спасибо" (Голоса VK) -->
       <div class="header-top-row">
-        <button id="backToMenuBtn" class="back-menu-btn" type="button" title="Р’РµСЂРЅСѓС‚СЊСЃСЏ Рє РІС‹Р±РѕСЂСѓ РјРёСЂРѕРІ">
-          <span class="back-icon">рџЏ </span>
-          <span class="back-text">РњРёСЂС‹</span>
+        <button id="backToMenuBtn" class="back-menu-btn" type="button" title="Вернуться к выбору миров">
+          <span class="back-icon">🏠</span>
+          <span class="back-text">Миры</span>
         </button>
         <div class="search-container">
-          <span class="search-icon">рџ”Ќ</span>
+          <span class="search-icon">🔍</span>
           <input 
             id="searchInput" 
             type="text" 
             class="search-input" 
-            placeholder="РќР°Р№С‚Рё Р¶РёРІРѕС‚РЅРѕРµ..." 
+            placeholder="Найти животное..." 
             autocomplete="off"
             autocorrect="off"
             spellcheck="false"
           />
-          <button id="clearSearchBtn" class="clear-search-btn hidden" type="button" aria-label="РћС‡РёСЃС‚РёС‚СЊ РїРѕРёСЃРє">вњ•</button>
+          <button id="clearSearchBtn" class="clear-search-btn hidden" type="button" aria-label="Очистить поиск">✕</button>
         </div>
 
-        <button id="openDonateBtn" class="donate-btn" type="button" title="РЈРіРѕСЃС‚РёС‚СЊ Р·РІРµСЂСЏС‚ РіРѕР»РѕСЃР°РјРё Р’РљРѕРЅС‚Р°РєС‚Рµ">
-          <span class="donate-icon">в­ђ</span>
-          <span class="donate-text">РЎРїР°СЃРёР±Рѕ</span>
+        <button id="openDonateBtn" class="donate-btn" type="button" title="Угостить зверят голосами ВКонтакте">
+          <span class="donate-icon">⭐</span>
+          <span class="donate-text">Спасибо</span>
         </button>
       </div>
 
-      <!-- Р“Р»Р°РІРЅС‹Рµ РєР°С‚РµРіРѕСЂРёРё (РЎСЂРµРґР° РѕР±РёС‚Р°РЅРёСЏ / РњРёСЂС‹) -->
-      <nav id="mainCategoriesBar" class="categories-bar scroll-x" aria-label="РљР°С‚РµРіРѕСЂРёРё РѕР±РёС‚Р°РЅРёСЏ">
-        <!-- Р“РµРЅРµСЂРёСЂСѓРµС‚СЃСЏ РёР· mainCategories -->
+      <!-- Главные категории (Среда обитания / Миры) -->
+      <nav id="mainCategoriesBar" class="categories-bar scroll-x" aria-label="Категории обитания">
+        <!-- Генерируется из mainCategories -->
       </nav>
 
-      <!-- РџРѕРґРєР°С‚РµРіРѕСЂРёРё (Р‘РёРѕР»РѕРіРёС‡РµСЃРєРёРµ РєР»Р°СЃСЃС‹: РњР»РµРєРѕРїРёС‚Р°СЋС‰РёРµ, РџС‚РёС†С‹, Р С‹Р±С‹...) -->
-      <nav id="subCategoriesBar" class="subcategories-bar scroll-x" aria-label="РљР»Р°СЃСЃС‹ Р¶РёРІРѕС‚РЅС‹С…">
-        <!-- Р“РµРЅРµСЂРёСЂСѓРµС‚СЃСЏ РёР· subCategories -->
+      <!-- Подкатегории (Биологические классы: Млекопитающие, Птицы, Рыбы...) -->
+      <nav id="subCategoriesBar" class="subcategories-bar scroll-x" aria-label="Классы животных">
+        <!-- Генерируется из subCategories -->
       </nav>
 
-      <!-- РЎС‡РµС‚С‡РёРє Рё РїР°РіРёРЅР°С†РёСЏ -->
+      <!-- Счетчик и пагинация -->
       <div class="slider-meta">
-        <div id="counterBadge" class="counter-badge">1 РёР· 73</div>
+        <div id="counterBadge" class="counter-badge">1 из 73</div>
         <div id="paginationDots" class="pagination-dots"></div>
       </div>
     </header>
 
-    <!-- РћСЃРЅРѕРІРЅР°СЏ РѕР±Р»Р°СЃС‚СЊ: Р‘РѕР»СЊС€РѕР№ РїР»Р°СЃС‚РёР»РёРЅРѕРІС‹Р№ СЃР»Р°Р№РґРµСЂ -->
+    <!-- Основная область: Большой пластилиновый слайдер -->
     <main class="slider-section">
-      <!-- РљРЅРѕРїРєР° Р’Р»РµРІРѕ -->
-      <button id="prevBtn" class="nav-btn prev-btn" aria-label="РџСЂРµРґС‹РґСѓС‰РµРµ Р¶РёРІРѕС‚РЅРѕРµ" title="РџСЂРµРґС‹РґСѓС‰РµРµ">
+      <!-- Кнопка Влево -->
+      <button id="prevBtn" class="nav-btn prev-btn" aria-label="Предыдущее животное" title="Предыдущее">
         <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor">
           <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
         </svg>
       </button>
 
-      <!-- РЎС†РµРЅР° РґР»СЏ РєР°СЂС‚РѕС‡РєРё СЃРѕ СЃРІР°Р№РїР°РјРё -->
+      <!-- Сцена для карточки со свайпами -->
       <div id="cardStage" class="card-stage">
         
-        <!-- РљР°СЂС‚РѕС‡РєР° Р¶РёРІРѕС‚РЅРѕРіРѕ -->
-        <article id="mainCard" class="fullscreen-card" role="button" tabindex="0" aria-label="РќР°Р¶РјРёС‚Рµ, С‡С‚РѕР±С‹ РїСЂРѕСЃР»СѓС€Р°С‚СЊ">
+        <!-- Карточка животного -->
+        <article id="mainCard" class="fullscreen-card" role="button" tabindex="0" aria-label="Нажмите, чтобы прослушать">
           
-          <!-- Р’РµСЂС…РЅРёР№ Р±РµР№РґР¶ СЃ РєР°С‚РµРіРѕСЂРёРµР№ Рё РєР»Р°СЃСЃРѕРј -->
+          <!-- Верхний бейдж с категорией и классом -->
           <div class="card-top-row">
-            <span id="cardTaxonomy" class="taxonomy-pill">РЎР°РІР°РЅРЅР° вЂў РњР»РµРєРѕРїРёС‚Р°СЋС‰РµРµ рџђѕ</span>
-            <div class="card-badge" title="РќР°Р¶РјРё, С‡С‚РѕР±С‹ РїРѕСЃР»СѓС€Р°С‚СЊ">
-              <span class="badge-icon">рџ”Љ</span>
+            <span id="cardTaxonomy" class="taxonomy-pill">Саванна • Млекопитающее 🐾</span>
+            <div class="card-badge" title="Нажми, чтобы послушать">
+              <span class="badge-icon">🔊</span>
               <span class="sound-waves">
                 <span></span><span></span><span></span>
               </span>
             </div>
           </div>
 
-          <!-- Р‘РѕР»СЊС€Р°СЏ РёР»Р»СЋСЃС‚СЂР°С†РёСЏ Р¶РёРІРѕС‚РЅРѕРіРѕ -->
+          <!-- Большая иллюстрация животного -->
           <div class="card-image-wrapper">
-            <img id="cardImage" src="" alt="Р–РёРІРѕС‚РЅРѕРµ" class="card-image" draggable="false" />
+            <img id="cardImage" src="" alt="Животное" class="card-image" draggable="false" />
           </div>
 
-          <!-- РќР°Р·РІР°РЅРёРµ, Р·РІСѓРє Рё РїРѕР·РЅР°РІР°С‚РµР»СЊРЅС‹Р№ С„Р°РєС‚ -->
+          <!-- Название, звук и познавательный факт -->
           <div class="card-info">
-            <h2 id="cardTitle" class="card-title">Р›РµРІ</h2>
-            <div id="cardSoundHint" class="card-sound-pill">В«Р -СЂ-СЂ-РјСЏСѓ!В» вЂў РќР°Р¶РјРё, С‡С‚РѕР±С‹ СѓСЃР»С‹С€Р°С‚СЊ рџђѕ</div>
+            <h2 id="cardTitle" class="card-title">Лев</h2>
+            <div id="cardSoundHint" class="card-sound-pill">«Р-р-р-мяу!» • Нажми, чтобы услышать 🐾</div>
             <div id="cardFact" class="card-fact-box">
-              <span class="fact-icon">рџ’Ў</span>
-              <span id="factText" class="fact-text">Р›СЊРІР° РїРѕ РїСЂР°РІСѓ РЅР°Р·С‹РІР°СЋС‚ С†Р°СЂС‘Рј РІСЃРµС… Р·РІРµСЂРµР№!</span>
+              <span class="fact-icon">💡</span>
+              <span id="factText" class="fact-text">Льва по праву называют царём всех зверей!</span>
             </div>
           </div>
 
         </article>
 
-        <!-- Р­РєСЂР°РЅ РїСЂРё РїСѓСЃС‚РѕРј РїРѕРёСЃРєРµ -->
+        <!-- Экран при пустом поиске -->
         <div id="emptyState" class="empty-state hidden">
-          <div class="empty-icon">рџ”Ќрџђѕ</div>
-          <h3 class="empty-title">Р–РёРІРѕС‚РЅРѕРµ РЅРµ РЅР°Р№РґРµРЅРѕ</h3>
-          <p class="empty-desc">РџРѕРїСЂРѕР±СѓР№ РёР·РјРµРЅРёС‚СЊ РїРѕРёСЃРєРѕРІС‹Р№ Р·Р°РїСЂРѕСЃ РёР»Рё СЃР±СЂРѕСЃРёС‚СЊ С„РёР»СЊС‚СЂС‹.</p>
-          <button id="resetFiltersBtn" class="reset-btn" type="button">РџРѕРєР°Р·Р°С‚СЊ РІСЃРµС… Р¶РёРІРѕС‚РЅС‹С…</button>
+          <div class="empty-icon">🔍🐾</div>
+          <h3 class="empty-title">Животное не найдено</h3>
+          <p class="empty-desc">Попробуй изменить поисковый запрос или сбросить фильтры.</p>
+          <button id="resetFiltersBtn" class="reset-btn" type="button">Показать всех животных</button>
         </div>
 
       </div>
 
-      <!-- РљРЅРѕРїРєР° Р’РїСЂР°РІРѕ -->
-      <button id="nextBtn" class="nav-btn next-btn" aria-label="РЎР»РµРґСѓСЋС‰РµРµ Р¶РёРІРѕС‚РЅРѕРµ" title="РЎР»РµРґСѓСЋС‰РµРµ">
+      <!-- Кнопка Вправо -->
+      <button id="nextBtn" class="nav-btn next-btn" aria-label="Следующее животное" title="Следующее">
         <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor">
           <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
         </svg>
       </button>
     </main>
 
-    <!-- РќРёР¶РЅСЏСЏ РїРѕРґСЃРєР°Р·РєР° -->
+    <!-- Нижняя подсказка -->
     <footer class="slider-footer">
-      <span class="swipe-hint">рџ‘€ Р›РёСЃС‚Р°Р№ СЃРІР°Р№РїР°РјРё РёР»Рё СЃС‚СЂРµР»РєР°РјРё рџ‘‰</span>
+      <span class="swipe-hint">👈 Листай свайпами или стрелками 👉</span>
     </footer>
     </div><!-- /gameScreen -->
 
 <!-- ========================================================
-         РњРѕРґР°Р»СЊРЅРѕРµ РѕРєРЅРѕ В«РЎРєР°Р·Р°С‚СЊ СЃРїР°СЃРёР±Рѕ РіРѕР»РѕСЃР°РјРё VKВ»
+         Модальное окно «Сказать спасибо голосами VK»
          ======================================================== -->
     <div id="donateModal" class="modal-overlay hidden" aria-hidden="true" role="dialog">
       <div class="modal-card">
-        <button id="closeDonateBtn" class="modal-close-btn" type="button" aria-label="Р—Р°РєСЂС‹С‚СЊ">вњ•</button>
+        <button id="closeDonateBtn" class="modal-close-btn" type="button" aria-label="Закрыть">✕</button>
         
         <div class="modal-header">
-          <span class="modal-badge-icon">рџ’–</span>
-          <h3 class="modal-title">РЎРєР°Р·Р°С‚СЊ СЃРїР°СЃРёР±Рѕ!</h3>
-          <p class="modal-subtitle">Р’Р°Рј РЅСЂР°РІРёС‚СЃСЏ РёРіСЂР°? Р’С‹ РјРѕР¶РµС‚Рµ СѓРіРѕСЃС‚РёС‚СЊ Р·РІРµСЂСЏС‚ РіРѕР»РѕСЃР°РјРё Р’РљРѕРЅС‚Р°РєС‚Рµ:</p>
+          <span class="modal-badge-icon">💖</span>
+          <h3 class="modal-title">Сказать спасибо!</h3>
+          <p class="modal-subtitle">Вам нравится игра? Вы можете угостить зверят голосами ВКонтакте:</p>
         </div>
 
         <div class="donate-options">
           <button class="donate-tier-btn active" data-votes="3" data-item="treat_3">
-            <span class="tier-icon">рџЌ¬</span>
+            <span class="tier-icon">🍬</span>
             <div class="tier-info">
-              <div class="tier-title">Р’РєСѓСЃРЅР°СЏ РєРѕРЅС„РµС‚РєР°</div>
-              <div class="tier-desc">РњР°Р»РµРЅСЊРєРёР№ РєРѕРјРїР»РёРјРµРЅС‚</div>
+              <div class="tier-title">Вкусная конфетка</div>
+              <div class="tier-desc">Маленький комплимент</div>
             </div>
-            <span class="tier-price">3 рџ’Ћ</span>
+            <span class="tier-price">3 💎</span>
           </button>
 
           <button class="donate-tier-btn" data-votes="5" data-item="treat_5">
-            <span class="tier-icon">рџҐ•</span>
+            <span class="tier-icon">🥕</span>
             <div class="tier-info">
-              <div class="tier-title">РљРѕСЂР·РёРЅРєР° СЏР±Р»РѕРє Рё РјРѕСЂРєРѕРІРё</div>
-              <div class="tier-desc">Р›СЋР±РёРјРѕРµ СѓРіРѕС‰РµРЅРёРµ РїРёС‚РѕРјС†РµРІ</div>
+              <div class="tier-title">Корзинка яблок и моркови</div>
+              <div class="tier-desc">Любимое угощение питомцев</div>
             </div>
-            <span class="tier-price">5 рџ’Ћ</span>
+            <span class="tier-price">5 💎</span>
           </button>
 
           <button class="donate-tier-btn" data-votes="10" data-item="treat_10">
-            <span class="tier-icon">рџЋ‚</span>
+            <span class="tier-icon">🎂</span>
             <div class="tier-info">
-              <div class="tier-title">РџСЂР°Р·РґРЅРёС‡РЅС‹Р№ С‚РѕСЂС‚</div>
-              <div class="tier-desc">Р‘РѕР»СЊС€Р°СЏ СЂР°РґРѕСЃС‚СЊ РІСЃРµРјСѓ Р·РѕРѕРїР°СЂРєСѓ!</div>
+              <div class="tier-title">Праздничный торт</div>
+              <div class="tier-desc">Большая радость всему зоопарку!</div>
             </div>
-            <span class="tier-price">10 рџ’Ћ</span>
+            <span class="tier-price">10 💎</span>
           </button>
         </div>
 
         <button id="confirmDonateBtn" class="confirm-donate-btn" type="button">
-          РџРѕР±Р»Р°РіРѕРґР°СЂРёС‚СЊ (3 РіРѕР»РѕСЃР°)
+          Поблагодарить (3 голоса)
         </button>
 
-        <p class="donate-note">РћРїР»Р°С‚Р° РїСЂРѕРёСЃС…РѕРґРёС‚ РѕС„РёС†РёР°Р»СЊРЅРѕ С‡РµСЂРµР· РіРѕР»РѕСЃР° Р’РљРѕРЅС‚Р°РєС‚Рµ</p>
+        <p class="donate-note">Оплата происходит официально через голоса ВКонтакте</p>
       </div>
     </div>
 
-    <!-- РњРѕРґР°Р»СЊРЅРѕРµ РѕРєРЅРѕ Р±Р»Р°РіРѕРґР°СЂРЅРѕСЃС‚Рё Р·РІРµСЂСЏС‚Р°Рј -->
+    <!-- Модальное окно благодарности зверятам -->
     <div id="thanks-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="thanksModalTitle">
       <div class="thanks-modal-card">
-        <button id="closeThanksModalBtn" class="modal-close-btn" aria-label="Р—Р°РєСЂС‹С‚СЊ">вњ•</button>
-        <div class="thanks-modal-badge">рџ’– РЎРїР°СЃРёР±Рѕ, РјР°Р»РµРЅСЊРєРёР№ РґСЂСѓРі! рџђѕ</div>
-        <img src="assets/images/menu/btn_thanks.png" alt="РџР»Р°СЃС‚РёР»РёРЅРѕРІРѕРµ СЃРµСЂРґРµС‡РєРѕ" class="thanks-modal-img">
-        <h2 id="thanksModalTitle" class="thanks-modal-title">Р—РІРµСЂСЏС‚Р° РїРµСЂРµРґР°СЋС‚ С‚РµР±Рµ РїСЂРёРІРµС‚!</h2>
+        <button id="closeThanksModalBtn" class="modal-close-btn" aria-label="Закрыть">✕</button>
+        <div class="thanks-modal-badge">💖 Спасибо, маленький друг! 🐾</div>
+        <img src="assets/images/menu/btn_thanks.png" alt="Пластилиновое сердечко" class="thanks-modal-img">
+        <h2 id="thanksModalTitle" class="thanks-modal-title">Зверята передают тебе привет!</h2>
         <p class="thanks-modal-text">
-          РўС‹ РґРµР»Р°РµС€СЊ РЅР°С€ РїР»Р°СЃС‚РёР»РёРЅРѕРІС‹Р№ РјРёСЂ С‚РµРїР»РµРµ Рё СЂР°РґРѕСЃС‚РЅРµРµ! РљР°Р¶РґРѕРµ Р¶РёРІРѕС‚РЅРѕРµ СЃР»РµРїР»РµРЅРѕ СЃ Р·Р°Р±РѕС‚РѕР№ Рё Р»СЋР±РѕРІСЊСЋ. РР·СѓС‡Р°Р№ РїРѕРІР°РґРєРё Р·РІРµСЂРµР№, СЃР»СѓС€Р°Р№ РёС… РЅР°СЃС‚РѕСЏС‰РёРµ РіРѕР»РѕСЃР° Рё СЂР°СЃС‚Рё Р»СЋР±РѕР·РЅР°С‚РµР»СЊРЅС‹Рј!
+          Ты делаешь наш пластилиновый мир теплее и радостнее! Каждое животное слеплено с заботой и любовью. Изучай повадки зверей, слушай их настоящие голоса и расти любознательным!
         </p>
         <div class="thanks-modal-parent-hint">
-          <span>рџ‘ЁвЂЌрџ‘©вЂЌрџ‘§ РРЅС„РѕСЂРјР°С†РёСЏ РґР»СЏ СЂРѕРґРёС‚РµР»РµР№:</span>
-          <p>РџСЂРёР»РѕР¶РµРЅРёРµ СЃРѕР·РґР°РЅРѕ РґР»СЏ СЂР°РЅРЅРµРіРѕ СЂР°Р·РІРёС‚РёСЏ РјР°Р»С‹С€РµР№. РџРѕРґРґРµСЂР¶Р°С‚СЊ РїСЂРѕРµРєС‚ РґРѕР±СЂС‹Рј СЃР»РѕРІРѕРј РёР»Рё РіРѕР»РѕСЃР°РјРё VK РјРѕР¶РЅРѕ РІ РёРіСЂРµ.</p>
+          <span>👨‍👩‍👧 Информация для родителей:</span>
+          <p>Приложение создано для раннего развития малышей. Поддержать проект добрым словом или голосами VK можно в игре.</p>
         </div>
         <button id="thanksActionBtn" class="thanks-action-btn" type="button">
-          <span>рџљЂ Рљ Р·РІРµСЂСЏС‚Р°Рј!</span>
+          <span>🚀 К зверятам!</span>
         </button>
       </div>
     </div>
 
   </div>
 
-  <!-- Р“Р»Р°РІРЅС‹Р№ СЃРєСЂРёРїС‚ Р»РѕРіРёРєРё -->
+  <!-- Главный скрипт логики -->
   <script type="module" src="app.js"></script>
 </body>
 </html>
-

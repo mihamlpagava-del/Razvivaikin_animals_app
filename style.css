@@ -1144,11 +1144,11 @@ body {
 }
 
 .start-logo-img {
-  max-height: clamp(55px, 11vh, 95px);
+  max-height: clamp(90px, 18vh, 175px);
   width: auto;
-  max-width: min(90vw, 360px);
+  max-width: min(94vw, 540px);
   object-fit: contain;
-  filter: drop-shadow(0 6px 14px rgba(84, 60, 44, 0.16));
+  filter: drop-shadow(0 8px 20px rgba(84, 60, 44, 0.22));
   pointer-events: none;
 }
 
@@ -1333,7 +1333,8 @@ body {
   }
 
   .start-logo-img {
-    max-height: clamp(48px, 9vh, 64px);
+    max-height: clamp(65px, 13vh, 105px);
+    max-width: min(92vw, 420px);
   }
 
   .worlds-dock {

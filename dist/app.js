@@ -29,6 +29,7 @@ const state = {
   isPlayingAudio: false,
   audioAbortController: null,
   isAutoPlaying: false,
+  mode: 'baby', // 'baby' (Малыш - звукоподражание) или 'nature' (Звуки природы)
   autoPlaySessionId: 0
 };
 let autoPlayTimeoutId = null;
@@ -278,7 +279,7 @@ function speakFallback(text, pitch = 1.0, signal) {
 /**
  * Воспроизведение трека или фоллбека
  */
-function playTrack(src, fallbackText, pitch, signal) {
+function playTrack(src, fallbackText, pitch, signal, maxDurationMs = null) {
   return new Promise(resolve => {
     if (signal && signal.aborted) return resolve();
 
@@ -292,13 +293,20 @@ function playTrack(src, fallbackText, pitch, signal) {
     activeAudio = audio;
 
     let resolved = false;
+    let maxTimer = null;
     const finish = () => {
       if (!resolved) {
         resolved = true;
+        if (maxTimer) clearTimeout(maxTimer);
+        try { audio.pause(); } catch (e) {}
         if (activeAudio === audio) activeAudio = null;
         resolve();
       }
     };
+
+    if (maxDurationMs && maxDurationMs > 0) {
+      maxTimer = setTimeout(finish, maxDurationMs);
+    }
 
     audio.addEventListener('ended', finish, { once: true });
     audio.addEventListener('error', () => {
@@ -377,22 +385,44 @@ async function playAnimalAudio() {
   }
 
   try {
-    // 1. Звук животного (случайный аудиофайл или живой речевой фоллбек)
-    await playTrack(soundSrc, currentSoundText, 1.25, signal);
-    if (signal.aborted) return;
+    if (state.mode === 'baby') {
+      // Режим «Малыш» (Звукоподражание):
+      // 1. Короткий реальный голос животного (1.1 сек)
+      await playTrack(soundSrc, currentSoundText, 1.25, signal, 1100);
+      if (signal.aborted) return;
 
-    // Пауза 260мс
-    await new Promise(res => {
-      activeTimeoutId = setTimeout(res, 260);
-      signal.addEventListener('abort', () => {
-        clearTimeout(activeTimeoutId);
-        res();
-      }, { once: true });
-    });
-    if (signal.aborted) return;
+      // Пауза 220мс
+      await new Promise(res => {
+        activeTimeoutId = setTimeout(res, 220);
+        signal.addEventListener('abort', () => {
+          clearTimeout(activeTimeoutId);
+          res();
+        }, { once: true });
+      });
+      if (signal.aborted) return;
 
-    // 2. Название животного диктором (например "Лев")
-    await playTrack(animal.voice, animal.name, 1.0, signal);
+      // 2. Ласковый детский голос (например «Кошка говорит: мяу-мяу!»)
+      const babyVoice = animal.voiceBaby || animal.voice;
+      await playTrack(babyVoice, `${animal.name} говорит ${animal.soundText || currentSoundText}`, 1.0, signal);
+    } else {
+      // Обычный режим «Звуки природы»:
+      // 1. Звук животного полной длительности
+      await playTrack(soundSrc, currentSoundText, 1.25, signal);
+      if (signal.aborted) return;
+
+      // Пауза 260мс
+      await new Promise(res => {
+        activeTimeoutId = setTimeout(res, 260);
+        signal.addEventListener('abort', () => {
+          clearTimeout(activeTimeoutId);
+          res();
+        }, { once: true });
+      });
+      if (signal.aborted) return;
+
+      // 2. Название животного диктором (например "Лев")
+      await playTrack(animal.voice, animal.name, 1.0, signal);
+    }
   } catch (err) {
     console.warn('Воспроизведение прервано:', err);
   } finally {
@@ -489,7 +519,11 @@ function renderCard(direction = 'none') {
   cardImage.alt = animal.name;
 
   cardTitle.innerHTML = `<span class="card-title-emoji">${animal.emoji}</span> <span class="card-title-text">${animal.name}</span>`;
-  cardSoundHint.textContent = `«${animal.soundText}» • Нажми, чтобы услышать 🐾`;
+  if (state.mode === 'baby') {
+    cardSoundHint.innerHTML = `<span class="baby-hint-badge">${animal.emoji || '🐾'} ${animal.name} делает: <strong>«${animal.soundText || 'Мяу!'}»</strong></span>`;
+  } else {
+    cardSoundHint.textContent = `«${animal.soundText}» • Нажми, чтобы услышать 🐾`;
+  }
   factText.textContent = animal.funFact || 'Удивительное создание нашей планеты!';
 
   // Сброс ручных inline-трансформаций
@@ -529,6 +563,52 @@ function prevAnimal() {
 const menuScreen = document.getElementById('menu-screen') || document.getElementById('startScreen');
 const gameScreen = document.getElementById('game-screen') || document.getElementById('gameScreen');
 const worldsGrid = document.getElementById('worldsGrid');
+
+// Детский режим и пагинация миров
+const btnBabyMode = document.getElementById('btnBabyMode');
+const modeToggleBtn = document.getElementById('modeToggleBtn');
+let currentWorldsPage = 0;
+let worldsAutoRotateTimer = null;
+
+function setWorldsPage(pageIndex) {
+  currentWorldsPage = pageIndex;
+  const grid = document.getElementById('worldsGrid');
+  if (!grid) return;
+  const cards = grid.querySelectorAll('.world-card');
+  const dots = document.querySelectorAll('.w-dot');
+
+  const isMobilePortrait = window.innerWidth <= 600 && window.innerHeight > window.innerWidth;
+  if (isMobilePortrait) {
+    cards.forEach((card, idx) => {
+      card.style.display = (pageIndex === 0 ? idx < 4 : idx >= 4) ? 'flex' : 'none';
+    });
+  } else {
+    cards.forEach(card => card.style.display = 'flex');
+  }
+
+  dots.forEach((dot, idx) => {
+    dot.classList.toggle('active', idx === pageIndex);
+  });
+}
+
+function startWorldsAutoRotate() {
+  if (worldsAutoRotateTimer) clearInterval(worldsAutoRotateTimer);
+  worldsAutoRotateTimer = setInterval(() => {
+    if (window.innerWidth <= 600 && window.innerHeight > window.innerWidth) {
+      setWorldsPage(currentWorldsPage === 0 ? 1 : 0);
+    }
+  }, 4500);
+}
+
+function updateModeToggleUI() {
+  if (!modeToggleBtn) return;
+  const isBaby = state.mode === 'baby';
+  modeToggleBtn.classList.toggle('baby-active', isBaby);
+  modeToggleBtn.innerHTML = isBaby
+    ? '<span class="mode-icon">👶</span><span class="mode-text">Малыш</span>'
+    : '<span class="mode-icon">🎓</span><span class="mode-text">Природа</span>';
+}
+
 const allAnimalsHeroBtn = document.getElementById('allAnimalsHeroBtn');
 const backToMenuBtn = document.getElementById('backToMenuBtn');
 const btnThanks = document.getElementById('btn-thanks');
@@ -1056,6 +1136,44 @@ function initEvents() {
   initTouchEvents();
   initSearch();
   initDonateModal();
+
+  // Кнопка "Учим звуки • Детский режим"
+  if (btnBabyMode) {
+    btnBabyMode.addEventListener('click', (e) => {
+      playSoftPopSFX(620);
+      tapticFeedback('medium');
+      spawnEmojiBurst(e.clientX, e.clientY, '👶');
+      state.mode = 'baby';
+      updateModeToggleUI();
+      openCategory('all');
+      startAutoPlay();
+    });
+  }
+
+  // Переключатель режима 👶 Малыш / 🎓 Природа
+  if (modeToggleBtn) {
+    modeToggleBtn.addEventListener('click', () => {
+      playSoftPopSFX(480);
+      tapticFeedback('light');
+      state.mode = state.mode === 'baby' ? 'nature' : 'baby';
+      updateModeToggleUI();
+      renderCard('none');
+    });
+  }
+
+  // Пагинация миров на мобильных (точки)
+  document.querySelectorAll('.w-dot').forEach(dot => {
+    dot.addEventListener('click', () => {
+      playSoftPopSFX(420);
+      const page = parseInt(dot.dataset.page, 10);
+      setWorldsPage(page);
+    });
+  });
+
+  // Запуск автосмены страниц миров на телефоне
+  setWorldsPage(0);
+  startWorldsAutoRotate();
+  window.addEventListener('resize', () => setWorldsPage(currentWorldsPage));
 
   if (allAnimalsHeroBtn) {
     allAnimalsHeroBtn.addEventListener('click', (e) => {

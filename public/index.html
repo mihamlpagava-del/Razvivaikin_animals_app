@@ -30,7 +30,8 @@
       </div>
 
       <!-- Сетка красочных миров животных (7 интерактивных карточек) -->
-      <div id="worldsGrid" class="worlds-grid">
+      <div class="worlds-carousel-wrapper">
+        <div id="worldsGrid" class="worlds-grid">
         <button class="world-card" data-category="pets" type="button" aria-label="Домашние">
           <img src="assets/images/menu/world_pets.png" alt="Домашние">
           <span>Домашние</span>
@@ -66,9 +67,19 @@
           <span>Птицы</span>
         </button>
       </div>
+        <div id="worldsDots" class="worlds-dots">
+          <span class="w-dot active" data-page="0" title="Миры 1-4"></span>
+          <span class="w-dot" data-page="1" title="Миры 5-7"></span>
+        </div>
+      </div>
 
       <!-- Большая пластилиновая кнопка "Смотреть всех животных" -->
-      <button id="allAnimalsHeroBtn" class="all-animals-hero-btn" type="button" aria-label="Смотреть всех животных">
+      <!-- Кнопка "Учим звуки • Детский режим" -->
+      <button id="btnBabyMode" class="menu-action-banner baby-mode-banner" type="button" aria-label="Учим звуки — Детский режим">
+        <img src="assets/images/menu/btn_baby_mode.png" alt="Учим звуки — Детский режим" class="menu-banner-btn-img">
+      </button>
+
+      <button id="allAnimalsHeroBtn"  class="all-animals-hero-btn" type="button" aria-label="Смотреть всех животных">
         <img src="assets/images/menu/btn_all_animals.png" alt="Смотреть всех животных — Все 73 пластилиновых зверят подряд" class="menu-banner-btn-img">
       </button>
 
@@ -92,6 +103,12 @@
           <span class="back-icon">🏠</span>
           <span class="back-text">Миры</span>
         </button>
+        <!-- Переключатель режима: 👶 Малыш / 🎓 Природа -->
+        <button id="modeToggleBtn" class="mode-toggle-chip baby-active" type="button" title="Переключить режим обучения">
+          <span class="mode-icon">👶</span>
+          <span class="mode-text">Малыш</span>
+        </button>
+
         <div class="search-container">
           <span class="search-icon">🔍</span>
           <input 

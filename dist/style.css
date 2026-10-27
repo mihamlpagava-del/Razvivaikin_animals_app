@@ -974,9 +974,9 @@ body {
 .start-screen {
   display: flex;
   flex-direction: column;
-  min-height: 100%;
+  height: 100%; max-height: 100dvh;
   width: 100%;
-  overflow-y: auto;
+  overflow-y: hidden;
   overflow-x: hidden;
   padding: 10px 8px 24px;
   gap: 14px;
@@ -1485,4 +1485,200 @@ body {
   color: #E65100;
   font-weight: 900;
   box-shadow: 0 4px 12px rgba(230, 81, 0, 0.2);
+}
+
+/* ========================================================
+   ДЕТСКИЙ РЕЖИМ (ЗВУКОПОДРАЖАНИЕ) & АДАПТИВНОСТЬ 100% БЕЗ СКРОЛЛА
+   ======================================================== */
+.worlds-carousel-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.worlds-dots {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+.w-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(140, 100, 70, 0.25);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.w-dot.active {
+  width: 18px;
+  border-radius: 9999px;
+  background: #FF7043;
+}
+
+.menu-actions-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  align-items: center;
+}
+
+.menu-action-banner {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  justify-content: center;
+  transition: transform 0.15s ease;
+}
+
+.menu-action-banner:hover {
+  transform: scale(1.02);
+}
+
+.menu-action-banner:active {
+  transform: scale(0.97);
+}
+
+.baby-mode-banner img {
+  max-height: clamp(40px, 6.5vh, 56px);
+  object-fit: contain;
+}
+
+/* Переключатель режимов: 👶 Малыш / 🎓 Природа */
+.mode-toggle-chip {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: #FFFFFF;
+  border: 1.5px solid #FFCC80;
+  border-radius: var(--radius-pill);
+  padding: 5px 11px;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #E65100;
+  box-shadow: 0 2px 8px rgba(255, 152, 0, 0.2);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.mode-toggle-chip.baby-active {
+  background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+  border-color: #FFA726;
+  color: #D84315;
+}
+
+.mode-toggle-chip:active {
+  transform: scale(0.95);
+}
+
+/* Бейдж подсказки звука в детском режиме */
+.baby-hint-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: #D84315;
+}
+
+.baby-hint-badge strong {
+  color: #BF360C;
+  font-size: 1.08rem;
+}
+
+/* ========================================================
+   ГОРИЗОНТАЛЬНАЯ ПРОЕКЦИЯ (LANDSCAPE / ШИРОКИЙ ЭКРАН)
+   ======================================================== */
+@media (orientation: landscape), (min-aspect-ratio: 13/10) {
+  .app-container {
+    max-width: 1000px !important;
+    width: 100% !important;
+    padding: 6px 20px !important;
+  }
+
+  #menu-screen {
+    height: 100vh !important;
+    max-height: 100dvh !important;
+    overflow: hidden !important;
+    justify-content: space-between !important;
+    padding: 6px 12px 10px !important;
+  }
+
+  .menu-logo-img {
+    max-height: 12vh !important;
+  }
+
+  .worlds-carousel-wrapper {
+    width: 100% !important;
+    overflow: hidden !important;
+    position: relative !important;
+    padding: 2px 0 !important;
+  }
+
+  .worlds-dots {
+    display: none !important;
+  }
+
+  /* Автоматическое плавное непрерывное движение пластилиновых иконок */
+  .worlds-grid {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 14px !important;
+    width: max-content !important;
+    margin: 4px 0 !important;
+    animation: marqueeGlide 22s linear infinite alternate !important;
+  }
+
+  .worlds-grid:hover,
+  .worlds-grid:active {
+    animation-play-state: paused !important;
+  }
+
+  .world-card {
+    display: flex !important;
+    flex: 0 0 115px !important;
+    height: 100px !important;
+  }
+
+  .world-card img {
+    max-height: 60px !important;
+  }
+
+  .menu-actions-stack {
+    flex-direction: row !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+
+  .menu-action-banner {
+    max-width: 250px !important;
+    flex: 1 1 0 !important;
+  }
+
+  .baby-mode-banner img,
+  .all-animals-hero-btn img,
+  .thanks-banner-img {
+    max-height: 48px !important;
+  }
+}
+
+@keyframes marqueeGlide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-100% + 94vw));
+  }
 }

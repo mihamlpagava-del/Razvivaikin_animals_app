@@ -131,7 +131,7 @@ export const animals = [
     voice: 'assets/audio/voices/canary.mp3',
     voiceBaby: 'assets/audio/voices/baby/canary_baby.mp3',
     emoji: '🐤',
-    soundText: 'Чирик-чирик!',
+    soundText: 'Трили-трили!',
     sounds: ['Тью-тью-ви!','Фью-фью-фью!','Трили-трили!'],
     funFact: 'Канарейки — настоящие маленькие музыканты с дивным голосом!',
     color: '#FFF3B0'

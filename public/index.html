@@ -21,16 +21,18 @@
     <!-- ========================================================
          СТАРТОВОЕ МЕНЮ (ХАБ-ЭКРАН / ВЫБОР МИРА И КАТЕГОРИЙ)
          ======================================================== -->
-    <section id="menu-screen" class="start-screen menu-screen" aria-label="Выбор мира">
-      <!-- Кнопка музыки слева вверху -->
-      <button id="musicToggleBtn" class="music-toggle-btn" type="button" title="Фоновая музыка" aria-label="Фоновая музыка">
-        <span class="music-icon">🎵</span>
-      </button>
+        <section id="menu-screen" class="start-screen menu-screen" aria-label="Выбор мира">
+      <!-- Верхняя панель управления: Звук и Полноэкранный режим (слева вверху для VK Mini Apps) -->
+      <header class="top-controls">
+        <button id="musicToggleBtn" class="top-ctrl-btn music-btn music-toggle-btn" type="button" title="Фоновая музыка" aria-label="Фоновая музыка">
+          <span class="music-icon">🎵</span>
+        </button>
+        <button id="fullscreenBtn" class="top-ctrl-btn fs-btn fullscreen-btn" type="button" title="Во весь экран" aria-label="Полноэкранный режим">
+          <span class="fs-icon">⛶</span>
+        </button>
+      </header>
 
-      <!-- Кнопка полноэкранного режима справа вверху -->
-      <button id="fullscreenBtn" class="fullscreen-btn" type="button" title="Во весь экран" aria-label="Полноэкранный режим">
-        <span class="fs-icon">⛶</span>
-      </button>
+      <!-- Центральный заголовок (Hero-блок) -->
       <div class="start-header">
         <div class="start-badge">✨ Игра для малышей • 3D Пластилин ✨</div>
         <div class="start-logo-container">
@@ -38,48 +40,46 @@
         </div>
       </div>
 
-      <!-- Сетка красочных миров животных (7 интерактивных карточек) -->
-      <div class="worlds-carousel-wrapper">
-        <div id="worldsGrid" class="worlds-grid">
-        <button class="world-card" data-category="pets" type="button" aria-label="Домашние">
-          <img src="assets/images/menu/world_pets.png" alt="Домашние">
-          <span>Домашние</span>
-        </button>
+      <!-- Центрированный пластилиновый док миров (7 карточек) -->
+      <div class="worlds-dock-container">
+        <div id="worldsGrid" class="worlds-dock" role="navigation" aria-label="Выбор мира">
+          <button class="world-card" data-category="pets" type="button" aria-label="Домашние">
+            <img src="assets/images/menu/world_pets.png" alt="Домашние">
+            <span>Домашние</span>
+          </button>
 
-        <button class="world-card" data-category="farm" type="button" aria-label="Ферма">
-          <img src="assets/images/menu/world_farm.png" alt="Ферма">
-          <span>Ферма</span>
-        </button>
+          <button class="world-card" data-category="farm" type="button" aria-label="Ферма">
+            <img src="assets/images/menu/world_farm.png" alt="Ферма">
+            <span>Ферма</span>
+          </button>
 
-        <button class="world-card" data-category="forest" type="button" aria-label="Лесные">
-          <img src="assets/images/menu/world_forest.png" alt="Лесные">
-          <span>Лесные</span>
-        </button>
+          <button class="world-card" data-category="forest" type="button" aria-label="Лесные">
+            <img src="assets/images/menu/world_forest.png" alt="Лесные">
+            <span>Лесные</span>
+          </button>
 
-        <button class="world-card" data-category="savanna" type="button" aria-label="Саванна">
-          <img src="assets/images/menu/world_savanna.png" alt="Саванна">
-          <span>Саванна</span>
-        </button>
+          <button class="world-card" data-category="savanna" type="button" aria-label="Саванна">
+            <img src="assets/images/menu/world_savanna.png" alt="Саванна">
+            <span>Саванна</span>
+          </button>
 
-        <button class="world-card" data-category="dinos" type="button" aria-label="Дино Мир">
-          <img src="assets/images/menu/world_dinos.png" alt="Дино Мир">
-          <span>Дино Мир</span>
-        </button>
+          <button class="world-card" data-category="dinos" type="button" aria-label="Дино Мир">
+            <img src="assets/images/menu/world_dinos.png" alt="Дино Мир">
+            <span>Дино Мир</span>
+          </button>
 
-        <button class="world-card" data-category="ocean" type="button" aria-label="Океан">
-          <img src="assets/images/menu/world_ocean.png" alt="Океан">
-          <span>Океан</span>
-        </button>
+          <button class="world-card" data-category="ocean" type="button" aria-label="Океан">
+            <img src="assets/images/menu/world_ocean.png" alt="Океан">
+            <span>Океан</span>
+          </button>
 
-        <button class="world-card" data-category="birds" type="button" aria-label="Птицы">
-          <img src="assets/images/menu/world_birds.png" alt="Птицы">
-          <span>Птицы</span>
-        </button>
+          <button class="world-card" data-category="birds" type="button" aria-label="Птицы">
+            <img src="assets/images/menu/world_birds.png" alt="Птицы">
+            <span>Птицы</span>
+          </button>
+        </div>
       </div>
-        <div id="worldsDots" class="worlds-dots">
-          <span class="w-dot active" data-page="0" title="Миры 1-4"></span>
-          <span class="w-dot" data-page="1" title="Миры 5-7"></span>
-        
+
       <!-- Органичный блок баннеров действий: Учим звуки, Все животные, Спасибо -->
       <div class="menu-actions-stack">
         <button id="btnBabyMode" class="menu-action-banner baby-banner" type="button" aria-label="Учим звуки — Детский режим">

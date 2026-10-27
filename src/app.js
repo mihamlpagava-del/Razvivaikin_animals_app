@@ -577,14 +577,9 @@ function setWorldsPage(pageIndex) {
   const cards = grid.querySelectorAll('.world-card');
   const dots = document.querySelectorAll('.w-dot');
 
-  const isMobilePortrait = window.innerWidth <= 600 && window.innerHeight > window.innerWidth;
-  if (isMobilePortrait) {
-    cards.forEach((card, idx) => {
-      card.style.display = (pageIndex === 0 ? idx < 4 : idx >= 4) ? 'flex' : 'none';
-    });
-  } else {
-    cards.forEach(card => card.style.display = 'flex');
-  }
+  cards.forEach(card => {
+    card.style.display = 'flex';
+  });
 
   dots.forEach((dot, idx) => {
     dot.classList.toggle('active', idx === pageIndex);
@@ -592,11 +587,8 @@ function setWorldsPage(pageIndex) {
 }
 
 function startWorldsAutoRotate() {
-  if (worldsAutoRotateTimer) clearInterval(worldsAutoRotateTimer);
-  worldsAutoRotateTimer = setInterval(() => {
-    if (window.innerWidth <= 600 && window.innerHeight > window.innerWidth) {
-      setWorldsPage(currentWorldsPage === 0 ? 1 : 0);
-    }
+  // All 7 world cards are displayed simultaneously in 2 balanced rows
+}
   }, 4500);
 }
 
@@ -1271,7 +1263,7 @@ function initEvents() {
   document.addEventListener('touchstart', startMusicOnFirstTouch, { once: true });
 
   // Полноэкранный режим
-  document.querySelectorAll('.fullscreen-btn').forEach(btn => {
+  document.querySelectorAll('.fullscreen-btn, #fullscreenBtn, #gameFullscreenBtn').forEach(btn => {
     btn.addEventListener('click', toggleFullscreen);
   });
   document.addEventListener('fullscreenchange', updateFullscreenIcons);

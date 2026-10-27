@@ -589,8 +589,6 @@ function setWorldsPage(pageIndex) {
 function startWorldsAutoRotate() {
   // All 7 world cards are displayed simultaneously in 2 balanced rows
 }
-  }, 4500);
-}
 
 
 /**

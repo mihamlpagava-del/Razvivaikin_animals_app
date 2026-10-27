@@ -24,8 +24,9 @@
     <section id="menu-screen" class="start-screen menu-screen" aria-label="Выбор мира">
       <div class="start-header">
         <div class="start-badge">✨ Игра для малышей • 3D Пластилин ✨</div>
-        <h1 class="start-title">Мир Животных 🐾</h1>
-        <p class="start-subtitle">Куда отправимся в путешествие? Выбери мир:</p>
+        <div class="start-logo-container">
+          <img src="assets/images/menu/logo_title.png" alt="Мир Животных — Куда отправимся в путешествие? Выбери мир:" class="start-logo-img">
+        </div>
       </div>
 
       <!-- Сетка красочных миров животных (7 интерактивных карточек) -->
@@ -66,21 +67,15 @@
         </button>
       </div>
 
-      <!-- Большая яркая кнопка "Смотреть всех животных" -->
-      <button id="allAnimalsHeroBtn" class="all-animals-hero-btn" type="button">
-        <span class="hero-btn-icon">⭐</span>
-        <div class="hero-btn-content">
-          <span class="hero-btn-title">Смотреть всех животных</span>
-          <span class="hero-btn-sub">Все 73 пластилиновых зверят подряд 🐾</span>
-        </div>
-        <span class="hero-btn-arrow">🚀</span>
+      <!-- Большая пластилиновая кнопка "Смотреть всех животных" -->
+      <button id="allAnimalsHeroBtn" class="all-animals-hero-btn" type="button" aria-label="Смотреть всех животных">
+        <img src="assets/images/menu/btn_all_animals.png" alt="Смотреть всех животных — Все 73 пластилиновых зверят подряд" class="menu-banner-btn-img">
       </button>
 
-      <!-- Интерактивная кнопка "Сказать спасибо зверятам" -->
+      <!-- Интерактивная пластилиновая кнопка "Сказать спасибо зверятам" -->
       <div class="start-footer-row">
         <button id="btn-thanks" class="thanks-button" type="button" aria-label="Сказать спасибо зверятам">
-          <img src="assets/images/menu/btn_thanks.png" alt="Спасибо">
-          <span>Сказать спасибо зверятам ❤️</span>
+          <img src="assets/images/menu/btn_thanks_wide.png" alt="Сказать спасибо зверятам" class="menu-banner-btn-img thanks-banner-img">
         </button>
       </div>
     </section>

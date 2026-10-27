@@ -533,6 +533,9 @@ const thanksModal = document.getElementById('thanks-modal');
 const closeThanksModalBtn = document.getElementById('closeThanksModalBtn');
 const thanksActionBtn = document.getElementById('thanksActionBtn');
 const startDonateBtn = document.getElementById('startDonateBtn');
+const thanksDonateBtn = document.getElementById('thanksDonateBtn');
+
+let openDonateModal = () => {};
 
 /**
  * Построение стартового меню выбора миров
@@ -816,6 +819,7 @@ function initDonateModal() {
   };
 
   const openModal = () => {
+    openDonateModal = openModal;
     tapticFeedback('light');
     donateModal.classList.remove('hidden');
     donateModal.setAttribute('aria-hidden', 'false');
@@ -1012,6 +1016,17 @@ function initEvents() {
       if (thanksModal) {
         thanksModal.classList.remove('hidden');
       }
+    });
+  }
+
+  // Кнопка «Подарить голоса» внутри модального окна благодарности
+  if (thanksDonateBtn) {
+    thanksDonateBtn.addEventListener('click', (e) => {
+      tapticFeedback('medium');
+      playSoftPopSFX(580);
+      spawnEmojiBurst(e.clientX, e.clientY, '💎');
+      if (thanksModal) thanksModal.classList.add('hidden');
+      openDonateModal();
     });
   }
 

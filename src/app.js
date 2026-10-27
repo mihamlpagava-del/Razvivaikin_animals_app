@@ -600,6 +600,36 @@ function startWorldsAutoRotate() {
   }, 4500);
 }
 
+
+/**
+ * Управление полноэкранным режимом (кнопка ⛶)
+ */
+function toggleFullscreen() {
+  tapticFeedback('medium');
+  playSoftPopSFX(550);
+  if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+    const el = document.documentElement;
+    if (el.requestFullscreen) {
+      el.requestFullscreen().catch(() => {});
+    } else if (el.webkitRequestFullscreen) {
+      el.webkitRequestFullscreen();
+    }
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen().catch(() => {});
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    }
+  }
+}
+
+function updateFullscreenIcons() {
+  const isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+  document.querySelectorAll('.fullscreen-btn .fs-icon').forEach(icon => {
+    icon.textContent = isFs ? '✕' : '⛶';
+  });
+}
+
 function updateModeToggleUI() {
   if (!modeToggleBtn) return;
   const isBaby = state.mode === 'baby';
@@ -742,7 +772,91 @@ async function runAutoPlayLoop() {
 /**
  * Переход из меню в режим игры с выбранной категорией
  */
+
+/**
+ * Управление фоновой музыкой меню с плавным затуханием (fade-out) и нарастанием (fade-in)
+ */
+let menuBGM = null;
+let isMusicMuted = false;
+let musicFadeInterval = null;
+
+function initMenuBGM() {
+  if (!menuBGM) {
+    menuBGM = new Audio('assets/audio/menu_bgm.mp3');
+    menuBGM.loop = true;
+    menuBGM.volume = 0;
+  }
+}
+
+function playMenuBGM(fadeIn = true) {
+  if (isMusicMuted) return;
+  initMenuBGM();
+  if (musicFadeInterval) clearInterval(musicFadeInterval);
+
+  menuBGM.play().catch(() => {});
+
+  if (fadeIn) {
+    const targetVol = 0.32;
+    const step = 0.02;
+    musicFadeInterval = setInterval(() => {
+      if (menuBGM.volume < targetVol) {
+        menuBGM.volume = Math.min(targetVol, menuBGM.volume + step);
+      } else {
+        clearInterval(musicFadeInterval);
+        musicFadeInterval = null;
+      }
+    }, 40);
+  } else {
+    menuBGM.volume = 0.32;
+  }
+}
+
+function stopMenuBGM(fadeOut = true) {
+  if (!menuBGM) return;
+  if (musicFadeInterval) clearInterval(musicFadeInterval);
+
+  if (fadeOut) {
+    const step = 0.03;
+    musicFadeInterval = setInterval(() => {
+      if (menuBGM.volume > 0.03) {
+        menuBGM.volume = Math.max(0, menuBGM.volume - step);
+      } else {
+        menuBGM.volume = 0;
+        menuBGM.pause();
+        clearInterval(musicFadeInterval);
+        musicFadeInterval = null;
+      }
+    }, 40);
+  } else {
+    menuBGM.volume = 0;
+    menuBGM.pause();
+  }
+}
+
+function toggleMusicMute() {
+  isMusicMuted = !isMusicMuted;
+  tapticFeedback('light');
+  playSoftPopSFX(500);
+
+  const btn = document.getElementById('musicToggleBtn');
+  if (btn) {
+    btn.classList.toggle('muted', isMusicMuted);
+    const icon = btn.querySelector('.music-icon');
+    if (icon) icon.textContent = isMusicMuted ? '🔇' : '🎵';
+  }
+
+  if (isMusicMuted) {
+    stopMenuBGM(false);
+  } else {
+    const menuEl = document.getElementById('menu-screen') || document.getElementById('startScreen');
+    if (menuEl && !menuEl.classList.contains('hidden')) {
+      playMenuBGM(true);
+    }
+  }
+}
+
 function openCategory(categoryId) {
+  stopMenuBGM(true);
   state.selectedCategory = categoryId;
   state.selectedSubCategory = 'all';
   state.searchQuery = '';
@@ -772,6 +886,7 @@ function openCategory(categoryId) {
  * Возврат в стартовое меню
  */
 function openStartMenu() {
+  playMenuBGM(true);
   stopAutoPlay();
   stopAllAudio();
   playSoftPopSFX(440);
@@ -1136,6 +1251,31 @@ function initEvents() {
   initTouchEvents();
   initSearch();
   initDonateModal();
+
+  // Кнопка музыки в меню
+  const musicToggleBtn = document.getElementById('musicToggleBtn');
+  if (musicToggleBtn) {
+    musicToggleBtn.addEventListener('click', toggleMusicMute);
+  }
+
+  // Запуск фоновой музыки при первом взаимодействии пользователя с меню
+  const startMusicOnFirstTouch = () => {
+    const menuEl = document.getElementById('menu-screen') || document.getElementById('startScreen');
+    if (menuEl && !menuEl.classList.contains('hidden')) {
+      playMenuBGM(true);
+    }
+    document.removeEventListener('click', startMusicOnFirstTouch);
+    document.removeEventListener('touchstart', startMusicOnFirstTouch);
+  };
+  document.addEventListener('click', startMusicOnFirstTouch, { once: true });
+  document.addEventListener('touchstart', startMusicOnFirstTouch, { once: true });
+
+  // Полноэкранный режим
+  document.querySelectorAll('.fullscreen-btn').forEach(btn => {
+    btn.addEventListener('click', toggleFullscreen);
+  });
+  document.addEventListener('fullscreenchange', updateFullscreenIcons);
+  document.addEventListener('webkitfullscreenchange', updateFullscreenIcons);
 
   // Кнопка "Учим звуки • Детский режим"
   if (btnBabyMode) {

@@ -22,6 +22,15 @@
          СТАРТОВОЕ МЕНЮ (ХАБ-ЭКРАН / ВЫБОР МИРА И КАТЕГОРИЙ)
          ======================================================== -->
     <section id="menu-screen" class="start-screen menu-screen" aria-label="Выбор мира">
+      <!-- Кнопка музыки слева вверху -->
+      <button id="musicToggleBtn" class="music-toggle-btn" type="button" title="Фоновая музыка" aria-label="Фоновая музыка">
+        <span class="music-icon">🎵</span>
+      </button>
+
+      <!-- Кнопка полноэкранного режима справа вверху -->
+      <button id="fullscreenBtn" class="fullscreen-btn" type="button" title="Во весь экран" aria-label="Полноэкранный режим">
+        <span class="fs-icon">⛶</span>
+      </button>
       <div class="start-header">
         <div class="start-badge">✨ Игра для малышей • 3D Пластилин ✨</div>
         <div class="start-logo-container">
@@ -70,22 +79,18 @@
         <div id="worldsDots" class="worlds-dots">
           <span class="w-dot active" data-page="0" title="Миры 1-4"></span>
           <span class="w-dot" data-page="1" title="Миры 5-7"></span>
-        </div>
-      </div>
+        
+      <!-- Органичный блок баннеров действий: Учим звуки, Все животные, Спасибо -->
+      <div class="menu-actions-stack">
+        <button id="btnBabyMode" class="menu-action-banner baby-banner" type="button" aria-label="Учим звуки — Детский режим">
+          <img src="assets/images/menu/btn_baby_mode.png" alt="Учим звуки — Детский режим" class="menu-banner-btn-img">
+        </button>
 
-      <!-- Большая пластилиновая кнопка "Смотреть всех животных" -->
-      <!-- Кнопка "Учим звуки • Детский режим" -->
-      <button id="btnBabyMode" class="menu-action-banner baby-mode-banner" type="button" aria-label="Учим звуки — Детский режим">
-        <img src="assets/images/menu/btn_baby_mode.png" alt="Учим звуки — Детский режим" class="menu-banner-btn-img">
-      </button>
+        <button id="allAnimalsHeroBtn" class="menu-action-banner all-animals-banner" type="button" aria-label="Смотреть всех животных">
+          <img src="assets/images/menu/btn_all_animals.png" alt="Смотреть всех животных — Все 73 пластилиновых зверят подряд" class="menu-banner-btn-img">
+        </button>
 
-      <button id="allAnimalsHeroBtn"  class="all-animals-hero-btn" type="button" aria-label="Смотреть всех животных">
-        <img src="assets/images/menu/btn_all_animals.png" alt="Смотреть всех животных — Все 73 пластилиновых зверят подряд" class="menu-banner-btn-img">
-      </button>
-
-      <!-- Интерактивная пластилиновая кнопка "Сказать спасибо зверятам" -->
-      <div class="start-footer-row">
-        <button id="btn-thanks" class="thanks-button" type="button" aria-label="Сказать спасибо зверятам">
+        <button id="btn-thanks" class="menu-action-banner thanks-banner" type="button" aria-label="Сказать спасибо зверятам">
           <img src="assets/images/menu/btn_thanks_wide.png" alt="Сказать спасибо зверятам" class="menu-banner-btn-img thanks-banner-img">
         </button>
       </div>
@@ -99,6 +104,9 @@
       
       <!-- Верхний ряд: Поиск и кнопка "Сказать спасибо" (Голоса VK) -->
       <div class="header-top-row">
+          <button id="gameFullscreenBtn" class="fullscreen-btn header-fs-btn" type="button" title="Во весь экран" aria-label="Полноэкранный режим">
+            <span class="fs-icon">⛶</span>
+          </button>
         <button id="backToMenuBtn" class="back-menu-btn" type="button" title="Вернуться к выбору миров">
           <span class="back-icon">🏠</span>
           <span class="back-text">Миры</span>

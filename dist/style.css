@@ -54,7 +54,7 @@ html, body {
 
 body {
   font-family: var(--font-family);
-  background: var(--bg-gradient);
+  background: linear-gradient(rgba(255, 252, 247, 0.16), rgba(255, 245, 236, 0.22)), url('assets/images/menu/background.png') no-repeat center center fixed; background-size: cover;
   color: var(--text-main);
   display: flex;
   justify-content: center;
@@ -1681,4 +1681,203 @@ body {
   100% {
     transform: translateX(calc(-100% + 94vw));
   }
+}
+
+/* ========================================================
+   ПОЛНОЭКРАННЫЙ РЕЖИМ & ФОН НА ВСЮ ОБЛАСТЬ
+   ======================================================== */
+.fullscreen-btn {
+  position: absolute;
+  top: max(10px, env(safe-area-inset-top));
+  right: max(14px, env(safe-area-inset-right));
+  z-index: 1000;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 248, 240, 0.95));
+  border: 2px solid rgba(255, 183, 77, 0.75);
+  border-radius: var(--radius-pill);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(230, 81, 0, 0.22);
+  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.18s ease;
+}
+
+.fullscreen-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 18px rgba(230, 81, 0, 0.35);
+}
+
+.fullscreen-btn:active {
+  transform: scale(0.92);
+}
+
+.header-fs-btn {
+  position: static;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+}
+
+.fs-icon {
+  font-size: 1.35rem;
+  line-height: 1;
+  color: #E65100;
+}
+
+/* ========================================================
+   ГОРИЗОНТАЛЬНЫЙ РЕЖИМ: БОЛЬШИЕ ИКОНКИ + ОРГАНИЧНЫЕ БАННЕРЫ
+   ======================================================== */
+@media (orientation: landscape), (min-aspect-ratio: 13/10) {
+  html, body {
+    background:
+      linear-gradient(rgba(255, 252, 247, 0.16), rgba(255, 245, 236, 0.22)),
+      url('assets/images/menu/background.png') no-repeat center center fixed !important;
+    background-size: cover !important;
+  }
+
+  .app-container {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 6px 24px 12px !important;
+    background: transparent !important;
+  }
+
+  #menu-screen {
+    height: 100vh !important;
+    max-height: 100dvh !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 6px 20px 14px !important;
+    background: transparent !important;
+  }
+
+  .start-header {
+    margin: 0 !important;
+    gap: 2px !important;
+  }
+
+  .start-logo-img {
+    max-height: clamp(55px, 12vh, 95px) !important;
+    width: auto !important;
+  }
+
+  .worlds-carousel-wrapper {
+    width: 100% !important;
+    overflow: visible !important;
+    margin: 4px 0 !important;
+  }
+
+  .worlds-dots {
+    display: none !important;
+  }
+
+  /* 2. БОЛЬШИЕ КРАСОЧНЫЕ ИКОНКИ МИРОВ */
+  .worlds-grid {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: clamp(14px, 2.2vw, 26px) !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+  }
+
+  .world-card {
+    display: flex !important;
+    flex: 0 0 clamp(115px, 12vw, 160px) !important;
+    height: clamp(125px, 25vh, 175px) !important;
+    padding: 8px 6px 8px !important;
+    border-radius: 24px !important;
+    box-shadow: 0 10px 22px rgba(84, 60, 44, 0.14) !important;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease !important;
+  }
+
+  .world-card:hover {
+    transform: scale(1.08) translateY(-4px) !important;
+    box-shadow: 0 16px 28px rgba(84, 60, 44, 0.22) !important;
+  }
+
+  .world-card img {
+    height: 75% !important;
+    max-height: clamp(85px, 18vh, 125px) !important;
+    object-fit: contain !important;
+    filter: drop-shadow(0 6px 10px rgba(0,0,0,0.12)) !important;
+  }
+
+  .world-card span {
+    font-size: clamp(0.95rem, 1.4vw, 1.25rem) !important;
+    font-weight: 900 !important;
+  }
+
+  /* 3. ОРГАНИЧНЫЕ БОЛЬШИЕ КНОПКИ ДЕЙСТВИЙ */
+  .menu-actions-stack {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: clamp(14px, 2.5vw, 32px) !important;
+    width: 100% !important;
+    max-width: 1100px !important;
+    margin: 4px auto 0 !important;
+  }
+
+  .menu-action-banner {
+    flex: 1 1 0 !important;
+    max-width: 340px !important;
+    height: clamp(52px, 9vh, 72px) !important;
+  }
+
+  .menu-banner-btn-img {
+    height: 100% !important;
+    max-height: clamp(52px, 9vh, 72px) !important;
+    width: 100% !important;
+    object-fit: contain !important;
+    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.16)) !important;
+  }
+}
+
+/* ========================================================
+   КНОПКА МУЗЫКИ В СТАРТОВОМ МЕНЮ
+   ======================================================== */
+.music-toggle-btn {
+  position: absolute;
+  top: max(10px, env(safe-area-inset-top));
+  left: max(14px, env(safe-area-inset-left));
+  z-index: 1000;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 248, 240, 0.95));
+  border: 2px solid rgba(255, 183, 77, 0.75);
+  border-radius: var(--radius-pill);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(230, 81, 0, 0.22);
+  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.18s ease;
+}
+
+.music-toggle-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 18px rgba(230, 81, 0, 0.35);
+}
+
+.music-toggle-btn:active {
+  transform: scale(0.92);
+}
+
+.music-toggle-btn.muted {
+  opacity: 0.65;
+  border-color: #BDBDBD;
+  background: #ECEFF1;
+}
+
+.music-icon {
+  font-size: 1.35rem;
+  line-height: 1;
 }

@@ -27,8 +27,11 @@ const state = {
   searchQuery: '',
   currentIndex: 0,
   isPlayingAudio: false,
-  audioAbortController: null
+  audioAbortController: null,
+  isAutoPlaying: false,
+  autoPlaySessionId: 0
 };
+let autoPlayTimeoutId = null;
 
 // Ссылки на воспроизведение
 let activeAudio = null;
@@ -589,6 +592,74 @@ function buildWorldsGrid() {
 }
 
 /**
+ * Управление автоматическим режимом (просмотр всех 73 животных подряд)
+ */
+function updateAutoPlayUI(isActive) {
+  const badge = document.getElementById('autoPlayControlBtn');
+  const backText = backToMenuBtn ? backToMenuBtn.querySelector('.back-text') : null;
+
+  if (badge) {
+    badge.classList.toggle('hidden', !isActive);
+  }
+  if (backText) {
+    backText.textContent = isActive ? 'Назад' : 'Миры';
+  }
+  if (backToMenuBtn) {
+    backToMenuBtn.classList.toggle('autoplay-active-back', isActive);
+  }
+}
+
+function startAutoPlay() {
+  state.isAutoPlaying = true;
+  state.autoPlaySessionId = (state.autoPlaySessionId || 0) + 1;
+  updateAutoPlayUI(true);
+  runAutoPlayLoop();
+}
+
+function stopAutoPlay() {
+  if (!state.isAutoPlaying) return;
+  state.isAutoPlaying = false;
+  state.autoPlaySessionId = (state.autoPlaySessionId || 0) + 1;
+  if (autoPlayTimeoutId) {
+    clearTimeout(autoPlayTimeoutId);
+    autoPlayTimeoutId = null;
+  }
+  updateAutoPlayUI(false);
+}
+
+async function runAutoPlayLoop() {
+  const currentToken = state.autoPlaySessionId;
+
+  // Небольшая задержка перед стартом озвучки (350мс для плавного появления экрана)
+  await new Promise(res => {
+    autoPlayTimeoutId = setTimeout(res, 350);
+  });
+
+  while (state.isAutoPlaying && state.autoPlaySessionId === currentToken) {
+    const list = getFilteredAnimals();
+    if (list.length === 0) break;
+    const animal = list[state.currentIndex];
+    if (!animal) break;
+
+    // 1. Озвучиваем текущее животное (настоящий звук + имя диктором)
+    await playAnimalAudio(animal);
+
+    if (!state.isAutoPlaying || state.autoPlaySessionId !== currentToken) break;
+
+    // 2. Комфортная пауза для ребёнка (1.6 сек), чтобы рассмотреть пластилинового зверька
+    await new Promise(res => {
+      autoPlayTimeoutId = setTimeout(res, 1600);
+    });
+
+    if (!state.isAutoPlaying || state.autoPlaySessionId !== currentToken) break;
+
+    // 3. Автоматически перелистываем к следующему животному по порядку
+    state.currentIndex = (state.currentIndex + 1) % list.length;
+    renderCard('next');
+  }
+}
+
+/**
  * Переход из меню в режим игры с выбранной категорией
  */
 function openCategory(categoryId) {
@@ -621,6 +692,7 @@ function openCategory(categoryId) {
  * Возврат в стартовое меню
  */
 function openStartMenu() {
+  stopAutoPlay();
   stopAllAudio();
   playSoftPopSFX(440);
   tapticFeedback('light');
@@ -645,6 +717,7 @@ function buildMainCategories() {
 
     btn.addEventListener('click', () => {
       if (state.selectedCategory === cat.id) return;
+      stopAutoPlay();
       stopAllAudio();
       state.selectedCategory = cat.id;
       state.currentIndex = 0;
@@ -988,8 +1061,19 @@ function initEvents() {
     allAnimalsHeroBtn.addEventListener('click', (e) => {
       playSoftPopSFX(600);
       tapticFeedback('medium');
-      spawnEmojiBurst(e.clientX, e.clientY, '⭐');
+      spawnEmojiBurst(e.clientX, e.clientY, '🚀');
       openCategory('all');
+      startAutoPlay();
+    });
+  }
+
+  // Кнопка остановки автопросмотра на карточке
+  const autoPlayControlBtn = document.getElementById('autoPlayControlBtn');
+  if (autoPlayControlBtn) {
+    autoPlayControlBtn.addEventListener('click', () => {
+      playSoftPopSFX(450);
+      tapticFeedback('light');
+      stopAutoPlay();
     });
   }
 

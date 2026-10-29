@@ -90,3 +90,4 @@ console.log('3. Инициализация YaGames.init() и LoadingAPI.ready():
 console.log('4. Пауза звука при переключении вкладки (visibilitychange): ДА');
 console.log('5. Вес архива < 100 МБ: ДА (меньше 30 МБ)');
 console.log('----------------------------------------------------');
+

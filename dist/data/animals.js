@@ -841,7 +841,7 @@ export const animals = [
   // ==========================================
   {
     id: 'whale',
-    name: 'Синий кит',
+    name: 'Кит',
     category: 'ocean',
     subCategory: 'mammal',
     image: 'assets/images/ocean/whale.png',

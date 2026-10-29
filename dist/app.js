@@ -486,10 +486,19 @@ function renderCard(direction = 'none') {
 
   mainCard.style.display = 'flex';
   emptyState.classList.add('hidden');
-  prevBtn.style.opacity = '1';
-  prevBtn.style.pointerEvents = 'auto';
-  nextBtn.style.opacity = '1';
-  nextBtn.style.pointerEvents = 'auto';
+  if (state.isAutoPlaying) {
+    prevBtn.style.display = 'none';
+    prevBtn.style.pointerEvents = 'none';
+    nextBtn.style.display = 'none';
+    nextBtn.style.pointerEvents = 'none';
+  } else {
+    prevBtn.style.display = '';
+    prevBtn.style.opacity = '1';
+    prevBtn.style.pointerEvents = 'auto';
+    nextBtn.style.display = '';
+    nextBtn.style.opacity = '1';
+    nextBtn.style.pointerEvents = 'auto';
+  }
 
   const total = list.length;
   if (state.currentIndex >= total) state.currentIndex = 0;
@@ -555,6 +564,7 @@ function renderCard(direction = 'none') {
  * Перелистывание вперед (зациклено)
  */
 function nextAnimal() {
+  if (state.isAutoPlaying) return;
   playSoftPopSFX(580);
   const list = getFilteredAnimals();
   if (list.length <= 1) return;
@@ -567,6 +577,7 @@ function nextAnimal() {
  * Перелистывание назад (зациклено)
  */
 function prevAnimal() {
+  if (state.isAutoPlaying) return;
   playSoftPopSFX(500);
   const list = getFilteredAnimals();
   if (list.length <= 1) return;
@@ -717,6 +728,29 @@ function buildWorldsGrid() {
 function updateAutoPlayUI(isActive) {
   const badge = document.getElementById('autoPlayControlBtn');
   const backText = backToMenuBtn ? backToMenuBtn.querySelector('.back-text') : null;
+  const gameEl = document.getElementById('game-screen') || document.getElementById('gameScreen');
+
+  if (gameEl) {
+    gameEl.classList.toggle('is-autoplay-active', isActive);
+  }
+
+  if (prevBtn) {
+    prevBtn.classList.toggle('autoplay-hidden', isActive);
+    prevBtn.style.display = isActive ? 'none' : '';
+    prevBtn.style.pointerEvents = isActive ? 'none' : 'auto';
+  }
+  if (nextBtn) {
+    nextBtn.classList.toggle('autoplay-hidden', isActive);
+    nextBtn.style.display = isActive ? 'none' : '';
+    nextBtn.style.pointerEvents = isActive ? 'none' : 'auto';
+  }
+
+  if (mainCategoriesBar) {
+    mainCategoriesBar.style.display = isActive ? 'none' : '';
+  }
+  if (subCategoriesBar) {
+    subCategoriesBar.style.display = isActive ? 'none' : '';
+  }
 
   if (badge) {
     badge.classList.toggle('hidden', !isActive);
@@ -1025,6 +1059,7 @@ function initTouchEvents() {
   let isSwipingHorizontal = false;
 
   cardStage.addEventListener('touchstart', (e) => {
+    if (state.isAutoPlaying) return;
     if (e.touches.length !== 1) return;
     const touch = e.touches[0];
     touchStartX = touch.clientX;
@@ -1035,6 +1070,7 @@ function initTouchEvents() {
   }, { passive: true });
 
   cardStage.addEventListener('touchmove', (e) => {
+    if (state.isAutoPlaying) return;
     if (!isDragging || e.touches.length !== 1) return;
     const touch = e.touches[0];
     const diffX = touch.clientX - touchStartX;
@@ -1504,6 +1540,7 @@ function initEvents() {
   });
 
   mainCard.addEventListener('click', (e) => {
+    if (state.isAutoPlaying) return;
     tapticFeedback('medium');
     const animal = getCurrentAnimal();
     spawnEmojiBurst(e.clientX, e.clientY, animal ? animal.emoji : '🐾');

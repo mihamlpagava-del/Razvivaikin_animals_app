@@ -1974,3 +1974,24 @@ body {
   transform: translateY(4px) scale(0.95);
   box-shadow: 0 2px 0 #D84315;
 }
+
+/* ========================================================
+   РЕЖИМ АВТОПРОСМОТРА (АВТОПИЛОТ): СКРЫТИЕ ЛИШНИХ КНОПОК
+   ======================================================== */
+.game-screen.is-autoplay-active #mainCategoriesBar,
+.game-screen.is-autoplay-active #subCategoriesBar,
+.game-screen.is-autoplay-active #prevBtn,
+.game-screen.is-autoplay-active #nextBtn,
+.game-screen.is-autoplay-active .slider-footer,
+.nav-btn.autoplay-hidden {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.game-screen.is-autoplay-active .slider-meta {
+  justify-content: center;
+  gap: 16px;
+  padding: 6px 0 2px 0;
+}

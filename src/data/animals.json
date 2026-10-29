@@ -1008,17 +1008,17 @@
     "category": "ocean",
     "subCategory": "mammal",
     "image": "assets/images/ocean/whale.png",
-    "sound": "assets/audio/sounds/whale_1.mp3",
+    "sound": "assets/audio/sounds/water_splash.mp3",
     "soundFiles": [
-      "assets/audio/sounds/whale_1.mp3"
+      "assets/audio/sounds/water_splash.mp3"
     ],
     "voice": "assets/audio/voices/whale.mp3",
     "emoji": "🐋",
-    "soundText": "У-у-у-у-у-ум...",
+    "soundText": "Плюх-плюх!",
     "sounds": [
-      "У-у-у-у-у-ум...",
-      "Вуууу-пшшшш!",
-      "О-о-о-у-у-ум..."
+      "Плюх-плюх!",
+      "Буль-плюх!",
+      "Плюх!"
     ],
     "funFact": "Синий кит — самое грандиозное животное, когда-либо жившее на Земле!",
     "color": "#60A5FA"
@@ -1029,17 +1029,17 @@
     "category": "ocean",
     "subCategory": "mammal",
     "image": "assets/images/ocean/dolphin.png",
-    "sound": "assets/audio/sounds/dolphin_1.mp3",
+    "sound": "assets/audio/sounds/water_splash.mp3",
     "soundFiles": [
-      "assets/audio/sounds/dolphin_1.mp3"
+      "assets/audio/sounds/water_splash.mp3"
     ],
     "voice": "assets/audio/voices/dolphin.mp3",
     "emoji": "🐬",
-    "soundText": "Клик-клик-клик!",
+    "soundText": "Плюх-плюх!",
     "sounds": [
-      "Клик-клик-клик!",
-      "И-и-и-и свист!",
-      "Уит-уит-уит!"
+      "Плюх-плюх!",
+      "Буль-плюх!",
+      "Плюх!"
     ],
     "funFact": "Дельфины невероятно умны и обожают синхронно выпрыгивать из волн!",
     "color": "#93C5FD"
@@ -1050,17 +1050,20 @@
     "category": "ocean",
     "subCategory": "fish",
     "image": "assets/images/ocean/shark.png",
-    "sound": "assets/audio/sounds/shark.mp3",
+    "sound": "assets/audio/sounds/water_splash.mp3",
     "voice": "assets/audio/voices/shark.mp3",
     "emoji": "🦈",
-    "soundText": "Буль-хлыст!",
+    "soundText": "Плюх-плюх!",
     "sounds": [
-      "Буль-хлыст!",
-      "Вжух-плюх!",
-      "Клац-волны!"
+      "Плюх-плюх!",
+      "Буль-плюх!",
+      "Плюх!"
     ],
     "funFact": "Зубы у акулы растут непрерывно в несколько рядов всю её жизнь!",
-    "color": "#BAE6FD"
+    "color": "#BAE6FD",
+    "soundFiles": [
+      "assets/audio/sounds/water_splash.mp3"
+    ]
   },
   {
     "id": "clownfish",
@@ -1068,17 +1071,17 @@
     "category": "ocean",
     "subCategory": "fish",
     "image": "assets/images/ocean/clownfish.png",
-    "sound": "assets/audio/sounds/clownfish_1.mp3",
+    "sound": "assets/audio/sounds/water_splash.mp3",
     "soundFiles": [
-      "assets/audio/sounds/clownfish_1.mp3"
+      "assets/audio/sounds/water_splash.mp3"
     ],
     "voice": "assets/audio/voices/clownfish.mp3",
     "emoji": "🐠",
-    "soundText": "Бульк-бульк!",
+    "soundText": "Плюх-плюх!",
     "sounds": [
-      "Бульк-бульк!",
-      "Шурх-коралл!",
-      "Плюх-бульк!"
+      "Плюх-плюх!",
+      "Буль-плюх!",
+      "Плюх!"
     ],
     "funFact": "Яркие рыбки-клоуны дружат с актиниями и прячутся в их щупальцах!",
     "color": "#FB923C"
@@ -1089,17 +1092,20 @@
     "category": "ocean",
     "subCategory": "fish",
     "image": "assets/images/ocean/seahorse.png",
-    "sound": "assets/audio/sounds/seahorse.mp3",
+    "sound": "assets/audio/sounds/water_splash.mp3",
     "voice": "assets/audio/voices/seahorse.mp3",
     "emoji": "🐡",
-    "soundText": "Цок-буль!",
+    "soundText": "Плюх-плюх!",
     "sounds": [
-      "Цок-буль!",
-      "Плик-плик!",
-      "Шурх-водоросли!"
+      "Плюх-плюх!",
+      "Буль-плюх!",
+      "Плюх!"
     ],
     "funFact": "Морские коньки плавают вертикально и держатся хвостиком за водоросли!",
-    "color": "#F472B6"
+    "color": "#F472B6",
+    "soundFiles": [
+      "assets/audio/sounds/water_splash.mp3"
+    ]
   },
   {
     "id": "octopus",
@@ -1107,17 +1113,20 @@
     "category": "ocean",
     "subCategory": "fish",
     "image": "assets/images/ocean/octopus.png",
-    "sound": "assets/audio/sounds/octopus.mp3",
+    "sound": "assets/audio/sounds/water_splash.mp3",
     "voice": "assets/audio/voices/octopus.mp3",
     "emoji": "🐙",
-    "soundText": "Буль-шурх!",
+    "soundText": "Плюх-плюх!",
     "sounds": [
-      "Буль-шурх!",
-      "Плюх-щупальца!",
-      "Шлеп-бульк!"
+      "Плюх-плюх!",
+      "Буль-плюх!",
+      "Плюх!"
     ],
     "funFact": "У осьминога целых три сердца и восемь ловких щупалец с присосками!",
-    "color": "#F87171"
+    "color": "#F87171",
+    "soundFiles": [
+      "assets/audio/sounds/water_splash.mp3"
+    ]
   },
   {
     "id": "crab",
@@ -1125,17 +1134,20 @@
     "category": "ocean",
     "subCategory": "fish",
     "image": "assets/images/ocean/crab.png",
-    "sound": "assets/audio/sounds/crab.mp3",
+    "sound": "assets/audio/sounds/water_splash.mp3",
     "voice": "assets/audio/voices/crab.mp3",
     "emoji": "🦀",
-    "soundText": "Щёлк-щёлк клешней!",
+    "soundText": "Плюх-плюх!",
     "sounds": [
-      "Щёлк-щёлк клешней!",
-      "Клац-клац!",
-      "Цок-цок-бок!"
+      "Плюх-плюх!",
+      "Буль-плюх!",
+      "Плюх!"
     ],
     "funFact": "Крабы ходят боком и прячутся в песок за считанные секунды!",
-    "color": "#EF4444"
+    "color": "#EF4444",
+    "soundFiles": [
+      "assets/audio/sounds/water_splash.mp3"
+    ]
   },
   {
     "id": "seal",
@@ -1143,17 +1155,20 @@
     "category": "ocean",
     "subCategory": "mammal",
     "image": "assets/images/ocean/seal.png",
-    "sound": "assets/audio/sounds/seal.mp3",
+    "sound": "assets/audio/sounds/water_splash.mp3",
     "voice": "assets/audio/voices/seal.mp3",
     "emoji": "🦭",
-    "soundText": "Тяв-плюх!",
+    "soundText": "Плюх-плюх!",
     "sounds": [
-      "Тяв-плюх!",
-      "Хорьк-ласты!",
-      "Уи-плюх!"
+      "Плюх-плюх!",
+      "Буль-плюх!",
+      "Плюх!"
     ],
     "funFact": "Морские котики греются на ледяных льдинах и ныряют на сотни метров в глубину!",
-    "color": "#CBD5E1"
+    "color": "#CBD5E1",
+    "soundFiles": [
+      "assets/audio/sounds/water_splash.mp3"
+    ]
   },
   {
     "id": "walrus",
@@ -1161,17 +1176,20 @@
     "category": "ocean",
     "subCategory": "mammal",
     "image": "assets/images/ocean/walrus.png",
-    "sound": "assets/audio/sounds/walrus.mp3",
+    "sound": "assets/audio/sounds/water_splash.mp3",
     "voice": "assets/audio/voices/walrus.mp3",
     "emoji": "🦭",
-    "soundText": "Хрюк-плюх!",
+    "soundText": "Плюх-плюх!",
     "sounds": [
-      "Хрюк-плюх!",
-      "У-о-о бивни!",
-      "Бух-плюх лед!"
+      "Плюх-плюх!",
+      "Буль-плюх!",
+      "Плюх!"
     ],
     "funFact": "Клыки-бивни помогают моржу забираться на скользкие полярные льдины!",
-    "color": "#94A3B8"
+    "color": "#94A3B8",
+    "soundFiles": [
+      "assets/audio/sounds/water_splash.mp3"
+    ]
   },
   {
     "id": "penguin",
@@ -1179,17 +1197,20 @@
     "category": "ocean",
     "subCategory": "bird",
     "image": "assets/images/ocean/penguin.png",
-    "sound": "assets/audio/sounds/penguin.mp3",
+    "sound": "assets/audio/sounds/water_splash.mp3",
     "voice": "assets/audio/voices/penguin.mp3",
     "emoji": "🐧",
-    "soundText": "Кве-кве-кве!",
+    "soundText": "Плюх-плюх!",
     "sounds": [
-      "Кве-кве-кве!",
-      "Кра-а-а-кря!",
-      "Га-га-га на льду!"
+      "Плюх-плюх!",
+      "Буль-плюх!",
+      "Плюх!"
     ],
     "funFact": "Пингвины носят праздничный черный «фрак» и катаются на животиках по льду!",
-    "color": "#E2E8F0"
+    "color": "#E2E8F0",
+    "soundFiles": [
+      "assets/audio/sounds/water_splash.mp3"
+    ]
   },
   {
     "id": "sea_turtle",
@@ -1197,17 +1218,20 @@
     "category": "ocean",
     "subCategory": "reptile",
     "image": "assets/images/ocean/sea_turtle.png",
-    "sound": "assets/audio/sounds/sea_turtle.mp3",
+    "sound": "assets/audio/sounds/water_splash.mp3",
     "voice": "assets/audio/voices/sea_turtle.mp3",
     "emoji": "🐢",
-    "soundText": "Шурх-плюх!",
+    "soundText": "Плюх-плюх!",
     "sounds": [
-      "Шурх-плюх!",
-      "Буль-ласты!",
-      "Плыв-плыв!"
+      "Плюх-плюх!",
+      "Буль-плюх!",
+      "Плюх!"
     ],
     "funFact": "Морские черепахи парят в толще океана, будто птицы в небесах!",
-    "color": "#6EE7B7"
+    "color": "#6EE7B7",
+    "soundFiles": [
+      "assets/audio/sounds/water_splash.mp3"
+    ]
   },
   {
     "id": "frog",
@@ -1215,17 +1239,20 @@
     "category": "ocean",
     "subCategory": "amphibian",
     "image": "assets/images/ocean/frog.png",
-    "sound": "assets/audio/sounds/frog.mp3",
+    "sound": "assets/audio/sounds/water_splash.mp3",
     "voice": "assets/audio/voices/frog.mp3",
     "emoji": "🐸",
-    "soundText": "Ква-ква-ква!",
+    "soundText": "Плюх-плюх!",
     "sounds": [
-      "Ква-ква-ква!",
-      "Брекекекс-ква!",
-      "Ква-а-а-ак!"
+      "Плюх-плюх!",
+      "Буль-плюх!",
+      "Плюх!"
     ],
     "funFact": "Лягушки умеют дышать прямо через кожу и ловят мух быстрым язычком!",
-    "color": "#86EFAC"
+    "color": "#86EFAC",
+    "soundFiles": [
+      "assets/audio/sounds/water_splash.mp3"
+    ]
   },
   {
     "id": "eagle",

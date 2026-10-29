@@ -20,6 +20,117 @@ function tapticFeedback(style = 'light') {
   }
 }
 
+/**
+ * Инициализация Яндекс Игр SDK (Yandex Games SDK v2)
+ */
+let ysdk = null;
+
+function initYandexSDK() {
+  if (typeof YaGames !== 'undefined') {
+    YaGames.init()
+      .then(sdk => {
+        ysdk = sdk;
+        window.ysdk = sdk;
+        console.log('🎮 Яндекс Игры SDK успешно инициализирован');
+
+        // Оповещаем платформу Яндекс Игры, что игра загрузилась и готова к взаимодействию
+        if (ysdk.features && ysdk.features.LoadingAPI) {
+          ysdk.features.LoadingAPI.ready();
+        }
+
+        // Адаптируем интерфейс под требования Яндекс Игр
+        adaptUIForPlatform();
+      })
+      .catch(error => {
+        console.warn('Яндекс Игры SDK (init):', error);
+      });
+  } else {
+    adaptUIForPlatform();
+  }
+}
+
+/**
+ * Адаптация интерфейса под текущую платформу (Яндекс Игры / VK Mini Apps)
+ * Удаляет упоминания других платформ для 100% прохождения модерации Яндекс Игр
+ */
+function adaptUIForPlatform() {
+  const isYandex = typeof window !== 'undefined' && (
+    window.ysdk ||
+    (typeof YaGames !== 'undefined') ||
+    location.hostname.includes('yandex') ||
+    location.search.includes('yandex')
+  );
+  const isVK = typeof window !== 'undefined' && (
+    window.vkBridge ||
+    location.search.includes('vk_')
+  );
+
+  if (isYandex && !isVK) {
+    // В Яндекс Играх запрещено упоминать сторонние платформы и голоса VK
+    const donateBtn = document.getElementById('openDonateBtn');
+    if (donateBtn) donateBtn.style.display = 'none';
+
+    const thanksDonateBtn = document.getElementById('thanksDonateBtn');
+    if (thanksDonateBtn) thanksDonateBtn.style.display = 'none';
+
+    const parentHint = document.querySelector('.thanks-modal-parent-hint p');
+    if (parentHint) {
+      parentHint.textContent = 'Приложение создано для раннего развития малышей и знакомства с миром природы!';
+    }
+  }
+}
+
+/**
+ * Пауза и возобновление звуков при сворачивании / переключении вкладки
+ * (Обязательное техническое требование модерации Яндекс Игр)
+ */
+let wasBGMPlayingBeforeHidden = false;
+let wasFairytalePlayingBeforeHidden = false;
+
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    if (menuBGM && !menuBGM.paused) {
+      wasBGMPlayingBeforeHidden = true;
+      try { menuBGM.pause(); } catch (e) {}
+    } else {
+      wasBGMPlayingBeforeHidden = false;
+    }
+
+    if (activeAudio && !activeAudio.paused) {
+      try { activeAudio.pause(); } catch (e) {}
+    }
+
+    const ftAudio = document.getElementById('fairytaleAudio');
+    if (ftAudio && !ftAudio.paused) {
+      wasFairytalePlayingBeforeHidden = true;
+      try { ftAudio.pause(); } catch (e) {}
+      const playIcon = document.getElementById('talePlayIcon');
+      if (playIcon) playIcon.textContent = '▶';
+    } else {
+      wasFairytalePlayingBeforeHidden = false;
+    }
+  } else {
+    if (wasBGMPlayingBeforeHidden && !isMusicMuted) {
+      const menuEl = document.getElementById('menu-screen') || document.getElementById('startScreen');
+      if (menuEl && !menuEl.classList.contains('hidden')) {
+        try { menuBGM.play().catch(() => {}); } catch (e) {}
+      }
+    }
+    if (wasFairytalePlayingBeforeHidden) {
+      const ftScreen = document.getElementById('fairytale-screen');
+      if (ftScreen && !ftScreen.classList.contains('hidden')) {
+        const ftAudio = document.getElementById('fairytaleAudio');
+        if (ftAudio) {
+          try { ftAudio.play().catch(() => {}); } catch (e) {}
+          const playIcon = document.getElementById('talePlayIcon');
+          if (playIcon) playIcon.textContent = '⏸';
+        }
+      }
+    }
+  }
+});
+
+
 // Состояние приложения
 const state = {
   selectedCategory: 'all',
@@ -1714,6 +1825,7 @@ function initEvents() {
 // Запуск при загрузке документа
 document.addEventListener('DOMContentLoaded', () => {
   initVKApp();
+  initYandexSDK();
   buildWorldsGrid();
   buildMainCategories();
   buildSubCategories();

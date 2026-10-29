@@ -58,33 +58,28 @@ function copyDirRecursive(src, dest) {
 copyDirRecursive(path.join(ROOT, 'public', 'assets'), path.join(DIST, 'assets'));
 console.log('✓ assets/ (картинки и звуки) скопированы');
 
-// 7. Создание ZIP архивов для VK и Яндекс Игр
-function createZip(outPath, label) {
-  if (fs.existsSync(outPath)) {
-    try { fs.unlinkSync(outPath); } catch (e) {}
+// 7. Создание чистых ZIP архивов для VK и Яндекс Игр
+function packZip(distDir, zipOut, label) {
+  if (fs.existsSync(zipOut)) {
+    try { fs.unlinkSync(zipOut); } catch (e) {}
   }
 
   try {
+    const pythonCmd = `python -c "import zipfile, os; dist_dir = r'${distDir}'; z_path = r'${zipOut}'; z = zipfile.ZipFile(z_path, 'w', zipfile.ZIP_DEFLATED, compresslevel=6); [z.write(os.path.join(r, f), os.path.relpath(os.path.join(r, f), dist_dir).replace('\\\\\\\\', '/')) for r, d, files in os.walk(dist_dir) for f in files]; z.close()"`;
+    execSync(pythonCmd);
+  } catch {
     if (process.platform === 'win32') {
-      execSync(`tar -a -cf "${outPath}" -C "${DIST}" .`);
-      const zipSize = (fs.statSync(outPath).size / 1024 / 1024).toFixed(2);
-      console.log(`✓ Архив для ${label} создан: ${outPath} (${zipSize} MB)`);
+      execSync(`tar -a -cf "${zipOut}" -C "${distDir}" .`);
     } else {
-      try {
-        execSync(`cd "${DIST}" && zip -q -r "${outPath}" .`);
-        const zipSize = (fs.statSync(outPath).size / 1024 / 1024).toFixed(2);
-        console.log(`✓ Архив для ${label} создан: ${outPath} (${zipSize} MB)`);
-      } catch {
-        console.log(`ℹ Пропущен ZIP для ${label}`);
-      }
+      execSync(`cd "${distDir}" && zip -q -r "${zipOut}" .`);
     }
-  } catch (err) {
-    console.error(`Ошибка при создании архива ${label}:`, err.message);
   }
+  const zipSize = (fs.statSync(zipOut).size / 1024 / 1024).toFixed(2);
+  console.log(`✓ Архив для ${label} создан: ${zipOut} (${zipSize} MB)`);
 }
 
-createZip(VK_ZIP_OUT, 'VK Mini App');
-createZip(YANDEX_ZIP_OUT, 'Яндекс Игр');
+packZip(DIST, VK_ZIP_OUT, 'VK Mini App');
+packZip(DIST, YANDEX_ZIP_OUT, 'Яндекс Игр');
 
 console.log('----------------------------------------------------');
 console.log('🎉 Сборка успешно завершена!');

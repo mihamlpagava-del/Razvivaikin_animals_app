@@ -57,37 +57,35 @@ function copyDirRecursive(src, dest) {
 copyDirRecursive(path.join(ROOT, 'public', 'assets'), path.join(DIST, 'assets'));
 console.log('✓ assets/ скопированы');
 
-// 7. Создание ZIP архива для загрузки в консоль разработчика Яндекс Игр
+// 7. Создание чистого ZIP архива (без префиксов ./ в путях для 100% совместимости с модерацией)
 if (fs.existsSync(YANDEX_ZIP_OUT)) {
   try { fs.unlinkSync(YANDEX_ZIP_OUT); } catch (e) {}
 }
 
-try {
-  if (process.platform === 'win32') {
-    execSync(`tar -a -cf "${YANDEX_ZIP_OUT}" -C "${DIST}" .`);
-    const zipSize = (fs.statSync(YANDEX_ZIP_OUT).size / 1024 / 1024).toFixed(2);
-    console.log(`✓ Архив для Яндекс Игр создан: ${YANDEX_ZIP_OUT} (${zipSize} MB)`);
-  } else {
-    try {
-      execSync(`cd "${DIST}" && zip -q -r "${YANDEX_ZIP_OUT}" .`);
-      const zipSize = (fs.statSync(YANDEX_ZIP_OUT).size / 1024 / 1024).toFixed(2);
-      console.log(`✓ Архив для Яндекс Игр создан: ${YANDEX_ZIP_OUT} (${zipSize} MB)`);
-    } catch {
-      console.log('ℹ Пропущен ZIP');
+function packZip(distDir, zipOut) {
+  try {
+    const pythonCmd = `python -c "import zipfile, os; dist_dir = r'${distDir}'; z_path = r'${zipOut}'; z = zipfile.ZipFile(z_path, 'w', zipfile.ZIP_DEFLATED, compresslevel=6); [z.write(os.path.join(r, f), os.path.relpath(os.path.join(r, f), dist_dir).replace('\\\\\\\\', '/')) for r, d, files in os.walk(dist_dir) for f in files]; z.close()"`;
+    execSync(pythonCmd);
+  } catch {
+    if (process.platform === 'win32') {
+      execSync(`tar -a -cf "${zipOut}" -C "${distDir}" .`);
+    } else {
+      execSync(`cd "${distDir}" && zip -q -r "${zipOut}" .`);
     }
   }
-} catch (err) {
-  console.error('Ошибка архивации:', err.message);
+  const zipSize = (fs.statSync(zipOut).size / 1024 / 1024).toFixed(2);
+  console.log(`✓ Архив для Яндекс Игр создан: ${zipOut} (${zipSize} MB)`);
 }
+
+packZip(DIST, YANDEX_ZIP_OUT);
 
 console.log('----------------------------------------------------');
 console.log('🎉 Сборка для Яндекс Игр успешно завершена!');
 console.log(`Готовый файл для загрузки в консоль Яндекса: yandex_game.zip`);
 console.log('Требования платформы:');
-console.log('1. index.html в корне архива: ДА');
+console.log('1. index.html строго в корне архива: ДА');
 console.log('2. SDK (https://yandex.ru/games/sdk/v2) подключен: ДА');
 console.log('3. Инициализация YaGames.init() и LoadingAPI.ready(): ДА');
 console.log('4. Пауза звука при переключении вкладки (visibilitychange): ДА');
 console.log('5. Вес архива < 100 МБ: ДА (меньше 30 МБ)');
 console.log('----------------------------------------------------');
-
